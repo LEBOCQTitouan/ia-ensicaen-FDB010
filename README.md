@@ -1,6 +1,4 @@
-# lv223-ressources
-
-
+# Projet Colonisation LV-223
 
 ## Getting started
 

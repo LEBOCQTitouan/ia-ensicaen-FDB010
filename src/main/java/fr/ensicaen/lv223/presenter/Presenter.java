@@ -27,8 +27,7 @@ public class Presenter {
     public void drawPlanet() {
         List<List<Cell>> cells = planet.getCells();
         List<List<CellView>> cellsView = new ArrayList<>();
-
-        GaussianBlur blur = new GaussianBlur(70.0);
+        GaussianBlur blur = new GaussianBlur(60.0);
 
         for (int i = 0; i < cells.size(); i++) {
             cellsView.add(new ArrayList<>(cells.get(0).size()));
@@ -42,7 +41,6 @@ public class Presenter {
         }
 
         GaussianBlur noBlur = new GaussianBlur(0.0);
-
         view.setCellsView(cellsView);
         view.draw();
     }
@@ -63,7 +61,7 @@ public class Presenter {
     }
 
     /**
-     * @todo TO COMPLETE
+     * {@code @todo} TO COMPLETE
      */
     public void simulateOneTurn() {
         // TO COMPLETE
@@ -72,7 +70,7 @@ public class Presenter {
     }
 
     /**
-     * @todo TO COMPLETE
+     * {@code @todo} TO COMPLETE
      */
     public void updateRobotPositionOnView() {
     }
@@ -82,7 +80,7 @@ public class Presenter {
     }
 
     /**
-     * @todo TO COMPLETE
+     * {@code @todo} TO COMPLETE
      * @return true if all robots died, false otherwise.
      */
     public boolean noMoreLivingRobots() {
