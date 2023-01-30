@@ -2,35 +2,50 @@ package fr.ensicaen.lv223.model.cells;
 
 import fr.ensicaen.lv223.model.CellType;
 
+import java.util.Optional;
+
 public class CellFactory {
     private CellFactory() {}
 
-    public static Cell factory(String type, double intensity, int x, int y) {
+    public static Optional<Cell> factory(String type, double intensity, int x, int y) {
+        Cell c = null;
         switch (type) {
-            case "LAKE":
-                return new LakeCell(x, y, CellType.LAKE, intensity, 200000);
-            case "ORE":
-                return new MineralCell(x, y, CellType.ORE, intensity, 100);
             case "BASE":
-                return new Cell(x, y, CellType.BASE, intensity);
-            case "STONE":
-                return new Cell(x, y, CellType.STONE, intensity);
-            case "FOREST":
-                return new Cell(x, y, CellType.FOREST, intensity);
-            case "DRY_GRASS":
-                return new Cell(x, y, CellType.DRY_GRASS, intensity);
-            case "GRASS":
-                return new Cell(x, y, CellType.GRASS, intensity);
-            case "WET_GRASS":
-                return new Cell(x, y, CellType.WET_GRASS, intensity);
+                c = new Cell(x, y, CellType.BASE, intensity);
+                break;
             case "DESERT":
-                return new Cell(x, y, CellType.DESERT, intensity);
+                c = new Cell(x, y, CellType.DESERT, intensity);
+                break;
+            case "DRY_GRASS":
+                c = new Cell(x, y, CellType.DRY_GRASS, intensity);
+                break;
             case "FOOD":
-                return new FoodCell(x, y, CellType.FOOD, intensity, 100);
+                c = new Cell(x, y, CellType.FOOD, intensity);
+                break;
+            case "FOREST":
+                c = new Cell(x, y, CellType.FOREST, intensity);
+                break;
+            case "GRASS":
+                c = new Cell(x, y, CellType.GRASS, intensity);
+                break;
             case "IMPENETRABLE":
-                return new Cell(x, y, CellType.IMPENETRABLE, intensity);
+                c = new Cell(x, y, CellType.IMPENETRABLE, intensity);
+                break;
+            case "LAKE":
+                c = new Cell(x, y, CellType.LAKE, intensity);
+                break;
+            case "ORE":
+                c = new Cell(x, y, CellType.ORE, intensity);
+                break;
+            case "STONE":
+                c = new Cell(x, y, CellType.STONE, intensity);
+                break;
+            case "WET_GRASS":
+                c = new Cell(x, y, CellType.WET_GRASS, intensity);
+                break;
             default:
                 return null;
         }
+        return Optional.ofNullable(c);
     }
 }

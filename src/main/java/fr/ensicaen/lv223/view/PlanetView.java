@@ -54,8 +54,9 @@ public class PlanetView implements IPresenter {
     private final Presenter presenter;
     private List<List<CellView>> cellsView = null;
 
+    /** It allows to choose the number of steps of the simulation */
     private final Observable items = FXCollections.observableArrayList("1",
-            "10", "100", "1000");
+            "10", "100");
 
     private final Observable tolerances = FXCollections.observableArrayList(
             "Hostile", "Adaptative", "Tolérante");

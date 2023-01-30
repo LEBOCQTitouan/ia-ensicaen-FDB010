@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import fr.ensicaen.lv223.model.cells.Cell;
 import fr.ensicaen.lv223.model.cells.CellFactory;
@@ -24,7 +25,9 @@ public class Planet implements Environment {
         for (int i = 0; i < 21; i++) {
             cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
-                cells.get(i).add(CellFactory.factory("IMPENETRABLE", -1, i, j));
+                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i,
+                        j);
+                cells.get(i).add(o.get());
             }
         }
 
@@ -32,12 +35,12 @@ public class Planet implements Environment {
             for (int j = 0; j < planetDatum.getCellPos().length; j++) {
                 int x = planetDatum.getCellPos()[j].getX();
                 int y = planetDatum.getCellPos()[j].getY();
-
-                cells.get(x).set(y, CellFactory.factory(planetDatum.getType(),
+                Optional<Cell> o = CellFactory.factory(planetDatum.getType(),
                         -1,
                         planetDatum.getCellPos()[j].getX(),
-                        planetDatum.getCellPos()[j].getY()));
+                        planetDatum.getCellPos()[j].getY());
 
+                cells.get(x).set(y, o.get());
             }
         }
     }
