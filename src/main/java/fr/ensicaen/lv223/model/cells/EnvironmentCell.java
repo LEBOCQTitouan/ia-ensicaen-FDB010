@@ -13,8 +13,14 @@ public interface EnvironmentCell {
     CellType getType();
 
     /**
-     * Returns the intensity of this cell.
-     * @return the intensity of this cell
+     * Returns the intensity of metamorphosis for this cell.
+     * @return the intensity of metamorphosis for this cell
      */
     double getIntensity();
+
+    /**
+     * Sets the intensity of metamorphosis for this cell.
+     * @param intensity the intensity of metamorphosis for this cell
+     */
+    public void setIntensity(double intensity);
 }

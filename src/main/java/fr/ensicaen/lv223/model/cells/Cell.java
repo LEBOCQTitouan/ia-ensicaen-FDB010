@@ -15,7 +15,7 @@ public class Cell implements EnvironmentCell, Comparable {
     private final int x;
     private final int y;
     private final CellType type;
-    private final double intensityOfMetamorphosis;
+    private double intensityOfMetamorphosis;
     private int intensityOfWave;
     private final boolean isExoskeleton;
 
@@ -101,6 +101,15 @@ public class Cell implements EnvironmentCell, Comparable {
     @Override
     public double getIntensity() {
         return intensityOfMetamorphosis;
+    }
+
+    /**
+     * Sets the intensity of metamorphosis of the cell.
+     * @param intensity the intensity of metamorphosis of the cell
+     */
+    @Override
+    public void setIntensity(double intensity) {
+        intensityOfMetamorphosis = intensity;
     }
 
     /**
