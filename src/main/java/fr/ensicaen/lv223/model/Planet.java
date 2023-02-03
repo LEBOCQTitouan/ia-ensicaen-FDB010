@@ -12,15 +12,16 @@ import fr.ensicaen.lv223.planetloader.PlanetData;
 import fr.ensicaen.lv223.planetloader.PlanetLoader;
 
 /**
- * The {@code Planet} class implements the Environment interface and represents
- * a 2-dimensional grid of cells in our simulation.
- * The planet is constructed using data loaded from a JSON file, which is passed
- * to a PlanetLoader object. This data is then processed to create a grid of
- * cells using the CellFactory class. The grid is stored as a list of lists of
- * Cell objects.
- * The age of the planet can be accessed and the width and height of the grid
- * can be queried. Additionally, individual cells can be retrieved or set using
- * a Coordinate object to specify their position in the grid.
+ * The {@code Planet} class implements the {@link Environment} interface and
+ * represents a 2-dimensional grid of cells in our simulation.
+ * The planet is created using data loaded from a JSON file, which is passed
+ * to a {@link PlanetLoader} object. This data is then processed to create a
+ * two-dimensional grid of cells using the {@link CellFactory} class. The grid
+ * is stored as a list of lists of {@link Cell} objects.
+ * The age of the planet since the arrival of the colony can be accessed,
+ * such as the width and height of the grid. Additionally, individual cells can
+ * be retrieved or set using a {@link Coordinate} object to specify their
+ * position in the grid.
  */
 public class Planet implements Environment {
     private final List<List<Cell>> cells;

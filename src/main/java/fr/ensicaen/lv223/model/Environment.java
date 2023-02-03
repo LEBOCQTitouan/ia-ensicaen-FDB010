@@ -7,7 +7,8 @@ import java.util.List;
 
 /**
  * The interface {@code Environment} defines methods that must be implemented
- * by any class that wants to represent an environment.
+ * by any class that wants to represent an environment (e.g. the {@code
+ * Planet} class is an {@code Environment}).
  */
 public interface Environment {
     /**

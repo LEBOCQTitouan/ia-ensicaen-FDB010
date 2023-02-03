@@ -5,10 +5,11 @@ import javafx.scene.shape.Circle;
 
 /**
  * A visual representation of a robot in the simulation. The robot is
- * displayed as a circle shape. The color of the circle depends on the type
- * of robot.
+ * displayed as a circle shape. The circle is filled with a color that depends
+ * on the type of the robot.
  */
 public class RobotView {
+    /** The color of the robot */
     private Color color;
 
     /** The circle shape representing the robot */

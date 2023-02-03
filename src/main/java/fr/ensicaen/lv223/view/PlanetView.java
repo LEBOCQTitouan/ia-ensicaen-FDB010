@@ -110,13 +110,13 @@ public class PlanetView implements IPresenter {
      * Constructs a new {@code PlanetView} object with a reference to the
      * presenter and the width and height of the scene.
      * @param presenter a reference to the presenter of the simulation
-     * @param x the width of the scene
-     * @param y the height of the scene
+     * @param width the width of the scene
+     * @param height the height of the scene
      */
-    public PlanetView(Presenter presenter, int x, int y) {
+    public PlanetView(Presenter presenter, int width, int height) {
         this.presenter = presenter;
-        this.sceneWidth = x;
-        this.sceneHeight = y;
+        this.sceneWidth = width;
+        this.sceneHeight = height;
     }
 
     public int getSceneWidth() {

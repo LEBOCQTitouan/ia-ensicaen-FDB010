@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * The {@code CellView} class is a visual representation of a {@link Cell} in
+ * The {@code CellView} class is a visual representation of a {@code Cell} in
  * the simulation.
  * It contains information about the width, height and color of the cell and
  * it's corresponding {@code RobotView} object.
@@ -41,8 +41,8 @@ public class CellView {
     }
 
     /**
-     * Returns the `Rectangle` shape of this cell.
-     * @return The `Rectangle` shape of this cell.
+     * Returns the {@link Rectangle} shape of this cell.
+     * @return The {@code Rectangle} shape of this cell.
      */
     public Rectangle getShape() {
         return shape;
@@ -83,7 +83,7 @@ public class CellView {
     }
 
     /**
-     * Returns the {@code RobotView} instance associated with this cell.
+     * Returns the {@link RobotView} instance associated with this cell.
      *
      * @return The {@code RobotView} instance associated with this cell.
      */
@@ -92,7 +92,7 @@ public class CellView {
     }
 
     /**
-     * Sets the {@code RobotView} instance associated with this cell.
+     * Sets the {@link RobotView} instance associated with this cell.
      *
      * @param robotView The {@code RobotView} instance to associate with this
      *        cell.
@@ -102,7 +102,7 @@ public class CellView {
     }
 
     /**
-     * Returns the {@code StackPane} associated with this cell.
+     * Returns the {@link StackPane} associated with this cell.
      *
      * @return The {@code StackPane} associated with this cell.
      */
@@ -111,7 +111,7 @@ public class CellView {
     }
 
     /**
-     * Sets the {@code StackPane} associated with this cell.
+     * Sets the {@link StackPane} associated with this cell.
      *
      * @param pane The {@code StackPane} to associate with this cell.
      */

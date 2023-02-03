@@ -9,8 +9,8 @@ package fr.ensicaen.lv223.planetloader;
 public interface PlanetLoader {
     /**
      * Loads the planet data from a source.
-     * @return An array of PlanetData instances representing the loaded planet
-     * data.
+     * @return An array of {@link PlanetData} instances representing the
+     * loaded planet data.
      */
     PlanetData[] load();
 }

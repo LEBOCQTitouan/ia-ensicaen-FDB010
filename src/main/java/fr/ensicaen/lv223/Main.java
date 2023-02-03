@@ -26,25 +26,26 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        int x;
-        int y;
+        int width;
+        int height;
         Presenter presenter;
         IPresenter view;
         FXMLLoader fxmlLoader;
         Scene scene;
 
-        x = 500;
-        y = 500;
+        width = 500;
+        height = 500;
         presenter = new Presenter();
-        view = new PlanetView(presenter, x, y);
+        view = new PlanetView(presenter, width, height);
         presenter.setView(view);
 
         fxmlLoader = new FXMLLoader(Main.class.getResource("/board_view.fxml"));
         fxmlLoader.setController(view);
 
-        scene = new Scene(fxmlLoader.load(), x, y);
+        scene = new Scene(fxmlLoader.load(), width, height);
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         stage.setScene(scene);
+        stage.setTitle("Simulation LV-223");
 
         view.setOnclick();
         view.setChoicesOfNumberOfSteps();

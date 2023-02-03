@@ -3,9 +3,9 @@ package fr.ensicaen.lv223.model.cells;
 import fr.ensicaen.lv223.model.CellType;
 
 /**
- * The {@code Cell} class represents a cell in a 2D grid, with properties such
- * as x and y coordinates, cell type, intensity of metamorphosis, intensity
- * of wave, and whether it is part of the exoskeleton or not.
+ * The {@code Cell} class represents a cell in a two-dimensional grid, with
+ * properties such as x and y coordinates, cell type, intensity of metamorphosis,
+ * intensity of wave, and whether it is part of the exoskeleton or not.
  * <p>
  * It implements {@code EnvironmentCell} and {@code Comparable} interfaces.
  * @see EnvironmentCell
@@ -14,7 +14,7 @@ import fr.ensicaen.lv223.model.CellType;
 public class Cell implements EnvironmentCell, Comparable {
     private final int x;
     private final int y;
-    private final CellType type;
+    private CellType type;
     private double intensityOfMetamorphosis;
     private int intensityOfWave;
     private final boolean isExoskeleton;
@@ -34,7 +34,9 @@ public class Cell implements EnvironmentCell, Comparable {
         this.type = type;
         this.intensityOfMetamorphosis = intensity;
         this.intensityOfWave = 0;
-        this.isExoskeleton = type == CellType.BASE || type == CellType.LAKE || type == CellType.STONE || type == CellType.ORE || type == CellType.IMPENETRABLE;
+        this.isExoskeleton = type == CellType.BASE
+                || type == CellType.LAKE || type == CellType.STONE
+                || type == CellType.ORE || type == CellType.IMPENETRABLE;
     }
 
     /**
@@ -57,20 +59,20 @@ public class Cell implements EnvironmentCell, Comparable {
      * Returns whether the cell has been impacted by a wave or not.
      * @return true if the cell has been impacted by a wave, false otherwise
      */
-    public boolean hasBeenWaved() {
+    public boolean hasBeenImpactedByAWave() {
         return intensityOfWave != 0;
     }
 
     /**
-     * Returns the intensity of wave of the cell.
-     * @return the intensity of wave of the cell
+     * Returns the intensity of wave on the cell.
+     * @return the intensity of wave on the cell
      */
     public int getIntensityOfWave() {
         return intensityOfWave;
     }
 
     /**
-     * Sets the intensity of wave of the cell to the given value.
+     * Sets the intensity of wave on the cell to the given value.
      * @param value the new value of the intensity of wave
      */
     public void setIntensityOfWave(int value) {
@@ -95,8 +97,8 @@ public class Cell implements EnvironmentCell, Comparable {
     }
 
     /**
-     * Returns the intensity of metamorphosis of the cell.
-     * @return the intensity of metamorphosis of the cell
+     * Returns the intensity of metamorphosis for the cell.
+     * @return the intensity of metamorphosis for the cell
      */
     @Override
     public double getIntensity() {
