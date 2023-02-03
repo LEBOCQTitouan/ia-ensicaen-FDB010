@@ -5,9 +5,9 @@ import java.util.Random;
 
 /**
  * The {@code Coordinate} class represents a position on a two-dimensional
- * plane. It provides functionality to get/set the x and y values, create a
- * random new coordinate, translate the coordinate by an offset, add two
- * coordinates and get the string representation of the coordinate. It also
+ * plane. It provides functionality to get/set the x and y coordinates,
+ * create a random new coordinate, translate the coordinate by an offset, add
+ * two coordinates and get the string representation of the coordinate. It also
  * implements hashcode and equals methods to compare if two coordinates are
  * equal based on their x and y values.
  */

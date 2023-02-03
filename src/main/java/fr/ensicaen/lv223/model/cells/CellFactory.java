@@ -23,7 +23,7 @@ public class CellFactory {
      * the type is invalid
      */
     public static Optional<Cell> factory(String type, double intensity, int x, int y) {
-        Cell c = null;
+        Cell c;
         switch (type) {
             case "BASE":
                 c = new Cell(x, y, CellType.BASE, intensity);

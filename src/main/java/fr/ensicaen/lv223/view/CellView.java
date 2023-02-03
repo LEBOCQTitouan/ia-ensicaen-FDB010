@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * The {@code CellView} class is a visual representation of a {@code Cell} in
  * the simulation.
- * It contains information about the width, height and color of the cell and
+ * It contains information about the width, height and color of the cell, and
  * it's corresponding {@code RobotView} object.
  */
 public class CellView {

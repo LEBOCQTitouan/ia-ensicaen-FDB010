@@ -22,5 +22,5 @@ public interface EnvironmentCell {
      * Sets the intensity of metamorphosis for this cell.
      * @param intensity the intensity of metamorphosis for this cell
      */
-    public void setIntensity(double intensity);
+    void setIntensity(double intensity);
 }
