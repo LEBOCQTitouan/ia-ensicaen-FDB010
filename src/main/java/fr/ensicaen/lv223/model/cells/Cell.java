@@ -3,41 +3,30 @@ package fr.ensicaen.lv223.model.cells;
 import fr.ensicaen.lv223.model.CellType;
 
 /**
- * A cell on the planet. The type of the cell is one of the following values:
- * - CellType.BASE: the cell where the spatial ship has landed;
- * - CellType.BOUNDARY: a cell on the boundary;
- * - CellType.DESERT: a desert cell;
- * - CellType.DRY_GRASS: a cell with a dry grass land;
- * - CellType.FOOD: a cell with some food;
- * - CellType.FOREST: a cell with a forest on it;
- * - CellType.GRASS: a cell with a normal grass land;
- * - CellType.IMPENETRABLE: an impenetrable cell, except by cartographer
- * agents;
- * - CellType.LAKE: a cell that contains some water (e.g. lake) and that is
- * a part of the exoskeleton of the planet;
- * - CellType.ORE: a cell that contains some ore and that is a part of the
- * exoskeleton of the planet;
- * - CellType.STONE: a cell from the exoskeleton;
- * - CellType.WET_GRASS: a cell with a wet grass land.
+ * The {@code Cell} class represents a cell in a 2D grid, with properties such
+ * as x and y coordinates, cell type, intensity of metamorphosis, intensity
+ * of wave, and whether it is part of the exoskeleton or not.
+ * <p>
+ * It implements {@code EnvironmentCell} and {@code Comparable} interfaces.
+ * @see EnvironmentCell
+ * @see Comparable
  */
 public class Cell implements EnvironmentCell, Comparable {
     private final int x;
     private final int y;
-
     private final CellType type;
     private final double intensityOfMetamorphosis;
     private int intensityOfWave;
-
-    /** Indicates if the cell is a part of the exoskeleton of the planet */
     private final boolean isExoskeleton;
 
     /**
-     * Creates a new cell on the planet with a coordinate, a cell type, and an
-     * initial intensity of metamorphosis.
-     * @param x The column of the cell
-     * @param y The row of the cell
-     * @param type The type of the cell
-     * @param intensity The intensity of metamorphosis
+     * Constructs a new {@code Cell} object with given x and y coordinates,
+     * cell type, and intensity of metamorphosis. The intensity of wave is
+     * initialized to 0 and isExoskeleton is set based on the cell type.
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
+     * @param type the type of cell
+     * @param intensity the intensity of metamorphosis
      */
     public Cell(int x, int y, CellType type, double intensity) {
         this.x = x;
@@ -48,52 +37,88 @@ public class Cell implements EnvironmentCell, Comparable {
         this.isExoskeleton = type == CellType.BASE || type == CellType.LAKE || type == CellType.STONE || type == CellType.ORE || type == CellType.IMPENETRABLE;
     }
 
+    /**
+     * Returns the x coordinate of the cell.
+     * @return the x coordinate of the cell
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Returns the y coordinate of the cell.
+     * @return the y coordinate of the cell
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Returns whether the cell has been impacted by a wave or not.
+     * @return true if the cell has been impacted by a wave, false otherwise
+     */
     public boolean hasBeenWaved() {
         return intensityOfWave != 0;
     }
 
+    /**
+     * Returns the intensity of wave of the cell.
+     * @return the intensity of wave of the cell
+     */
     public int getIntensityOfWave() {
         return intensityOfWave;
     }
 
+    /**
+     * Sets the intensity of wave of the cell to the given value.
+     * @param value the new value of the intensity of wave
+     */
     public void setIntensityOfWave(int value) {
         this.intensityOfWave = value;
     }
 
+    /**
+     * Returns whether the cell is a part of the exoskeleton or not.
+     * @return true if the cell is a part of the exoskeleton, false otherwise
+     */
     public boolean isExoskeleton() {
         return isExoskeleton;
     }
 
+    /**
+     * Returns the type of the cell.
+     * @return the type of the cell
+     */
     @Override
     public CellType getType() {
         return type;
     }
-    
+
+    /**
+     * Returns the intensity of metamorphosis of the cell.
+     * @return the intensity of metamorphosis of the cell
+     */
     @Override
     public double getIntensity() {
         return intensityOfMetamorphosis;
     }
 
     /**
-     * Compares the intensity of waves between two cells.
-     *
-     * @param o Another cell
-     * @return 1 if intensity is higher, -1 if intensity is lower and 0
-     * otherwise
+     * Compares the intensity of wave of this cell to another cell.
+     * @param o the other cell to compare to
+     * @return a negative integer, zero, or a positive integer as this cell's
+     * intensity of wave is less than, equal to, or greater than the other
+     * cell's
      */
     public int compareTo(Object o) {
         Cell other = (Cell) o;
         return Integer.compare(intensityOfWave, other.getIntensityOfWave());
     }
 
+    /**
+     * Returns a string representation of the cell.
+     * @return a string representation of the cell
+     */
     public String toString() {
         return "" + intensityOfWave;
     }

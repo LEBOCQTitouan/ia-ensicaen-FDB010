@@ -11,7 +11,19 @@ import fr.ensicaen.lv223.presenter.IPresenter;
 import fr.ensicaen.lv223.presenter.Presenter;
 import fr.ensicaen.lv223.view.PlanetView;
 
+/**
+ * {@code Main} class extends the {@link Application} class of JavaFX to
+ * create the GUI application for our simulation.
+ * It sets up the scene, size, style and behavior of the application.
+ */
 public class Main extends Application {
+    /**
+     * Override the start method of {@link Application} class to set up the GUI
+     * elements and behaviors.
+     *
+     * @param stage the stage object used to show the application
+     * @throws IOException when there is an error in loading the FXML file
+     */
     @Override
     public void start(Stage stage) throws IOException {
         int x;
@@ -31,12 +43,13 @@ public class Main extends Application {
         fxmlLoader.setController(view);
 
         scene = new Scene(fxmlLoader.load(), x, y);
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         stage.setScene(scene);
 
         view.setOnclick();
-        view.setChoiceBox();
-        scene.getRoot().setStyle("-fx-font-family: 'serif'");
+        view.setChoicesOfNumberOfSteps();
+        view.setChoicesOfPlanetTolerance();
+        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         presenter.drawPlanet();
 
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
@@ -55,6 +68,10 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * Main method to launch the application.
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         launch();
     }

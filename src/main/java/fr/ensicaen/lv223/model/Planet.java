@@ -11,15 +11,26 @@ import fr.ensicaen.lv223.planetloader.JsonLoader;
 import fr.ensicaen.lv223.planetloader.PlanetData;
 import fr.ensicaen.lv223.planetloader.PlanetLoader;
 
+/**
+ * The {@code Planet} class implements the Environment interface and represents
+ * a 2-dimensional grid of cells in our simulation.
+ * The planet is constructed using data loaded from a JSON file, which is passed
+ * to a PlanetLoader object. This data is then processed to create a grid of
+ * cells using the CellFactory class. The grid is stored as a list of lists of
+ * Cell objects.
+ * The age of the planet can be accessed and the width and height of the grid
+ * can be queried. Additionally, individual cells can be retrieved or set using
+ * a Coordinate object to specify their position in the grid.
+ */
 public class Planet implements Environment {
     private final List<List<Cell>> cells;
-    private int age;
+    private int ageSinceTheArrivalOfTheColony;
 
     public Planet() {
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
 
-        age = 0;
+        ageSinceTheArrivalOfTheColony = 0;
 
         cells = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
@@ -45,12 +56,13 @@ public class Planet implements Environment {
         }
     }
 
+    @Override
     public List<List<Cell>> getCells() {
         return cells;
     }
 
-    public int getAge() {
-        return age;
+    public int getAgeSinceTheArrivalOfTheColony() {
+        return ageSinceTheArrivalOfTheColony;
     }
 
     @Override

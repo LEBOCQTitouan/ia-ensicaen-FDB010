@@ -7,7 +7,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <GridPane fx:id="_grid">
+        <GridPane fx:id="gridOfPlanet">
             <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" percentWidth="4.2"/>
                 <ColumnConstraints hgrow="ALWAYS" percentWidth="4.2"/>
@@ -61,13 +61,13 @@
 
         </GridPane>
         <VBox HBox.hgrow="ALWAYS">
-            <Label fx:id="_age" text="Age de la planète : 0 ans">
+            <Label fx:id="ageSinceTheArrivalOfTheColony" text="Durée de la simulation : 0 ans">
                 <VBox.margin>
                     <Insets bottom="10.0" top="15.0"/>
                 </VBox.margin>
             </Label>
-            <Label fx:id="_healthStatus" text="Santé de la planète : Bonne"/>
-            <Label fx:id="_robots" text="Nombre de robots : 13">
+            <Label fx:id="healthStatusOfThePlanet" text="Santé de la planète : Bonne"/>
+            <Label fx:id="currentNumberOfRobots" text="Nombre de robots : 13">
                 <VBox.margin>
                     <Insets top="10.0"/>
                 </VBox.margin>
@@ -77,24 +77,24 @@
                     <Insets bottom="10.0" top="10.0"/>
                 </VBox.margin>
                 <children>
-                    <Label fx:id="_waterStock" text="Stock d'eau : 0"/>
-                    <Label fx:id="_foodStock" text="Stock de nourriture : 0"/>
-                    <Label fx:id="_oreStock" text="Stock de minerai : 0"/>
+                    <Label fx:id="waterStockOfTheColony" text="Stock d'eau : 0"/>
+                    <Label fx:id="foodStockOfTheColony" text="Stock de nourriture : 0"/>
+                    <Label fx:id="oreStockOfTheColony" text="Stock de minerai : 0"/>
                 </children>
             </HBox>
             <HBox prefHeight="25.0" prefWidth="340.0">
                 <children>
-                    <ChoiceBox fx:id="_tolerance" prefWidth="150.0"/>
-                    <Label fx:id="_tols" prefHeight="25.0" prefWidth="190.0" text=" : Tolérance de la planète "
+                    <ChoiceBox fx:id="choiceOfThePlanetTolerance" prefWidth="150.0"/>
+                    <Label fx:id="tolerances" prefHeight="25.0" prefWidth="190.0" text=" : Tolérance de la planète "
                            textAlignment="CENTER"/>
                 </children>
             </HBox>
-            <ChoiceBox fx:id="_choice" prefWidth="150.0">
+            <ChoiceBox fx:id="choiceOfNumberOfSteps" prefWidth="150.0">
                 <VBox.margin>
                     <Insets bottom="10.0" top="10.0"/>
                 </VBox.margin>
             </ChoiceBox>
-            <Button fx:id="_button" mnemonicParsing="false" text="Simulation">
+            <Button fx:id="buttonToStartOneOrMoreSteps" mnemonicParsing="false" text="Avancer">
                 <VBox.margin>
                     <Insets bottom="10.0" top="10.0"/>
                 </VBox.margin>

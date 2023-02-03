@@ -1,5 +1,9 @@
 package fr.ensicaen.lv223.planetloader;
 
+/**
+ * The {@code PlanetData} class contains the data of a planet with its type and
+ * cell positions.
+ */
 public class PlanetData {
     private String type;
     private CellPosition[] cellPos;

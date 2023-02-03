@@ -4,9 +4,24 @@ import fr.ensicaen.lv223.model.CellType;
 
 import java.util.Optional;
 
+/**
+ * The {@code CellFactory} class is a utility class for creating cells.
+ */
 public class CellFactory {
     private CellFactory() {}
 
+    /**
+     * Returns an {@link Optional} containing the {@link Cell} object with the
+     * specified type and intensity, or an empty Optional if the type is
+     * invalid.
+     *
+     * @param type the type of the cell
+     * @param intensity the intensity of the cell
+     * @param x the x-coordinate of the cell
+     * @param y the y-coordinate of the cell
+     * @return an Optional containing the Cell object, or an empty Optional if
+     * the type is invalid
+     */
     public static Optional<Cell> factory(String type, double intensity, int x, int y) {
         Cell c = null;
         switch (type) {

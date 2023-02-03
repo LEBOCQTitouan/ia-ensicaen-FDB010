@@ -1,6 +1,5 @@
 package fr.ensicaen.lv223.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.ensicaen.lv223.presenter.IPresenter;
@@ -15,52 +14,105 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+/**
+ * {@code PlanetView} is a JavaFX class that represents the visual aspect of
+ * the planet and its simulation.
+ * The class implements the {@code IPresenter} interface and contains methods
+ * to interact with the user and display the simulation status.
+ * @version 1.0
+ * @since 01/12/2023
+ */
 public class PlanetView implements IPresenter {
+    /**
+     * The {@code gridOfPlanet} is a {@link GridPane} object used to display
+     * the cells of the planet simulation.
+     */
     @FXML
-    private GridPane _grid;
+    private GridPane gridOfPlanet;
 
+    /**
+     * The {@code buttonToStartOneOrMoreSteps} is a {@link Button} object used
+     * to initiate a certain number of steps for the simulation.
+     */
     @FXML
-    private Button _button;
+    private Button buttonToStartOneOrMoreSteps;
 
+    /**
+     * The {@code choiceOfNumberOfSteps} is a {@link ChoiceBox} object used to
+     * choose the number of steps when pushing the simulation button (1, 10
+     * or 100 steps).
+     */
     @FXML
-    private Button _list;
+    private ChoiceBox<String> choiceOfNumberOfSteps;
 
+    /**
+     * The {@code choiceOfThePlanetTolerance} is a {@link ChoiceBox} object
+     * used to choose the tolerance level of the planet.
+     */
     @FXML
-    private ChoiceBox<String> _choice;
+    private ChoiceBox<String> choiceOfThePlanetTolerance;
 
+    /**
+     * The label to display the age of the planet since the arrival of the
+     * colony
+     */
     @FXML
-    private ChoiceBox<String> _tolerance;
+    private Label ageSinceTheArrivalOfTheColony;
 
+    /** The label to display the health status of the planet */
     @FXML
-    private Label _age;
+    private Label healthStatusOfThePlanet;
 
+    /** The label to display the food stock of the colony */
     @FXML
-    private Label _healthStatus;
+    private Label foodStockOfTheColony;
 
+    /** The label to display the water stock of the colony */
     @FXML
-    private Label _foodStock;
+    private Label waterStockOfTheColony;
 
+    /** The label to display the ore stock of the colony */
     @FXML
-    private Label _waterStock;
+    private Label oreStockOfTheColony;
 
+    /** The label to display the current number of robots of the colony */
     @FXML
-    private Label _oreStock;
+    private Label currentNumberOfRobots;
 
-    @FXML
-    private Label _robots;
-
+    /** The width of the scene */
     private int sceneWidth;
+
+    /** The height of the scene */
     private int sceneHeight;
+
+    /** A reference to the presenter of the simulation */
     private final Presenter presenter;
+
+    /**
+     * The 2D list of {@code CellView} objects to represent the cells within the
+     * simulation grid
+     */
     private List<List<CellView>> cellsView = null;
 
-    /** It allows to choose the number of steps of the simulation */
+    /**
+     * An Observable list of items to select the number of steps of the simulation
+     */
     private final Observable items = FXCollections.observableArrayList("1",
             "10", "100");
 
+    /**
+     * An Observable list of items to select the tolerance of the planet
+     */
     private final Observable tolerances = FXCollections.observableArrayList(
             "Hostile", "Adaptative", "Tolérante");
 
+    /**
+     * Constructs a new {@code PlanetView} object with a reference to the
+     * presenter and the width and height of the scene.
+     * @param presenter a reference to the presenter of the simulation
+     * @param x the width of the scene
+     * @param y the height of the scene
+     */
     public PlanetView(Presenter presenter, int x, int y) {
         this.presenter = presenter;
         this.sceneWidth = x;
@@ -85,10 +137,13 @@ public class PlanetView implements IPresenter {
         this.sceneHeight = sceneHeight;
     }
 
+    /**
+     * Sets the action when the user clicks on the button to simulate.
+     */
     public void setOnclick() {
-        _button.setOnAction(event -> presenter.simulate(Integer.parseInt(_choice.getValue())));
-        _tolerance.setOnAction(event -> {
-            switch (_tolerance.getValue()) {
+        buttonToStartOneOrMoreSteps.setOnAction(event -> presenter.simulate(Integer.parseInt(choiceOfNumberOfSteps.getValue())));
+        choiceOfThePlanetTolerance.setOnAction(event -> {
+            switch (choiceOfThePlanetTolerance.getValue()) {
                 case "Hostile":
                     presenter.setTolerance(1.0);
                     break;
@@ -104,16 +159,29 @@ public class PlanetView implements IPresenter {
         });
     }
 
-    public void setChoiceBox() {
-        _choice.setItems((ObservableList<String>) items);
-        _choice.setValue("1");
-        _tolerance.setItems((ObservableList<String>) tolerances);
-        _tolerance.setValue("Tolérante");
+    /**
+     * Sets the items of the choice boxe to select the number of steps of the
+     * simulation.
+     */
+    public void setChoicesOfNumberOfSteps() {
+        choiceOfNumberOfSteps.setItems((ObservableList<String>) items);
+        choiceOfNumberOfSteps.setValue("1");
     }
 
+    /**
+     * Sets the items of the choice boxe to select the tolerance for the planet.
+     */
+    public void setChoicesOfPlanetTolerance() {
+        choiceOfThePlanetTolerance.setItems((ObservableList<String>) tolerances);
+        choiceOfThePlanetTolerance.setValue("Tolérante");
+    }
+
+    /**
+     * Displays an information alert when the simulation ends.
+     */
     @Override
     public void finish() {
-        _button.setDisable(true);
+        buttonToStartOneOrMoreSteps.setDisable(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setContentText("Fin de la simulation !");
@@ -122,10 +190,10 @@ public class PlanetView implements IPresenter {
 
     @Override
     public void draw() {
-        _grid.getChildren().clear();
+        gridOfPlanet.getChildren().clear();
         for (int i = 0; i < cellsView.size(); i++) {
             for (int j = 0; j < cellsView.get(i).size(); j++) {
-                _grid.add(cellsView.get(i).get(j).getPane(), i, j);
+                gridOfPlanet.add(cellsView.get(i).get(j).getPane(), i, j);
             }
         }
     }
@@ -140,13 +208,23 @@ public class PlanetView implements IPresenter {
         return cellsView;
     }
 
+    /**
+     * Updates the planet's status in the UI.
+     * @param age the planet's age since the arrival of the colony
+     * @param healthStatus the planet's health status
+     * @param foodStock the colony's food stock
+     * @param waterStock the colony's water stock
+     * @param oreStock the colony's ore stock
+     * @param nbRobots the number of robots for the colony
+     */
     public void updateStatus(int age, String healthStatus, double foodStock,
                              double waterStock, double oreStock, int nbRobots) {
-        _age.setText("Âge de la planète : " + age + " an(s)");
-        _healthStatus.setText("Santé de la planète : " + healthStatus);
-        _foodStock.setText("Stock de nourriture : " + foodStock);
-        _waterStock.setText("Stock d'eau : " + waterStock);
-        _oreStock.setText("Stock de minerai : " + oreStock);
-        _robots.setText("Nombre de robots : " + nbRobots);
+        ageSinceTheArrivalOfTheColony.setText("Âge de la planète : " + age + " an(s)");
+        healthStatusOfThePlanet.setText("Santé de la planète : " + healthStatus);
+        foodStockOfTheColony.setText("Stock de nourriture : " + foodStock);
+        waterStockOfTheColony.setText("Stock d'eau : " + waterStock);
+        oreStockOfTheColony.setText("Stock de minerai : " + oreStock);
+        currentNumberOfRobots.setText("Nombre de robots : " + nbRobots);
     }
+
 }

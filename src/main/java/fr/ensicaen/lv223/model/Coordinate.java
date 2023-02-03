@@ -4,8 +4,12 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * A coordinate can both represents a direction (e.g. NORTH corresponds to
- * x=0 and y=1) or an effective coordinate.
+ * The {@code Coordinate} class represents a position on a two-dimensional
+ * plane. It provides functionality to get/set the x and y values, create a
+ * random new coordinate, translate the coordinate by an offset, add two
+ * coordinates and get the string representation of the coordinate. It also
+ * implements hashcode and equals methods to compare if two coordinates are
+ * equal based on their x and y values.
  */
 public class Coordinate {
     private static final int MAX_BOUND = 2;

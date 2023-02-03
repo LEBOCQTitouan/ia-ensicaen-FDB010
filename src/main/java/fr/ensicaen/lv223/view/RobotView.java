@@ -3,25 +3,47 @@ package fr.ensicaen.lv223.view;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * A visual representation of a robot in the simulation. The robot is
+ * displayed as a circle shape. The color of the circle depends on the type
+ * of robot.
+ */
 public class RobotView {
     private Color color;
 
+    /** The circle shape representing the robot */
     private final Circle shape;
 
+    /**
+     * Creates a new instance of the {@code RobotView} class.
+     *
+     * @param cellWidth the width of the cell in which the robot is displayed
+     */
     public RobotView(double cellWidth) {
         this.shape = new Circle();
         this.shape.setRadius(cellWidth / 3);
         this.shape.setSmooth(true);
     }
 
+    /**
+     * Makes the robot visible in the simulation.
+     */
     public void setVisible() {
         this.shape.setVisible(true);
     }
 
+    /**
+     * Hides the robot in the simulation.
+     */
     public void hide() {
         this.shape.setVisible(false);
     }
 
+    /**
+     * Sets the color of the robot based on its type.
+     *
+     * @param type the type of the robot
+     */
     public void setColor(String type) {
         switch (type) {
             case "CARTOGRAPHER":
@@ -45,6 +67,11 @@ public class RobotView {
         }
     }
 
+    /**
+     * Returns the circle shape representing the robot.
+     *
+     * @return the circle shape representing the robot
+     */
     public Circle getShape() {
         return shape;
     }
