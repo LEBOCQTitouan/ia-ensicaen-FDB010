@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.ensicaen.lv223.model.*;
 import fr.ensicaen.lv223.model.cells.Cell;
+import fr.ensicaen.lv223.model.robotsAlpha.RobotType;
 import fr.ensicaen.lv223.view.CellView;
 import javafx.scene.effect.GaussianBlur;
 
@@ -42,7 +43,7 @@ public class Presenter {
     public void drawPlanet() {
         List<List<Cell>> cells = planet.getCells();
         List<List<CellView>> cellsView = new ArrayList<>();
-        GaussianBlur blur = new GaussianBlur(60.0);
+        GaussianBlur blur = new GaussianBlur(0.0);
 
         for (int i = 0; i < cells.size(); i++) {
             cellsView.add(new ArrayList<>(cells.get(0).size()));
@@ -51,6 +52,10 @@ public class Presenter {
                         view.getSceneHeight() / 21.0,
                         cells.get(i).get(j).getType().name()));
                 cellsView.get(i).get(j).getRobotView().hide();
+                if (i == j) {
+                    cellsView.get(i).get(j).getRobotView().setVisible();
+                    cellsView.get(i).get(j).getRobotView().setColor(RobotType.values()[i%RobotType.values().length].getColor());
+                }
                 cellsView.get(i).get(j).getPane().setEffect(blur);
             }
         }

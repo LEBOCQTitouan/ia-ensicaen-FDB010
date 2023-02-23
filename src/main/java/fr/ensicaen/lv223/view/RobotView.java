@@ -68,6 +68,10 @@ public class RobotView {
         }
     }
 
+    public void setColor(Color color) {
+        this.shape.setFill(color);
+    }
+
     /**
      * Returns the circle shape representing the robot.
      *
