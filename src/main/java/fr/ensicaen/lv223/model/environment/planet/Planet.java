@@ -1,12 +1,14 @@
-package fr.ensicaen.lv223.model;
+package fr.ensicaen.lv223.model.environment.planet;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import fr.ensicaen.lv223.model.cells.Cell;
-import fr.ensicaen.lv223.model.cells.CellFactory;
-import fr.ensicaen.lv223.model.cells.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.Coordinate;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
+import fr.ensicaen.lv223.model.environment.cells.CellFactory;
+import fr.ensicaen.lv223.model.environment.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.planetloader.JsonLoader;
 import fr.ensicaen.lv223.planetloader.PlanetData;
 import fr.ensicaen.lv223.planetloader.PlanetLoader;
@@ -37,8 +39,7 @@ public class Planet implements Environment {
         for (int i = 0; i < 21; i++) {
             cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
-                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i,
-                        j);
+                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i, j);
                 cells.get(i).add(o.get());
             }
         }

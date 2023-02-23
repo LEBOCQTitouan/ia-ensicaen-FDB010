@@ -3,9 +3,9 @@ package fr.ensicaen.lv223.presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.ensicaen.lv223.model.*;
-import fr.ensicaen.lv223.model.cells.Cell;
-import fr.ensicaen.lv223.model.robotsAlpha.RobotType;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
+import fr.ensicaen.lv223.model.agent.robot.RobotType;
+import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.view.CellView;
 import javafx.scene.effect.GaussianBlur;
 

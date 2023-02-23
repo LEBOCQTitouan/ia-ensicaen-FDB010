@@ -1,11 +1,11 @@
 package fr.ensicaen.lv223.model.agent.robot;
 
 import fr.ensicaen.lv223.model.agent.Agent;
+import fr.ensicaen.lv223.model.agent.robot.message.Message;
 
 import java.util.PriorityQueue;
-import java.util.Stack;
 
-public class Robot implements Agent {
+public abstract class Robot implements Agent {
     private PriorityQueue<Message> priorityQueueMessage;
     @Override
     public void compute() {

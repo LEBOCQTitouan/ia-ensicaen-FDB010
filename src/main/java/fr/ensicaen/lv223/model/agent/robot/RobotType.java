@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.model.robotsAlpha;
+package fr.ensicaen.lv223.model.agent.robot;
 
 import javafx.scene.paint.Color;
 
@@ -11,7 +11,7 @@ public enum RobotType {
     NONE(Color.TRANSPARENT);
 
     private final Color color;
-    private RobotType(Color color)
+    RobotType(Color color)
     {
         this.color = color;
     }
