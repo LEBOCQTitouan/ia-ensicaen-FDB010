@@ -17,6 +17,7 @@ public abstract class Robot implements Agent {
     public void compute() {
 
     }
+    public abstract boolean isAvailable(Message m);
     public void addMessage(Message message) {
         this.priorityQueueMessage.add(message);
     }
@@ -24,6 +25,13 @@ public abstract class Robot implements Agent {
     private Message getTopMessage(){
         if(priorityQueueMessage.size() != 0){
             return this.priorityQueueMessage.poll();
+        }
+        return null;
+    }
+
+    private Command getTopCommand(){
+        if(priorityQueueCommand.size() != 0){
+            return this.priorityQueueCommand.peek();
         }
         return null;
     }

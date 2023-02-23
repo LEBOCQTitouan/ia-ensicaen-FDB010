@@ -89,6 +89,7 @@ public class Presenter {
      */
     public void simulateOneTurn() {
         // TO COMPLETE
+        planet.play();
         drawPlanet();
         updateRobotPositionOnView();
     }
