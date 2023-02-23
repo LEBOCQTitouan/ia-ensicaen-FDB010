@@ -67,39 +67,39 @@ public class Astar implements Agent {
                 neighbours.add(cells[x - 1][y]);
             }
             if (y > 0 && cells[x - 1][y - 1].getType() != CellType.IMPENETRABLE
-                    && cells[x - 1][y].getType() != CellType.LAKE) { // TOP LEFT
+                    && cells[x - 1][y - 1].getType() != CellType.LAKE) { // TOP LEFT
                 neighbours.add(cells[x - 1][y - 1]);
             }
             if (y < cells[0].length - 1
                     && cells[x - 1][y + 1].getType() != CellType.IMPENETRABLE
-                    && cells[x - 1][y].getType() != CellType.LAKE) { // TOP RIGHT
+                    && cells[x - 1][y + 1].getType() != CellType.LAKE) { // TOP RIGHT
                 neighbours.add(cells[x - 1][y + 1]);
             }
         }
         if (x < cells.length - 1) { // BOTTOM
             if (cells[x + 1][y].getType() != CellType.IMPENETRABLE
-                    && cells[x - 1][y].getType() != CellType.LAKE) {
+                    && cells[x + 1][y].getType() != CellType.LAKE) {
                 neighbours.add(cells[x + 1][y]);
             }
             if (y > 0
                     && cells[x + 1][y - 1].getType() != CellType.IMPENETRABLE
-                    && cells[x - 1][y].getType() != CellType.LAKE) { // BOTTOM LEFT
+                    && cells[x + 1][y - 1].getType() != CellType.LAKE) { // BOTTOM LEFT
                 neighbours.add(cells[x + 1][y - 1]);
             }
             if (y < cells[0].length - 1
                     && cells[x + 1][y + 1].getType() != CellType.IMPENETRABLE
-                    && cells[x - 1][y].getType() != CellType.LAKE) { // BOTTOM RIGHT
+                    && cells[x + 1][y + 1].getType() != CellType.LAKE) { // BOTTOM RIGHT
                 neighbours.add(cells[x + 1][y + 1]);
             }
         }
         if (y > 0
                 && cells[x][y - 1].getType() != CellType.IMPENETRABLE
-                && cells[x - 1][y].getType() != CellType.LAKE) { // LEFT
+                && cells[x][y - 1].getType() != CellType.LAKE) { // LEFT
             neighbours.add(cells[x][y - 1]);
         }
         if (y < cells[0].length - 1
                 && cells[x][y + 1].getType() != CellType.IMPENETRABLE
-                && cells[x - 1][y].getType() != CellType.LAKE) { // RIGHT
+                && cells[x][y + 1].getType() != CellType.LAKE) { // RIGHT
             neighbours.add(cells[x][y + 1]);
         }
 

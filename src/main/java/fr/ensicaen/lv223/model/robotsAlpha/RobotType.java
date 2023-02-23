@@ -11,7 +11,7 @@ public enum RobotType {
     NONE(Color.TRANSPARENT);
 
     private final Color color;
-    private RobotType(Color color)
+    RobotType(Color color)
     {
         this.color = color;
     }
