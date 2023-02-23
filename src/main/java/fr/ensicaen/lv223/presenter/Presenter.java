@@ -25,8 +25,8 @@ public class Presenter {
      * Constructs a new {@code Presenter} instance.
      */
     public Presenter() {
-        // TODO : TO COMPLETE BY INSTANTIATING ALL YOU NEED
         planet = new Planet();
+
     }
 
     /**
@@ -43,7 +43,7 @@ public class Presenter {
     public void drawPlanet() {
         List<List<Cell>> cells = planet.getCells();
         List<List<CellView>> cellsView = new ArrayList<>();
-        GaussianBlur blur = new GaussianBlur(0.0);
+        GaussianBlur blur = new GaussianBlur(0.6);
 
         for (int i = 0; i < cells.size(); i++) {
             cellsView.add(new ArrayList<>(cells.get(0).size()));
