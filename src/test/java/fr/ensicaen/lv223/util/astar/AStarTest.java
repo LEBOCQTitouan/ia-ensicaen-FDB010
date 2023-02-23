@@ -1,7 +1,7 @@
 package fr.ensicaen.lv223.util.astar;
 
-import fr.ensicaen.lv223.model.Planet;
-import fr.ensicaen.lv223.model.cells.Cell;
+import fr.ensicaen.lv223.model.environment.planet.Planet;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
