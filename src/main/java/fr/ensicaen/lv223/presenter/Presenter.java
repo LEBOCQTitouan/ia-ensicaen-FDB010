@@ -25,7 +25,7 @@ public class Presenter {
      * Constructs a new {@code Presenter} instance.
      */
     public Presenter() {
-        // TO COMPLETE BY INSTANTIATING ALL YOU NEED
+        // TODO : TO COMPLETE BY INSTANTIATING ALL YOU NEED
         planet = new Planet();
     }
 
