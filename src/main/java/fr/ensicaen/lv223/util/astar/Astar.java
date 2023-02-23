@@ -1,8 +1,8 @@
 package fr.ensicaen.lv223.util.astar;
 
 
-import fr.ensicaen.lv223.model.CellType;
-import fr.ensicaen.lv223.model.cells.Cell;
+import fr.ensicaen.lv223.model.environment.cells.CellType;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.util.astar.heuristic.Heuristic;
 import fr.ensicaen.lv223.util.astar.heuristic.ManhattanHeuristic;
 

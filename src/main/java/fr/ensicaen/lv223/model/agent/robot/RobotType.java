@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.model.robotsAlpha;
+package fr.ensicaen.lv223.model.agent.robot;
 
 import javafx.scene.paint.Color;
 
