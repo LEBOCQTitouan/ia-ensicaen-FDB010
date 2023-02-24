@@ -1,10 +1,12 @@
 package fr.ensicaen.lv223.model.agent.robot;
 
 import fr.ensicaen.lv223.model.agent.Agent;
-import fr.ensicaen.lv223.model.agent.robot.command.Command;
+import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
@@ -20,8 +22,9 @@ public abstract class Robot implements Agent {
     }
 
     @Override
-    public void compute() {
-
+    public List<Command> compute() {
+        List<Command> commands = new ArrayList<>();
+        return commands;
     }
     public abstract boolean isAvailable(Message m);
     public void addMessage(Message message) {
