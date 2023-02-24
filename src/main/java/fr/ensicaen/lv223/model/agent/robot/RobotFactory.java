@@ -21,11 +21,8 @@ public class RobotFactory {
             case ORE_EXTRACTOR -> {
                 return new OreExtractor(RobotType.ORE_EXTRACTOR);
             }
-            case CENTRALISER -> {
-                return new Centralizer(RobotType.CENTRALISER);
-            }
             case CENTRALIZER -> {
-                return new Centralizer();
+                return new Centralizer(RobotType.CENTRALIZER);
             }
             default -> {
                 return null;
