@@ -24,6 +24,9 @@ public class RobotFactory {
             case CENTRALISER -> {
                 return new Centralizer(RobotType.CENTRALISER);
             }
+            case CENTRALIZER -> {
+                return new Centralizer();
+            }
             default -> {
                 return null;
             }

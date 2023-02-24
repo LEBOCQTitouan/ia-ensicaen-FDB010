@@ -13,4 +13,9 @@ public class Farmer extends Robot {
     public boolean isAvailable( Message m ) {
         return false;
     }
+
+    @Override
+    public void compute() {
+
+    }
 }

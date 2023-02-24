@@ -8,7 +8,7 @@ public enum RobotType {
     FARMER(Color.CORNSILK),
     PIPELINE_BUILDER(Color.DARKSEAGREEN),
     ORE_EXTRACTOR(Color.DARKMAGENTA),
-    CENTRALISER(Color.TRANSPARENT),
+    CENTRALIZER(Color.TRANSPARENT),
     NONE(Color.TRANSPARENT);
 
     private final Color color;
