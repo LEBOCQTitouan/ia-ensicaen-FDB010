@@ -1,8 +1,11 @@
 package fr.ensicaen.lv223.teams.jamesbond.robot;
 
+import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.specials.ACartographer;
+
+import java.util.List;
 
 public class Cartographer extends ACartographer {
     public Cartographer(RobotType type) {
@@ -15,7 +18,7 @@ public class Cartographer extends ACartographer {
     }
 
     @Override
-    public void compute() {
-
+    public List<Command> compute() {
+        return null;
     }
 }

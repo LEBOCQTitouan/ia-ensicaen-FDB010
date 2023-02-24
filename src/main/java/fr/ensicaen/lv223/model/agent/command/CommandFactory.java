@@ -1,7 +1,5 @@
 package fr.ensicaen.lv223.model.agent.command;
 
-import fr.ensicaen.lv223.model.agent.robot.command.CommandType;
-
 public class CommandFactory {
     private static CommandFactory instance = null;
     //mettre le proxy planete en parametre

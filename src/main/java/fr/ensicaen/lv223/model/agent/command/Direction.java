@@ -1,6 +1,4 @@
-package fr.ensicaen.lv223.model.agent.robot.command;
-
-import javafx.scene.paint.Color;
+package fr.ensicaen.lv223.model.agent.command;
 
 public enum Direction {
     NORTH(0,-1),
