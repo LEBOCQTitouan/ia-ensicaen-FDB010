@@ -8,11 +8,17 @@ import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
+    public final RobotType type;
     private PriorityQueue<Message> priorityQueueMessage;
     private PriorityQueue<Command> priorityQueueCommand;
     private Objectif primalObjectif;
     //Objectif temporaire prioritaire sur l'objectif principal
     private Objectif temporaryObjectif;
+
+    protected Robot(RobotType type) {
+        this.type = type;
+    }
+
     @Override
     public void compute() {
 
