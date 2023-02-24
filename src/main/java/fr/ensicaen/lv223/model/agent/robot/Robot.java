@@ -10,11 +10,21 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
+    public final RobotType type;
     private PriorityQueue<Message> priorityQueueMessage;
     private PriorityQueue<Command> priorityQueueCommand;
     private Objectif primalObjectif;
     //Objectif temporaire prioritaire sur l'objectif principal
     private Objectif temporaryObjectif;
+
+    protected Robot(RobotType type) {
+        this.type = type;
+    }
+
+    @Override
+    public void compute() {
+
+    }
     public abstract boolean isAvailable(Message m);
     public void addMessage(Message message) {
         this.priorityQueueMessage.add(message);
