@@ -1,11 +1,11 @@
-package fr.ensicaen.lv223.model.agent.robot.specials;
+package fr.ensicaen.lv223.teams.jamesbond.robot;
 
-import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
+import fr.ensicaen.lv223.model.agent.robot.specials.AFoodRetriever;
 
-public class Farmer extends Robot {
-    public Farmer(RobotType type) {
+public class FoodRetriever extends AFoodRetriever {
+    public FoodRetriever(RobotType type) {
         super(type);
     }
 

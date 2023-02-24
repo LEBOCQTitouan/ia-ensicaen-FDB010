@@ -1,6 +1,6 @@
 package fr.ensicaen.lv223.model.agent.robot;
 
-import fr.ensicaen.lv223.model.agent.robot.specials.*;
+import fr.ensicaen.lv223.teams.jamesbond.robot.*;
 
 public class RobotFactory {
     public RobotFactory() {}
