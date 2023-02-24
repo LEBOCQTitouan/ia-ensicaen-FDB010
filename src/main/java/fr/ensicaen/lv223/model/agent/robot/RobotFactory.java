@@ -20,6 +20,9 @@ public class RobotFactory {
             case ORE_EXTRACTOR -> {
                 return new OreExtractor();
             }
+            case CENTRALIZER -> {
+                return new Centralizer();
+            }
             default -> {
                 return null;
             }

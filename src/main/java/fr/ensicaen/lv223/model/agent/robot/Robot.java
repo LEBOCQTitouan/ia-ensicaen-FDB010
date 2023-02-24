@@ -13,10 +13,6 @@ public abstract class Robot implements Agent {
     private Objectif primalObjectif;
     //Objectif temporaire prioritaire sur l'objectif principal
     private Objectif temporaryObjectif;
-    @Override
-    public void compute() {
-
-    }
     public abstract boolean isAvailable(Message m);
     public void addMessage(Message message) {
         this.priorityQueueMessage.add(message);
