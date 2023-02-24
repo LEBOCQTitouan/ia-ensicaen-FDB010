@@ -1,6 +1,7 @@
 package fr.ensicaen.lv223.model.environment;
 
 import fr.ensicaen.lv223.model.environment.cells.Cell;
+import fr.ensicaen.lv223.model.environment.planet.PlanetEmotion;
 
 import java.util.List;
 
@@ -41,4 +42,11 @@ public interface Environment {
      * @return The list of cells
      */
     List<List<Cell>> getCells();
+
+    /**
+     * Sets the emotion for the planet
+     * @param planetEmotion current emotion for planet
+     */
+
+    void setEmotion( PlanetEmotion planetEmotion );
 }

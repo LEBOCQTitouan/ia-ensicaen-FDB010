@@ -8,4 +8,9 @@ public class FoodRetriever extends Robot {
     public boolean isAvailable( Message m ) {
         return false;
     }
+
+    @Override
+    public void compute() {
+
+    }
 }

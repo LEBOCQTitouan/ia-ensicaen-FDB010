@@ -1,11 +1,13 @@
 package fr.ensicaen.lv223.model.environment.cells;
 
+import java.util.ArrayList;
+
 /**
  * The {@code CellType} enumeration represents the different types of cells
  * that can exist in the two-dimensional grid of LV-223.
  */
 public enum CellType {
-    BASE,      /**<! A cell that contains the base of the colony (is part of the
+          /**<! A cell that contains the base of the colony (is part of the
      exoskeleton). */
     BOUNDARY,       /**<! NOT YET USED */
     DESERT,         /**<! A cell that contains a desert. */
@@ -17,5 +19,7 @@ public enum CellType {
     LAKE,           /**<! A cell that contains a lake (is part of the exoskeleton). */
     ORE,            /**<! A cell that contains mineral deposits (is part of the exoskeleton). */
     STONE,          /**<! A cell that contains stones (is part of the exoskeleton). */
-    WET_GRASS       /**<! A cell that contains a wet meadow. */
+    BASE,
+    WET_GRASS;
+    /**<! A cell that contains a wet meadow. */
 }

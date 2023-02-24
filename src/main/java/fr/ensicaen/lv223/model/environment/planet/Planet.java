@@ -13,6 +13,8 @@ import fr.ensicaen.lv223.model.environment.Coordinate;
 import fr.ensicaen.lv223.planetloader.JsonLoader;
 import fr.ensicaen.lv223.planetloader.PlanetData;
 import fr.ensicaen.lv223.planetloader.PlanetLoader;
+import net.sourceforge.jFuzzyLogic.FIS;
+import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
 /**
  * The {@code Planet} class implements the {@link Environment} interface and
@@ -26,26 +28,38 @@ import fr.ensicaen.lv223.planetloader.PlanetLoader;
  * be retrieved or set using a {@link Coordinate} object to specify their
  * position in the grid.
  */
+
+
+/**
+ * toDo emotions with planet
+ * Generate around the Centralisator cases with probalities random
+ */
 public class Planet implements Environment {
     private final List<List<Cell>> cells;
     private int ageSinceTheArrivalOfTheColony;
 
     private List<Agent> listAgents;
 
+    private FuzzyLogic fuzzyLogic;
+
+    private PlanetEmotion currentEmotion;
     public Planet() {
+        this.ageSinceTheArrivalOfTheColony = 0;
+        this.currentEmotion = PlanetEmotion.HAPPY;
+        this.cells = new ArrayList<>();
+        this.listAgents = new ArrayList<>();
+        this.fuzzyLogic = new FuzzyLogic();
+        this.fuzzyLogic.viewAllChart();
+
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
 
-        ageSinceTheArrivalOfTheColony = 0;
-
-        cells = new ArrayList<>();
-        this.listAgents = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
-            cells.add(new ArrayList<>());
+            this.cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
                 Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i,
                         j);
-                cells.get(i).add(o.get());
+                this.cells.get(i).add(o.get());
             }
         }
 
@@ -58,7 +72,7 @@ public class Planet implements Environment {
                         planetDatum.getCellPos()[j].getX(),
                         planetDatum.getCellPos()[j].getY());
 
-                cells.get(x).set(y, o.get());
+                this.cells.get(x).set(y, o.get());
             }
         }
     }
@@ -66,6 +80,11 @@ public class Planet implements Environment {
     @Override
     public List<List<Cell>> getCells() {
         return cells;
+    }
+
+    @Override
+    public void setEmotion( PlanetEmotion planetEmotion ) {
+        this.currentEmotion = planetEmotion;
     }
 
     public int getAgeSinceTheArrivalOfTheColony() {
@@ -100,6 +119,5 @@ public class Planet implements Environment {
                 }
             }
         }
-        System.out.println("je play");
     }
 }
