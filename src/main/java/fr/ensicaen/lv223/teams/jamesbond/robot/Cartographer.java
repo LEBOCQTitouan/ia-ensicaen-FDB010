@@ -1,13 +1,10 @@
-package fr.ensicaen.lv223.model.agent.robot.specials;
+package fr.ensicaen.lv223.teams.jamesbond.robot;
 
-import fr.ensicaen.lv223.model.agent.command.Command;
-import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
+import fr.ensicaen.lv223.model.agent.robot.specials.ACartographer;
 
-import java.util.List;
-
-public class Cartographer extends Robot {
+public class Cartographer extends ACartographer {
     public Cartographer(RobotType type) {
         super(type);
     }
@@ -18,8 +15,7 @@ public class Cartographer extends Robot {
     }
 
     @Override
-    public List<Command> compute() {
+    public void compute() {
 
-        return null;
     }
 }

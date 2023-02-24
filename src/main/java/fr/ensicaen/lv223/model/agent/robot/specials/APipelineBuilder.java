@@ -7,8 +7,8 @@ import fr.ensicaen.lv223.model.agent.robot.message.Message;
 
 import java.util.List;
 
-public class OreExtractor extends Robot {
-    public OreExtractor(RobotType type) {
+public abstract class APipelineBuilder extends Robot {
+    public APipelineBuilder(RobotType type) {
         super(type);
     }
 
@@ -19,7 +19,6 @@ public class OreExtractor extends Robot {
 
     @Override
     public List<Command> compute() {
-
         return null;
     }
 }

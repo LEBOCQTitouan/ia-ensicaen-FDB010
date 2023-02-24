@@ -1,13 +1,10 @@
-package fr.ensicaen.lv223.model.agent.robot.specials;
+package fr.ensicaen.lv223.teams.jamesbond.robot;
 
-import fr.ensicaen.lv223.model.agent.command.Command;
-import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
+import fr.ensicaen.lv223.model.agent.robot.specials.ACentralizer;
 
-import java.util.List;
-
-public class Centralizer extends Robot {
+public class Centralizer extends ACentralizer {
     public Centralizer(RobotType type) {
         super(type);
     }
@@ -17,8 +14,7 @@ public class Centralizer extends Robot {
     }
 
     @Override
-    public List<Command> compute() {
+    public void compute() {
 
-        return null;
     }
 }

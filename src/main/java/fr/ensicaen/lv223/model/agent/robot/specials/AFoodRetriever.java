@@ -7,8 +7,8 @@ import fr.ensicaen.lv223.model.agent.robot.message.Message;
 
 import java.util.List;
 
-public class FoodRetriever extends Robot {
-    public FoodRetriever(RobotType type) {
+public abstract class AFoodRetriever extends Robot {
+    public AFoodRetriever(RobotType type) {
         super(type);
     }
 
@@ -19,7 +19,6 @@ public class FoodRetriever extends Robot {
 
     @Override
     public List<Command> compute() {
-
         return null;
     }
 }

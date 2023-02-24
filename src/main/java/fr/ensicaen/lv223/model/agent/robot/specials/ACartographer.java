@@ -7,8 +7,8 @@ import fr.ensicaen.lv223.model.agent.robot.message.Message;
 
 import java.util.List;
 
-public class PipelineBuilder extends Robot {
-    public PipelineBuilder(RobotType type) {
+public abstract class ACartographer extends Robot {
+    public ACartographer(RobotType type) {
         super(type);
     }
 
@@ -19,7 +19,6 @@ public class PipelineBuilder extends Robot {
 
     @Override
     public List<Command> compute() {
-
         return null;
     }
 }
