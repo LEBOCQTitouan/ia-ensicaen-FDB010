@@ -1,8 +1,10 @@
 package fr.ensicaen.lv223.model.logic;
 
+import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sequencer {
@@ -15,6 +17,17 @@ public class Sequencer {
     }
 
     public void step() {
-        //TODO : implement the step
+        ArrayList<Command> commands = new ArrayList<>();
+        for (Robot robot : robots) {
+            robot.compute();
+        }
+        for (Robot robot : robots) {
+            for (Command command : robot.compute()) {
+                commands.add(command);
+            }
+        }
+        for (Command command: commands) {
+            command.apply();
+        }
     }
 }

@@ -1,8 +1,11 @@
 package fr.ensicaen.lv223.model.agent.robot.specials;
 
+import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
+
+import java.util.List;
 
 public abstract class AFoodRetriever extends Robot {
     public AFoodRetriever(RobotType type) {
@@ -15,7 +18,7 @@ public abstract class AFoodRetriever extends Robot {
     }
 
     @Override
-    public void compute() {
-
+    public List<Command> compute() {
+        return null;
     }
 }
