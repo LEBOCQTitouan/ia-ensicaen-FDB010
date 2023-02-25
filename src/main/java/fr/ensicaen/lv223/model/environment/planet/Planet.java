@@ -1,15 +1,13 @@
 package fr.ensicaen.lv223.model.environment.planet;
 
-import fr.ensicaen.lv223.model.agent.Agent;
-import fr.ensicaen.lv223.model.environment.Coordinate;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
-import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
 import fr.ensicaen.lv223.util.planetloader.JsonLoader;
 import fr.ensicaen.lv223.util.planetloader.PlanetData;
 import fr.ensicaen.lv223.util.planetloader.PlanetLoader;
+import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ import java.util.Optional;
  * is stored as a list of lists of {@link Cell} objects.
  * The age of the planet since the arrival of the colony can be accessed,
  * such as the width and height of the grid. Additionally, individual cells can
- * be retrieved or set using a {@link Coordinate} object to specify their
+ * be retrieved or set using a {@link fr.ensicaen.lv223.model.logic.localisation.Coordinate} object to specify their
  * position in the grid.
  */
 public class Planet implements Environment {
@@ -81,12 +79,23 @@ public class Planet implements Environment {
     }
 
     @Override
-    public EnvironmentCell getCell(Coordinate c) {
-        return cells.get(c.getX()).get(c.getY());
+    public EnvironmentCell getCell(Coordinate coord) {
+        return cells
+                .get(coord.x)
+                .get(coord.y);
+    }
+
+    @Override
+    public EnvironmentCell getCell(int x, int y) {
+        return cells
+                .get(x)
+                .get(y);
     }
 
     @Override
     public void setCell(Coordinate c, EnvironmentCell cell) {
-        this.getCells().get(c.getX()).set(c.getY(), (Cell) cell);
+        this.getCells()
+                .get(c.x)
+                .set(c.y, (Cell) cell);
     }
 }
