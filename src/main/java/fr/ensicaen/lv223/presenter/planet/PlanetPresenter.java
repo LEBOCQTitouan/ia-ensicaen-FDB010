@@ -24,9 +24,11 @@ public class PlanetPresenter {
             cellsView.add(new ArrayList<>(cells.get(0).size()));
             for (int j = 0; j < cells.get(i).size(); j++) {
                 cellsView.get(i).add(
-                    new CellView(view.getSceneWidth() / 21.0,
-                    view.getSceneHeight() / 21.0,
-                    cells.get(i).get(j).getType().name())
+                    new CellView(
+                            view.getSceneWidth() / 21.0,
+                            view.getSceneHeight() / 21.0,
+                            cells.get(i).get(j).getType()
+                    )
                 );
             }
         }

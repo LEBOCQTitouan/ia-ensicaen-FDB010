@@ -1,6 +1,7 @@
 package fr.ensicaen.lv223.view;
 
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
+import fr.ensicaen.lv223.util.Util;
 import fr.ensicaen.lv223.util.loader.viewloader.ImageLoader;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -13,11 +14,10 @@ import javafx.scene.shape.Circle;
  * on the type of the robot.
  */
 public class RobotView {
-    /** The color of the robot */
-    private Color color;
 
     /** The circle shape representing the robot */
     private final ImageView displayElement;
+    private double cellWidth;
 
     /**
      * Creates a new instance of the {@code RobotView} class.
@@ -26,6 +26,7 @@ public class RobotView {
      */
     public RobotView(double cellWidth) {
         this.displayElement = new ImageView();
+        this.cellWidth = cellWidth;
     }
 
     /**
@@ -44,9 +45,9 @@ public class RobotView {
 
     public void setRobotType(RobotType type) {
         try {
-            displayElement.setImage(ImageLoader.getInstance().getRobotImage(type));
+            this.displayElement.setImage(ImageLoader.getInstance(cellWidth, cellWidth).getRobotImage(type));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Util.LOGGER.severe("Error while loading robot image: " + e.getMessage());
         }
     }
 

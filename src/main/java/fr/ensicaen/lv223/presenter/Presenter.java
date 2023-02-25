@@ -47,6 +47,7 @@ public class Presenter {
         }
 
         sequencer.step();
+        // TODO implement the choice to see the turn or not
         if (nbTurns == 0) {
             updateView();
             return;
