@@ -6,9 +6,9 @@ import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
-import fr.ensicaen.lv223.planetloader.JsonLoader;
-import fr.ensicaen.lv223.planetloader.PlanetData;
-import fr.ensicaen.lv223.planetloader.PlanetLoader;
+import fr.ensicaen.lv223.util.planetloader.JsonLoader;
+import fr.ensicaen.lv223.util.planetloader.PlanetData;
+import fr.ensicaen.lv223.util.planetloader.PlanetLoader;
 
 import java.util.ArrayList;
 import java.util.List;

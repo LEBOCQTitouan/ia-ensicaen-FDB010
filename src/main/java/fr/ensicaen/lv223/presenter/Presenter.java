@@ -23,8 +23,8 @@ public class Presenter {
      */
     public Presenter() {
         sequencer = new Sequencer(new Planet());
-        planetPresenter = new PlanetPresenter(view, sequencer.planet);
-        colonyPresenter = new ColonyPresenter(view, sequencer.planet);
+        planetPresenter = new PlanetPresenter(sequencer.planet);
+        colonyPresenter = new ColonyPresenter(sequencer.mapper);
     }
 
     /**

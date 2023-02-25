@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Sequencer {
     public final Planet planet;
-    public final List<Robot> robots;
-    public final RobotMapper mapper;
+    public List<Robot> robots;
+    public RobotMapper mapper;
 
     public Sequencer(Planet planet) {
         this.planet = planet;

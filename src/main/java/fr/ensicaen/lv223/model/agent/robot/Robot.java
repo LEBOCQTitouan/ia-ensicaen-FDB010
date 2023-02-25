@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
-    private final CommandFactory commandFactory;
+    protected final CommandFactory commandFactory;
     /**
      * The type of the robot. Only temporary and implemented because of a lack of time.
      */

@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.planetloader;
+package fr.ensicaen.lv223.util.planetloader;
 
 /**
  * The class {@code CellPosition} represents the position of a cell on a

@@ -18,7 +18,7 @@ public class RobotMapper {
         this.planet = planet;
         robotMap = new HashMap<>();
 
-        CommandFactory commandFactory = new CommandFactory(planet, this);
+        CommandFactory commandFactory = new CommandFactory(this);
 
         RobotFactory factory = new RobotFactory(commandFactory);
 
@@ -66,11 +66,13 @@ public class RobotMapper {
         return robotMap.keySet().stream().toList();
     }
 
-    public boolean moveRobot(Robot robot, int x, int y) {
-        if (x < 0 || x >= planet.getHeight() || y < 0 || y >= planet.getWidth()) {
+    public boolean moveRobot(Robot robot, int offsetX, int offsetY) {
+        Coordinate coordinate = robotMap.get(robot);
+        Coordinate newCoordinate = new Coordinate(coordinate.x + offsetX, coordinate.y + offsetY);
+        if (newCoordinate.x < 0 || newCoordinate.x >= planet.getHeight() || newCoordinate.y < 0 || newCoordinate.y >= planet.getWidth()) {
             return false;
         }
-        robotMap.put(robot, new Coordinate(x, y));
+        robotMap.replace(robot, newCoordinate);
         return true;
     }
 }

@@ -9,6 +9,7 @@ public abstract class Command {
 
     public Command(Robot robot, RobotMapper robotMapper) {
         this.robot = robot;
+        this.robotMapper = robotMapper;
     }
 
     public abstract void apply();
