@@ -5,6 +5,7 @@ import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotFactory;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
+import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
 import fr.ensicaen.lv223.teams.ProjectTeam;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class RobotMapper {
 
         CommandFactory commandFactory = new CommandFactory(this);
 
-        RobotFactory factory = new RobotFactory(commandFactory);
+        RobotFactory factory = new RobotFactory(commandFactory, planet);
 
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);
         ProjectTeam currentTeam = ProjectTeam.JAMES_BOND;
@@ -38,6 +39,11 @@ public class RobotMapper {
         robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER, currentTeam), baseCoord);
         robotMap.put(factory.createRobot(RobotType.FARMER, currentTeam), baseCoord);
         robotMap.put(factory.createRobot(RobotType.FARMER, currentTeam), baseCoord);
+
+        for (Robot robot : robotMap.keySet()) {
+            RobotInterface robotInterface = new RobotInterface(robot, this);
+            RobotInterface.addRobotInterface(robotInterface);
+        }
     }
 
     public Robot getRobot(int x, int y) {

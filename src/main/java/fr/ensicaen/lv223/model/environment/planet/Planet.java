@@ -6,6 +6,7 @@ import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
+import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
 import fr.ensicaen.lv223.util.planetloader.JsonLoader;
 import fr.ensicaen.lv223.util.planetloader.PlanetData;
 import fr.ensicaen.lv223.util.planetloader.PlanetLoader;
@@ -30,8 +31,6 @@ public class Planet implements Environment {
     private final List<List<Cell>> cells;
     private int ageSinceTheArrivalOfTheColony;
 
-    private final List<Agent> listAgents;
-
     public Planet() {
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
@@ -39,7 +38,6 @@ public class Planet implements Environment {
         ageSinceTheArrivalOfTheColony = 0;
 
         cells = new ArrayList<>();
-        this.listAgents = new ArrayList<>();
         for (int i = 0; i < 21; i++) {
             cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
@@ -90,16 +88,5 @@ public class Planet implements Environment {
     @Override
     public void setCell(Coordinate c, EnvironmentCell cell) {
         this.getCells().get(c.getX()).set(c.getY(), (Cell) cell);
-    }
-
-    public void play(){
-        if (!listAgents.isEmpty()){
-            for(Agent ag : listAgents){
-                if(!ag.equals(null)){
-                    ag.compute();
-                }
-            }
-        }
-        System.out.println("je play");
     }
 }

@@ -5,12 +5,18 @@ import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
+import fr.ensicaen.lv223.model.logic.agentInterface.PlanetInterface;
+import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
+    protected final PlanetInterface captors;
+    /**
+     * The command factory of the robot. This factory is used to create the commands and interact with the model.
+     */
     protected final CommandFactory commandFactory;
     /**
      * The type of the robot. Only temporary and implemented because of a lack of time.
@@ -27,9 +33,10 @@ public abstract class Robot implements Agent {
      */
     private Objectif temporaryObjectif;
 
-    protected Robot(RobotType type, CommandFactory commandFactory) {
+    protected Robot(RobotType type, CommandFactory commandFactory, PlanetInterface captors) {
         this.type = type;
         this.commandFactory = commandFactory;
+        this.captors = captors;
     }
 
     /**
