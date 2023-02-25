@@ -37,7 +37,7 @@ public class CellView {
         this.pane.getChildren().add(shape);
 
         robotView = new RobotView(this.width);
-        this.pane.getChildren().add(robotView.getShape());
+        this.pane.getChildren().add(robotView.getNode());
     }
 
     /**

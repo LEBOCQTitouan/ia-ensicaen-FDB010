@@ -1,5 +1,9 @@
 package fr.ensicaen.lv223.view;
 
+import fr.ensicaen.lv223.model.agent.robot.RobotType;
+import fr.ensicaen.lv223.util.loader.viewloader.ImageLoader;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -13,7 +17,7 @@ public class RobotView {
     private Color color;
 
     /** The circle shape representing the robot */
-    private final Circle shape;
+    private final ImageView displayElement;
 
     /**
      * Creates a new instance of the {@code RobotView} class.
@@ -21,55 +25,29 @@ public class RobotView {
      * @param cellWidth the width of the cell in which the robot is displayed
      */
     public RobotView(double cellWidth) {
-        this.shape = new Circle();
-        this.shape.setRadius(cellWidth / 3);
-        this.shape.setSmooth(true);
+        this.displayElement = new ImageView();
     }
 
     /**
      * Makes the robot visible in the simulation.
      */
     public void setVisible() {
-        this.shape.setVisible(true);
+        this.displayElement.setVisible(true);
     }
 
     /**
      * Hides the robot in the simulation.
      */
     public void hide() {
-        this.shape.setVisible(false);
+        this.displayElement.setVisible(false);
     }
 
-    /**
-     * Sets the color of the robot based on its type.
-     *
-     * @param type the type of the robot
-     */
-    public void setColor(String type) {
-        switch (type) {
-            case "CARTOGRAPHER":
-                this.shape.setFill(Color.DODGERBLUE);
-                break;
-            case "FOOD_RETRIEVER":
-                this.shape.setFill(Color.DARKORANGE);
-                break;
-            case "FARMER":
-                this.shape.setFill(Color.CORNSILK);
-                break;
-            case "PIPELINE_BUILDER":
-                this.shape.setFill(Color.DARKSEAGREEN);
-                break;
-            case "ORE_EXTRACTOR":
-                this.shape.setFill(Color.DARKMAGENTA);
-                break;
-            default:
-                this.shape.setFill(Color.TRANSPARENT);
-                break;
+    public void setRobotType(RobotType type) {
+        try {
+            displayElement.setImage(ImageLoader.getInstance().getRobotImage(type));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-    }
-
-    public void setColor(Color color) {
-        this.shape.setFill(color);
     }
 
     /**
@@ -77,7 +55,7 @@ public class RobotView {
      *
      * @return the circle shape representing the robot
      */
-    public Circle getShape() {
-        return shape;
+    public Node getNode() {
+        return displayElement;
     }
 }

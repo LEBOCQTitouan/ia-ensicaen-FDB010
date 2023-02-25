@@ -4,9 +4,9 @@ import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
-import fr.ensicaen.lv223.util.planetloader.JsonLoader;
-import fr.ensicaen.lv223.util.planetloader.PlanetData;
-import fr.ensicaen.lv223.util.planetloader.PlanetLoader;
+import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
+import fr.ensicaen.lv223.util.loader.planetloader.PlanetData;
+import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 
 import java.util.ArrayList;
