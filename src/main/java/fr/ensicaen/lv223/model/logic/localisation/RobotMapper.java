@@ -1,5 +1,6 @@
 package fr.ensicaen.lv223.model.logic.localisation;
 
+import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.RobotFactory;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
@@ -16,7 +17,11 @@ public class RobotMapper {
     public RobotMapper(Planet planet) {
         this.planet = planet;
         robotMap = new HashMap<>();
-        RobotFactory factory = new RobotFactory();
+
+        CommandFactory commandFactory = new CommandFactory(planet, this);
+
+        RobotFactory factory = new RobotFactory(commandFactory);
+
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);
         ProjectTeam currentTeam = ProjectTeam.JAMES_BOND;
         robotMap.put(factory.createRobot(RobotType.CENTRALIZER, currentTeam), baseCoord);
@@ -45,7 +50,7 @@ public class RobotMapper {
         return null;
     }
 
-    public Coordinate getCoordiante(Robot robot) {
+    public Coordinate getCoordinate(Robot robot) {
         return robotMap.get(robot);
     }
 
@@ -59,5 +64,13 @@ public class RobotMapper {
 
     public List<Robot> getRobots() {
         return robotMap.keySet().stream().toList();
+    }
+
+    public boolean moveRobot(Robot robot, int x, int y) {
+        if (x < 0 || x >= planet.getHeight() || y < 0 || y >= planet.getWidth()) {
+            return false;
+        }
+        robotMap.put(robot, new Coordinate(x, y));
+        return true;
     }
 }

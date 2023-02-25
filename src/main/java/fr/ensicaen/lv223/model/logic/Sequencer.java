@@ -1,6 +1,7 @@
 package fr.ensicaen.lv223.model.logic;
 
 import fr.ensicaen.lv223.model.agent.command.Command;
+import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;

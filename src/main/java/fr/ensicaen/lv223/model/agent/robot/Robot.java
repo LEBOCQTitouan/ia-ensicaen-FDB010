@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.model.agent.robot;
 
 import fr.ensicaen.lv223.model.agent.Agent;
 import fr.ensicaen.lv223.model.agent.command.Command;
+import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
 
@@ -10,17 +11,31 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
+    private final CommandFactory commandFactory;
+    /**
+     * The type of the robot. Only temporary and implemented because of a lack of time.
+     */
     public final RobotType type;
     private PriorityQueue<Message> priorityQueueMessage;
     private PriorityQueue<Command> priorityQueueCommand;
+    /**
+     * This objective is the basic objective of the robot.
+     */
     private Objectif primalObjectif;
-    //Objectif temporaire prioritaire sur l'objectif principal
+    /**
+     * This objective is only temporary and prevail on the primal objective.
+     */
     private Objectif temporaryObjectif;
 
-    protected Robot(RobotType type) {
+    protected Robot(RobotType type, CommandFactory commandFactory) {
         this.type = type;
+        this.commandFactory = commandFactory;
     }
 
+    /**
+     * Compute the commands to execute this turn.
+     * @return the list of commands to execute this turn. This return can't be null.
+     */
     @Override
     public List<Command> compute() {
         List<Command> commands = new ArrayList<>();

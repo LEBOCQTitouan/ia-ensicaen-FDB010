@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.model.agent.command;
+package fr.ensicaen.lv223.model.logic.localisation;
 
 public enum Direction {
     NORTH(0,-1),

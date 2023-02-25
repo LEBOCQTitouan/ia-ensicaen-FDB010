@@ -42,7 +42,7 @@ public class ColonyPresenter {
 
         // TODO check
         for (Robot robot : robotMapper.getRobots()) {
-            Coordinate robotCoordinate = robotMapper.getCoordiante(robot);
+            Coordinate robotCoordinate = robotMapper.getCoordinate(robot);
             cellViews.get(robotCoordinate.x).get(robotCoordinate.y).getRobotView().setColor(robot.type.getColor());
             for (Coordinate coord : Util.getNeighbors(robotCoordinate, robotMapper.getHeigth(), robotMapper.getWidth())) {
                 cellViews.get(coord.x).get(coord.y).getPane().setEffect(noBlur);
