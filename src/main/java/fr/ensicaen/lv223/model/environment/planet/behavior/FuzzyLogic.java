@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.model.environment.planet;
+package fr.ensicaen.lv223.model.environment.planet.behavior;
 
 import javafx.scene.control.Alert;
 import net.sourceforge.jFuzzyLogic.FIS;

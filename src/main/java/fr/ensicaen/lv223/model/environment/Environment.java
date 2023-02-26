@@ -2,7 +2,7 @@ package fr.ensicaen.lv223.model.environment;
 
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
-import fr.ensicaen.lv223.model.environment.planet.PlanetEmotion;
+import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 
 import java.util.List;
 
