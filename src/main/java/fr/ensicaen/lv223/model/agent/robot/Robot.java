@@ -4,12 +4,15 @@ import fr.ensicaen.lv223.model.agent.Agent;
 import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public abstract class Robot implements Agent {
+    private final List<List<Cell>> map;
+
     public final RobotType type;
     private PriorityQueue<Message> priorityQueueMessage;
     private PriorityQueue<Command> priorityQueueCommand;
@@ -17,8 +20,9 @@ public abstract class Robot implements Agent {
     //Objectif temporaire prioritaire sur l'objectif principal
     private Objectif temporaryObjectif;
 
-    protected Robot(RobotType type) {
+    protected Robot(RobotType type, List<List<Cell>> map) {
         this.type = type;
+        this.map = map;
     }
 
     @Override
