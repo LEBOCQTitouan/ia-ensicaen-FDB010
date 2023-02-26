@@ -10,11 +10,11 @@ public class AStarTest {
     @Test
     public void testConstructor() {
         Planet planet = new Planet();
-        Cell[][] cells = new Cell[planet.getCells().size()-1][];
+        Cell[][] cells = new Cell[planet.getCells().size()][];
 
-        for (int i = 0; i < planet.getCells().size(); i++) {
+        for (int i = 0; i < cells.length; i++) {
             List<Cell> currentList = planet.getCells().get(i);
-            Cell[] currentArray = new Cell[currentList.size()-1];
+            Cell[] currentArray = new Cell[currentList.size()];
             for (int j = 0; j < currentArray.length; j++) {
                 currentArray[j] = currentList.get(j);
             }
@@ -40,11 +40,11 @@ public class AStarTest {
     @Test
     public void testCompute() {
         Planet planet = new Planet();
-        Cell[][] cells = new Cell[planet.getCells().size()-1][];
+        Cell[][] cells = new Cell[planet.getCells().size()][];
 
         for (int i = 0; i < cells.length; i++) {
             List<Cell> currentList = planet.getCells().get(i);
-            Cell[] currentArray = new Cell[currentList.size()-1];
+            Cell[] currentArray = new Cell[currentList.size()];
             for (int j = 0; j < currentArray.length; j++) {
                 currentArray[j] = currentList.get(j);
             }

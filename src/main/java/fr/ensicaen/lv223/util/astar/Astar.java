@@ -33,8 +33,8 @@ public class Astar implements Agent {
                 this.cells[i][j] = new AstarCell(cells[i][j]);
             }
         }
-        this.end = this.cells[end.getX()][end.getY()];
         this.start = this.cells[start.getX()][start.getY()];
+        this.end = this.cells[end.getX()][end.getY()];
 
         openList.add(this.start);
     }

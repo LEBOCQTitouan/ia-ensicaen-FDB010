@@ -9,11 +9,11 @@ import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
-import fr.ensicaen.lv223.model.environment.Coordinate;
+import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
-import fr.ensicaen.lv223.planetloader.JsonLoader;
-import fr.ensicaen.lv223.planetloader.PlanetData;
-import fr.ensicaen.lv223.planetloader.PlanetLoader;
+import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
+import fr.ensicaen.lv223.util.loader.planetloader.PlanetData;
+import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
@@ -110,6 +110,11 @@ public class Planet implements Environment {
     @Override
     public EnvironmentCell getCell(Coordinate c) {
         return cells.get(c.getX()).get(c.getY());
+    }
+
+    @Override
+    public EnvironmentCell getCell( int x, int y ) {
+        return null;
     }
 
     @Override

@@ -1,15 +1,14 @@
 package fr.ensicaen.lv223;
 
-import java.io.IOException;
-
+import fr.ensicaen.lv223.presenter.IPresenter;
+import fr.ensicaen.lv223.presenter.Presenter;
+import fr.ensicaen.lv223.view.PlanetView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import fr.ensicaen.lv223.presenter.IPresenter;
-import fr.ensicaen.lv223.presenter.Presenter;
-import fr.ensicaen.lv223.view.PlanetView;
+import java.io.IOException;
 
 /**
  * {@code Main} class extends the {@link Application} class of JavaFX to
@@ -26,6 +25,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        // TODO : update legend of main frame
         int width;
         int height;
         Presenter presenter;
@@ -51,18 +51,16 @@ public class Main extends Application {
         view.setChoicesOfNumberOfSteps();
         view.setChoicesOfPlanetTolerance();
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-        presenter.drawPlanet();
+        presenter.updateView();
 
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            presenter.drawPlanet();
-            presenter.updateRobotPositionOnView();
+            presenter.updateView();
         });
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
             view.setSceneHeight(newSceneHeight.intValue());
             view.setSceneWidth(newSceneHeight.intValue());
 
-            presenter.drawPlanet();
-            presenter.updateRobotPositionOnView();
+            presenter.updateView();
         });
 
         stage.setMaximized(true);
