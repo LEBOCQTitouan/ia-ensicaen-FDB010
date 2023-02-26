@@ -23,6 +23,9 @@ public class Sequencer {
 
     public void step() {
         ArrayList<Command> commands = new ArrayList<>();
+        // Planet turn
+        commands.addAll(planet.compute());
+        // Robots turn
         for (Robot robot : robots) {
             robot.compute();
         }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import fr.ensicaen.lv223.model.agent.Agent;
 import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
@@ -12,7 +11,6 @@ import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
-import fr.ensicaen.lv223.model.environment.planet.behavior.Transformer;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
@@ -40,19 +38,13 @@ import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
 public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
 
-    // TODO : implement planet agents
-    // private List<Agent> listAgents;
-
     private FuzzyLogic fuzzyLogic;
-
-    private Transformer transformer;
 
     private PlanetEmotion currentEmotion;
     public Planet() {
         this.currentEmotion = PlanetEmotion.HAPPY;
         this.cells = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
-        this.transformer = new Transformer(this.cells);
 
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
@@ -116,9 +108,15 @@ public class Planet implements Environment, EnvironmentAgent {
         this.getCells().get(c.getX()).set(c.getY(), (Cell) cell);
     }
 
+    private void react() {
+        // TODO
+    }
+
     @Override
     public List<Command> compute() {
         ArrayList commands = new ArrayList();
+        react();
+        // TODO possible commands for planet
         return commands;
     }
 }
