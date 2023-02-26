@@ -13,6 +13,7 @@ public class Sequencer {
     public final Planet planet;
     public List<Robot> robots;
     public RobotMapper mapper;
+    private int days = 0;
 
     public Sequencer(Planet planet) {
         this.planet = planet;
@@ -31,5 +32,10 @@ public class Sequencer {
         for (Command command: commands) {
             command.apply();
         }
+        days++;
+    }
+
+    public boolean hasHumansArrived() {
+        return days >= 8 * 365;
     }
 }

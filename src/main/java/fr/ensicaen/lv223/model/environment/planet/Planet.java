@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.ensicaen.lv223.model.agent.Agent;
+import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
 import fr.ensicaen.lv223.model.environment.planet.behavior.Transformer;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
@@ -35,11 +37,11 @@ import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
  * toDo emotions with planet
  * Generate around the Centralisator cases with probalities random
  */
-public class Planet implements Environment {
+public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
-    private int ageSinceTheArrivalOfTheColony;
 
-    private List<Agent> listAgents;
+    // TODO : implement planet agents
+    // private List<Agent> listAgents;
 
     private FuzzyLogic fuzzyLogic;
 
@@ -47,10 +49,8 @@ public class Planet implements Environment {
 
     private PlanetEmotion currentEmotion;
     public Planet() {
-        this.ageSinceTheArrivalOfTheColony = 0;
         this.currentEmotion = PlanetEmotion.HAPPY;
         this.cells = new ArrayList<>();
-        this.listAgents = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
         this.transformer = new Transformer(this.cells);
 
@@ -82,17 +82,8 @@ public class Planet implements Environment {
     }
 
     @Override
-    public List<List<Cell>> getCells() {
-        return cells;
-    }
-
-    @Override
     public void setEmotion( PlanetEmotion planetEmotion ) {
         this.currentEmotion = planetEmotion;
-    }
-
-    public int getAgeSinceTheArrivalOfTheColony() {
-        return ageSinceTheArrivalOfTheColony;
     }
 
     @Override
@@ -103,6 +94,11 @@ public class Planet implements Environment {
     @Override
     public int getHeight() {
         return cells.get(0).size();
+    }
+
+    @Override
+    public List<List<Cell>> getCells() {
+        return cells;
     }
 
     @Override
@@ -120,13 +116,9 @@ public class Planet implements Environment {
         this.getCells().get(c.getX()).set(c.getY(), (Cell) cell);
     }
 
-    public void play(){
-        if (!listAgents.isEmpty()){
-            for(Agent ag : listAgents){
-                if(!ag.equals(null)){
-                    ag.compute();
-                }
-            }
-        }
+    @Override
+    public List<Command> compute() {
+        ArrayList commands = new ArrayList();
+        return commands;
     }
 }

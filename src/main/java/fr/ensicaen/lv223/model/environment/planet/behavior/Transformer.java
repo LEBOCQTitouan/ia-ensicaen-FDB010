@@ -13,7 +13,7 @@ public class Transformer {
         this.cells = cells;
     }
 
-    public void transforme(Cell currenCell) {
+    public void transform(Cell currenCell) {
         Cell temp = currenCell.transformation();
         for(List<Cell> list: this.cells){
             if(list.contains(currenCell)){
@@ -22,7 +22,7 @@ public class Transformer {
         }
     }
 
-    public void transforme(int x, int y) {
+    public void transform(int x, int y) {
         for(List<Cell> list: this.cells){
             list.forEach(cell -> {
                 if(cell.getX() == x && cell.getY() == y){
