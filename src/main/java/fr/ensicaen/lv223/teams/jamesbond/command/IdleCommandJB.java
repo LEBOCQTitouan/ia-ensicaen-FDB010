@@ -1,6 +1,5 @@
-package fr.ensicaen.lv223.teams.jamesbond.robot.command;
+package fr.ensicaen.lv223.teams.jamesbond.command;
 
-import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.command.implementations.IdleCommand;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;

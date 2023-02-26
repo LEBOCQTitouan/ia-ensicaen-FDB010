@@ -5,7 +5,7 @@ import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.agentInterface.PlanetInterface;
 import fr.ensicaen.lv223.teams.ProjectTeam;
 import fr.ensicaen.lv223.teams.copilot.robots.*;
-import fr.ensicaen.lv223.teams.jamesbond.robot.robots.*;
+import fr.ensicaen.lv223.teams.jamesbond.robots.*;
 
 public class RobotFactory {
     private final CommandFactory factory;
