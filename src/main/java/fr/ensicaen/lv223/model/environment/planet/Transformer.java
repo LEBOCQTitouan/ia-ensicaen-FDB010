@@ -21,4 +21,15 @@ public class Transformer {
             }
         }
     }
+
+    public void transforme(int x, int y) {
+        for(List<Cell> list: this.cells){
+            list.forEach(cell -> {
+                if(cell.getX() == x && cell.getY() == y){
+                    Cell temp = cell.transformation();
+                    list.set(list.indexOf(cell), temp);
+                }
+            });
+        }
+    }
 }

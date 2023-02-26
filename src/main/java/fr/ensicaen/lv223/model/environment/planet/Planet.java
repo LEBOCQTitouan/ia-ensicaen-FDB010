@@ -10,6 +10,7 @@ import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.Coordinate;
+import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.planetloader.JsonLoader;
 import fr.ensicaen.lv223.planetloader.PlanetData;
 import fr.ensicaen.lv223.planetloader.PlanetLoader;
@@ -42,6 +43,8 @@ public class Planet implements Environment {
 
     private FuzzyLogic fuzzyLogic;
 
+    private Transformer transformer;
+
     private PlanetEmotion currentEmotion;
     public Planet() {
         this.ageSinceTheArrivalOfTheColony = 0;
@@ -49,10 +52,12 @@ public class Planet implements Environment {
         this.cells = new ArrayList<>();
         this.listAgents = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
+        this.transformer = new Transformer(this.cells);
         this.fuzzyLogic.viewAllChart();
 
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
+
 
         for (int i = 0; i < 21; i++) {
             this.cells.add(new ArrayList<>());
@@ -75,6 +80,7 @@ public class Planet implements Environment {
                 this.cells.get(x).set(y, o.get());
             }
         }
+        typeCells();
     }
 
     @Override
@@ -117,6 +123,17 @@ public class Planet implements Environment {
                 if(!ag.equals(null)){
                     ag.compute();
                 }
+            }
+        }
+    }
+
+    public void typeCells(){
+        for(List<Cell> list : this.cells){
+            for(Cell c : list){
+                if(c.getType() == CellType.FOOD){
+                    System.out.println(c.getIntensity());
+                }
+
             }
         }
     }
