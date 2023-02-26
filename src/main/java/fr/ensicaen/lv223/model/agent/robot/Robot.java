@@ -6,7 +6,6 @@ import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
 import fr.ensicaen.lv223.model.logic.agentInterface.PlanetInterface;
-import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
 
 import java.util.ArrayList;
 import java.util.List;
