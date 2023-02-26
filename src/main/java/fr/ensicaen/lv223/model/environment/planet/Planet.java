@@ -53,7 +53,6 @@ public class Planet implements Environment {
         this.listAgents = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
         this.transformer = new Transformer(this.cells);
-        this.fuzzyLogic.viewAllChart();
 
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
@@ -80,7 +79,6 @@ public class Planet implements Environment {
                 this.cells.get(x).set(y, o.get());
             }
         }
-        typeCells();
     }
 
     @Override
@@ -128,17 +126,6 @@ public class Planet implements Environment {
                 if(!ag.equals(null)){
                     ag.compute();
                 }
-            }
-        }
-    }
-
-    public void typeCells(){
-        for(List<Cell> list : this.cells){
-            for(Cell c : list){
-                if(c.getType() == CellType.FOOD){
-                    System.out.println(c.getIntensity());
-                }
-
             }
         }
     }
