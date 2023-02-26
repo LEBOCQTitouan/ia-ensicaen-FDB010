@@ -12,8 +12,7 @@ public class PlanetPresenter {
     private IPresenter view;
     private final Planet planet;
 
-    public PlanetPresenter(IPresenter view, Planet planet) {
-        this.view = view;
+    public PlanetPresenter(Planet planet) {
         this.planet = planet;
     }
 

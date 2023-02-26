@@ -10,6 +10,7 @@ import fr.ensicaen.lv223.view.CellView;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,9 +23,8 @@ public class ColonyPresenter {
     private IPresenter view;
     private final RobotMapper robotMapper;
 
-    public ColonyPresenter(IPresenter view, Planet planet) {
-        this.view = view;
-        this.robotMapper = new RobotMapper(planet);
+    public ColonyPresenter(RobotMapper robotMapper) {
+        this.robotMapper = robotMapper;
     }
 
     public void drawColony() {
@@ -40,9 +40,8 @@ public class ColonyPresenter {
             }
         }
 
-        // TODO check
         for (Robot robot : robotMapper.getRobots()) {
-            Coordinate robotCoordinate = robotMapper.getCoordiante(robot);
+            Coordinate robotCoordinate = robotMapper.getCoordinate(robot);
             cellViews.get(robotCoordinate.x).get(robotCoordinate.y).getRobotView().setColor(robot.type.getColor());
             for (Coordinate coord : Util.getNeighbors(robotCoordinate, robotMapper.getHeigth(), robotMapper.getWidth())) {
                 cellViews.get(coord.x).get(coord.y).getPane().setEffect(noBlur);
