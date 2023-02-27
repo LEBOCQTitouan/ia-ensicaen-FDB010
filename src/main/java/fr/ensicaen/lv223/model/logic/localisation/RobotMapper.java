@@ -21,7 +21,7 @@ public class RobotMapper {
 
         CommandFactory commandFactory = new CommandFactory(this);
 
-        RobotFactory factory = new RobotFactory(commandFactory, planet);
+        RobotFactory factory = new RobotFactory(commandFactory, planet, this);
 
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);
         ProjectTeam currentTeam = ProjectTeam.JAMES_BOND;
