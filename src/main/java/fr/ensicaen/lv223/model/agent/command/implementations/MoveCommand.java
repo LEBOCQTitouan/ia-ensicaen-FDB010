@@ -11,7 +11,7 @@ public class MoveCommand extends Command {
     public Direction direction;
 
     public MoveCommand(Robot robot, RobotMapper robotMapper, Direction dir) {
-        super(robot, robotMapper);
+        super(robot, robotMapper, 1);
         Random random = new Random();
         this.direction = dir;
     }
