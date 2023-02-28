@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.model.agent.command;
 
 import fr.ensicaen.lv223.model.agent.command.implementations.ExtractFromCellCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.IdleCommand;
+import fr.ensicaen.lv223.model.agent.command.implementations.InstallPipeCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.RandomMovementCommand;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
@@ -35,6 +36,8 @@ public class CommandFactory {
      */
     public Command createCommand(Robot robot, CommandType type, int value) {
         switch (type) {
+            case INSTALL_PIPE:
+                return new InstallPipeCommand(robot, robotMapper, value, planet);
             case EXTRACT:
                 return new ExtractFromCellCommand(planet, robot, robotMapper, value);
             case MOVE:

@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.model.environment.cells;
 
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.FoodCell;
+import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 
 import java.util.Random;
 

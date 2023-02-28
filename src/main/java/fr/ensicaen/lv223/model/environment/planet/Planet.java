@@ -9,6 +9,7 @@ import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
@@ -37,25 +38,24 @@ import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
  */
 public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
-
+    private final List<WaterPipe> waterPipes;
     private FuzzyLogic fuzzyLogic;
-
     private PlanetEmotion currentEmotion;
     public Planet() {
-        this.currentEmotion = PlanetEmotion.HAPPY;
-        this.cells = new ArrayList<>();
-        this.fuzzyLogic = new FuzzyLogic();
+        currentEmotion = PlanetEmotion.HAPPY;
+        cells = new ArrayList<>();
+        fuzzyLogic = new FuzzyLogic();
+        waterPipes = new ArrayList<>();
 
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
 
 
         for (int i = 0; i < 21; i++) {
-            this.cells.add(new ArrayList<>());
+            cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
-                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i,
-                        j);
-                this.cells.get(i).add(o.get());
+                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i, j);
+                cells.get(i).add(o.get());
             }
         }
 
@@ -63,11 +63,12 @@ public class Planet implements Environment, EnvironmentAgent {
             for (int j = 0; j < planetDatum.getCellPos().length; j++) {
                 int x = planetDatum.getCellPos()[j].getX();
                 int y = planetDatum.getCellPos()[j].getY();
-                Optional<Cell> o = CellFactory.factory(planetDatum.getType(),
+                Optional<Cell> o = CellFactory.factory(
+                        planetDatum.getType(),
                         -1,
                         planetDatum.getCellPos()[j].getX(),
-                        planetDatum.getCellPos()[j].getY());
-
+                        planetDatum.getCellPos()[j].getY()
+                );
                 this.cells.get(x).set(y, o.get());
             }
         }
@@ -119,5 +120,13 @@ public class Planet implements Environment, EnvironmentAgent {
         react();
         // TODO possible commands for planet
         return commands;
+    }
+
+    public void addPipe(WaterPipe pipe) {
+        waterPipes.add(pipe);
+    }
+
+    public void removePipe(WaterPipe pipe) {
+        waterPipes.remove(pipe);
     }
 }
