@@ -1,5 +1,6 @@
 package fr.ensicaen.lv223.model.agent.command;
 
+import fr.ensicaen.lv223.model.agent.command.implementations.ExtractFromCellCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.IdleCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.RandomMovementCommand;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
@@ -15,9 +16,14 @@ public class CommandFactory {
      * The robot mapper used to localise robots.
      */
     private RobotMapper robotMapper;
+    /**
+     * The planet where the robots are.
+     */
+    private Planet planet;
 
-    public CommandFactory(RobotMapper robotMapper) {
+    public CommandFactory(Planet planet, RobotMapper robotMapper) {
         this.robotMapper = robotMapper;
+        this.planet = planet;
     }
 
     /**
@@ -29,8 +35,11 @@ public class CommandFactory {
      */
     public Command createCommand(Robot robot, CommandType type, int value) {
         switch (type) {
+            case EXTRACT:
+                return new ExtractFromCellCommand(planet, robot, robotMapper, value);
             case MOVE:
                 return new RandomMovementCommand(robot, robotMapper, value);
+            case IDLE:
             default:
                 return new IdleCommand(robot, robotMapper);
         }

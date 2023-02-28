@@ -48,4 +48,8 @@ public abstract class ExtractableCell extends Cell {
     public double getPercentageExtraction() {
         return 100 - (quantity / initialQuantity) * 100;
     }
+
+    public void extract(double quantity) {
+        this.quantity -= quantity;
+    }
 }

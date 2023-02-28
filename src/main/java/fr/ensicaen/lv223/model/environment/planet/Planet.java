@@ -100,7 +100,8 @@ public class Planet implements Environment, EnvironmentAgent {
 
     @Override
     public EnvironmentCell getCell( int x, int y ) {
-        return null;
+        Coordinate coord = new Coordinate(x, y);
+        return getCell(coord);
     }
 
     @Override
