@@ -17,10 +17,10 @@ public class CommandFactory {
         this.robotMapper = robotMapper;
     }
 
-    public Command createCommand(Robot robot, CommandType type) {
+    public Command createCommand(Robot robot, CommandType type, int value) {
         switch (type) {
             case MOVE:
-                return new RandomMovementCommand(robot, robotMapper);
+                return new RandomMovementCommand(robot, robotMapper, value);
             default:
                 return new IdleCommand(robot, robotMapper);
         }
