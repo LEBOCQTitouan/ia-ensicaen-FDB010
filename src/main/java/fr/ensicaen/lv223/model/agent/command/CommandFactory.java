@@ -11,12 +11,22 @@ import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
  * Please extend this class to create your own commands.
  */
 public class CommandFactory {
+    /**
+     * The robot mapper used to localise robots.
+     */
     private RobotMapper robotMapper;
 
     public CommandFactory(RobotMapper robotMapper) {
         this.robotMapper = robotMapper;
     }
 
+    /**
+     * Create a command.
+     * @param robot The robot that will execute the command.
+     * @param type The type of the command.
+     * @param value The value of the command.
+     * @return The command.
+     */
     public Command createCommand(Robot robot, CommandType type, int value) {
         switch (type) {
             case MOVE:
