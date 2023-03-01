@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.model.environment.cells.specials;
+package fr.ensicaen.lv223.model.environment.cells.specials.extractable;
 
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellType;

@@ -9,6 +9,7 @@ import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
@@ -54,7 +55,8 @@ public class Planet implements Environment, EnvironmentAgent {
         for (int i = 0; i < 21; i++) {
             cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
-                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i, j);
+                // Optional<Cell> o2 = CellFactory.factory(CellType.IMPENETRABLE, -1, i, j);
+                Optional<Cell> o = CellFactory.factory(CellType.IMPENETRABLE, -1, i, j);
                 cells.get(i).add(o.get());
             }
         }

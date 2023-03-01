@@ -3,8 +3,6 @@ package fr.ensicaen.lv223.teams.jamesbond.objectifs;
 import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
-import fr.ensicaen.lv223.model.environment.cells.specials.MineralCell;
-import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
 
 import java.util.PriorityQueue;
