@@ -43,12 +43,12 @@ public class PlanetPresenter {
         this.view = view;
     }
 
-    public void updatePlanet(){
+    public void updateStatus(){
         this.view.updateStatus(
                 0,
                 planet.getCurrentHealthStatus().name(),
                 planet.getStockFood(),
-                planet.getStockWater(),
+                (planet.getStockWater() * 1e-9),
                 planet.getStockMineral(),
                 0
         );

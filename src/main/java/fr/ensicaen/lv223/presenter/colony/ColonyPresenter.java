@@ -24,6 +24,7 @@ public class ColonyPresenter {
     private final RobotMapper robotMapper;
 
     public ColonyPresenter(RobotMapper robotMapper) {
+
         this.robotMapper = robotMapper;
     }
 
@@ -49,6 +50,10 @@ public class ColonyPresenter {
                 cellViews.get(coord.x).get(coord.y).getPane().setEffect(noBlur);
             }
         }
+    }
+
+    public void updateColony(){
+        // TODO Method update for the presenter
     }
 
     public void setView(IPresenter view) {
