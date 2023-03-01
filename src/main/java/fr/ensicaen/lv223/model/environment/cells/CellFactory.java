@@ -7,13 +7,16 @@ import fr.ensicaen.lv223.model.environment.cells.specials.extractable.FoodCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.LakeCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.OreCell;
 
+import fr.ensicaen.lv223.model.environment.cells.specials.FoodCell;
+import fr.ensicaen.lv223.model.environment.cells.specials.LakeCell;
+import fr.ensicaen.lv223.model.environment.cells.specials.MineralCell;
+
 import java.util.Optional;
 
 /**
  * The {@code CellFactory} class is a utility class for creating cells.
  */
 public class CellFactory {
-    // TODO repartition des quantités
     private CellFactory() {}
 
     /**

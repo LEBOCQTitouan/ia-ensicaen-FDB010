@@ -48,8 +48,7 @@ public interface Environment {
 
     /**
      * Sets the emotion for the planet
-     * @param planetEmotion current emotion for planet
      */
 
-    void setEmotion( PlanetEmotion planetEmotion );
+    void setEmotion();
 }
