@@ -58,7 +58,7 @@ public class CellView {
 
         if (Main.DEBUG) {
             Text text = new Text(x + ", " + y);
-            text.setFill(Color.WHITE);
+            text.setFill(Color.BLACK);
             this.pane.getChildren().add(text);
         }
     }

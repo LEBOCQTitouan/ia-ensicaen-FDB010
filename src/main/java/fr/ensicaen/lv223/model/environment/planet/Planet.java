@@ -47,40 +47,23 @@ public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
     private FuzzyLogic fuzzyLogic;
     private PlanetEmotion currentEmotion;
-    private Dispatcher dispatcher;
-
+    // simulation
     private PlanetHealthStatus currentHealthStatus;
-
-    private final double initalStockFood;
-    private final double initalStockMineral;
-    private final double initalStockWater;
-
+    // shockWave
+    private ShockWaveSequencer shockWaveSequencer;
+    private List<Metamorphosis> metamorphosisList;
+    // stock data
+    private double initalStockFood;
+    private double initalStockMineral;
+    private double initalStockWater;
     private final double quantityWater = 200000;
     private final double quantityOre = 200;
     private final double quantityFood = 200;
-
-
-
     private double stockFood;
     private double stockMineral;
     private double stockWater;
-    private ShockWaveSequencer shockWaveSequencer;
-    private List<Metamorphosis> metamorphosisList;
-    public Planet() {
-        currentEmotion = PlanetEmotion.HAPPY;
-        cells = new ArrayList<>();
-        fuzzyLogic = new FuzzyLogic(this);
-        shockWaveSequencer = new ShockWaveSequencer(this);
-        metamorphosisList = new ArrayList<>();
-        dispatcher = new Dispatcher(cells);
 
-        Random r = new Random(System.currentTimeMillis());
-
-        this.currentEmotion = PlanetEmotion.HAPPY;
-        this.currentHealthStatus = PlanetHealthStatus.GOOD;
-
-
-
+    private void load() {
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
 
@@ -106,29 +89,17 @@ public class Planet implements Environment, EnvironmentAgent {
                 this.cells.get(x).set(y, o.get());
             }
         }
-        this.stockFood      = nbCaseType(CellType.FOOD)*quantityFood;
-        this.stockMineral   = nbCaseType(CellType.ORE)*quantityOre;
-        this.stockWater     = nbCaseType(CellType.LAKE)*quantityWater;
-
-        this.initalStockFood = stockFood;
-        this.initalStockMineral = stockMineral;
-        this.initalStockWater = stockWater;
-
-        setStocks();
-
-        this.setEmotion();
     }
+    private void stockSetup() {
+        stockFood          = nbCaseType(CellType.FOOD)*quantityFood;
+        stockMineral       = nbCaseType(CellType.ORE)*quantityOre;
+        stockWater         = nbCaseType(CellType.LAKE)*quantityWater;
 
-    @Override
-    public PlanetEmotion setEmotion() {
-        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalStockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalStockWater)*100) - 100);
-        this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
-        return this.currentEmotion;
-    }
+        initalStockFood    = stockFood;
+        initalStockMineral = stockMineral;
+        initalStockWater   = stockWater;
 
-
-    public void setStocks(){
-        for(List<Cell> list : this.cells){
+        for(List<Cell> list : cells){
             for(Cell c : list){
                 if(c.getType() == CellType.LAKE){
                     ((ExtractableCell) c).setQuantity(quantityWater);
@@ -144,36 +115,35 @@ public class Planet implements Environment, EnvironmentAgent {
             }
         }
     }
+    private void emotionSetup() {
+        this.currentEmotion = PlanetEmotion.HAPPY;
+        this.currentHealthStatus = PlanetHealthStatus.GOOD;
+        this.setEmotion();
+    }
 
-    @Override
-    public int getWidth() {
-        return cells.size();
+    public Planet() {
+        currentEmotion = PlanetEmotion.HAPPY;
+        cells = new ArrayList<>();
+        fuzzyLogic = new FuzzyLogic(this);
+        shockWaveSequencer = new ShockWaveSequencer(this);
+        metamorphosisList = new ArrayList<>();
+
+        load();
+        stockSetup();
+        emotionSetup();
     }
 
     @Override
-    public int getHeight() {
-        return cells.get(0).size();
+    public PlanetEmotion setEmotion() {
+        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalStockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalStockWater)*100) - 100);
+        this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
+        return this.currentEmotion;
     }
 
     @Override
-    public List<List<Cell>> getCells() {
-        return cells;
-    }
-
-    @Override
-    public EnvironmentCell getCell(Coordinate c) {
-        return cells.get(c.getX()).get(c.getY());
-    }
-
-    @Override
-    public EnvironmentCell getCell( int x, int y ) {
-        Coordinate coord = new Coordinate(x, y);
-        return getCell(coord);
-    }
-
-    @Override
-    public void setCell(Coordinate c, EnvironmentCell cell) {
-        this.getCells().get(c.getX()).set(c.getY(), CellFactory.convert(cell));
+    public void setCell(Coordinate c, EnvironmentCell EnvCell) {
+        Cell cell = CellFactory.convert(EnvCell);
+        cells.get(c.getX()).set(c.getY(), cell);
     }
 
     private void react() {
@@ -181,14 +151,6 @@ public class Planet implements Environment, EnvironmentAgent {
         for (Metamorphosis metamorphosis : metamorphosisList) {
             metamorphosis.transform();
         }
-    }
-
-    public void addMetamorphosis(Metamorphosis metamorphosis) {
-        metamorphosisList.add(metamorphosis);
-    }
-
-    public FuzzyLogic getFuzzyLogic() {
-        return fuzzyLogic;
     }
 
     @Override
@@ -207,10 +169,30 @@ public class Planet implements Environment, EnvironmentAgent {
         shockWaveSequencer.createShockWave(coord.x, coord.y, fuzzyLogic.getSamplingType(value));
     }
 
-    public PlanetHealthStatus getCurrentHealthStatus() {
-        return currentHealthStatus;
+    public void addMetamorphosis(Metamorphosis metamorphosis) {
+        metamorphosisList.add(metamorphosis);
     }
-
+    @Override
+    public int getWidth() {
+        return cells.size();
+    }
+    @Override
+    public int getHeight() {
+        return cells.get(0).size();
+    }
+    @Override
+    public List<List<Cell>> getCells() {
+        return cells;
+    }
+    @Override
+    public EnvironmentCell getCell(Coordinate c) {
+        return cells.get(c.getX()).get(c.getY());
+    }
+    @Override
+    public EnvironmentCell getCell( int x, int y ) {
+        Coordinate coord = new Coordinate(x, y);
+        return getCell(coord);
+    }
     public double nbCaseType(CellType cellType) {
         double cpt = 0;
         for (List<Cell> list : this.cells) {
@@ -222,32 +204,31 @@ public class Planet implements Environment, EnvironmentAgent {
         }
         return cpt;
     }
-
-    public double getStockFood() {
-        return stockFood;
-    }
-
     public PlanetEmotion getCurrentEmotion(){
         return this.currentEmotion;
     }
-
+    public PlanetHealthStatus getCurrentHealthStatus() {
+        return currentHealthStatus;
+    }
+    public double getStockFood() {
+        return stockFood;
+    }
     public double getStockMineral() {
         return stockMineral;
     }
-
     public double getStockWater() {
         return stockWater;
     }
-
     public double getInitalStockFood() {
         return initalStockFood;
     }
-
     public double getInitalStockMineral() {
         return initalStockMineral;
     }
-
     public double getInitalStockWater() {
         return initalStockWater;
+    }
+    public FuzzyLogic getFuzzyLogic() {
+        return fuzzyLogic;
     }
 }
