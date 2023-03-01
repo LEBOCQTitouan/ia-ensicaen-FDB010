@@ -3,19 +3,19 @@ package fr.ensicaen.lv223.model.environment.planet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import fr.ensicaen.lv223.model.agent.Agent;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
+import fr.ensicaen.lv223.model.environment.cells.specials.ExtractableCell;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetData;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
-import net.sourceforge.jFuzzyLogic.FIS;
-import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
 /**
  * The {@code Planet} class implements the {@link Environment} interface and
@@ -41,19 +41,27 @@ public class Planet implements Environment {
 
     private List<Agent> listAgents;
 
-    private FuzzyLogic fuzzyLogic;
-
-    private Transformer transformer;
+    private final FuzzyLogic fuzzyLogic;
 
     private PlanetEmotion currentEmotion;
+    private Dispatcher dispatcher;
+
+    private PlanetHealthStatus currentHealthStatus;
+
+    private double stockFood;
+    private double stockMineral;
+    private double stockWater;
     public Planet() {
         this.ageSinceTheArrivalOfTheColony = 0;
+        Random r = new Random(System.currentTimeMillis());
+
         this.currentEmotion = PlanetEmotion.HAPPY;
+        this.currentHealthStatus = PlanetHealthStatus.GOOD;
+
         this.cells = new ArrayList<>();
         this.listAgents = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
-        this.transformer = new Transformer(this.cells);
-        this.fuzzyLogic.viewAllChart();
+        this.dispatcher = new Dispatcher(this.cells);
 
         PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
         PlanetData[] planetData = planetLoader.load();
@@ -63,7 +71,7 @@ public class Planet implements Environment {
             this.cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
                 Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i,
-                        j);
+                        j,0);
                 this.cells.get(i).add(o.get());
             }
         }
@@ -75,12 +83,18 @@ public class Planet implements Environment {
                 Optional<Cell> o = CellFactory.factory(planetDatum.getType(),
                         -1,
                         planetDatum.getCellPos()[j].getX(),
-                        planetDatum.getCellPos()[j].getY());
+                        planetDatum.getCellPos()[j].getY(),0);
 
                 this.cells.get(x).set(y, o.get());
             }
         }
-        typeCells();
+        this.stockFood      = Math.floor((100.0 - nbCaseType(CellType.FOOD))*r.nextDouble() +nbCaseType(CellType.FOOD));
+        this.stockMineral   = Math.floor((100.0 - nbCaseType(CellType.ORE))*r.nextDouble()  +nbCaseType(CellType.ORE));
+        this.stockWater     = Math.floor((100.0 - nbCaseType(CellType.LAKE))*r.nextDouble() +nbCaseType(CellType.LAKE));
+        dispatcher.dispatched(CellType.FOOD,this.stockFood);
+        dispatcher.dispatched(CellType.ORE,this.stockFood);
+        dispatcher.dispatched(CellType.LAKE,this.stockFood);
+
     }
 
     @Override
@@ -125,21 +139,47 @@ public class Planet implements Environment {
     public void play(){
         if (!listAgents.isEmpty()){
             for(Agent ag : listAgents){
-                if(!ag.equals(null)){
-                    ag.compute();
-                }
+                ag.compute();
             }
         }
     }
 
-    public void typeCells(){
+
+    public PlanetEmotion getCurrentEmotion() {
+        return currentEmotion;
+    }
+
+    public PlanetHealthStatus getCurrentHealthStatus() {
+        return currentHealthStatus;
+    }
+
+    public double getStockFood() {
+        return stockFood;
+    }
+
+    public double getStockMineral() {
+        return stockMineral;
+    }
+
+    public double getStockWater() {
+        return stockWater;
+    }
+
+    public List<Agent> getListAgents() {
+        return listAgents;
+    }
+    public double nbCaseType(CellType cellType){
+        double cpt = 0;
         for(List<Cell> list : this.cells){
-            for(Cell c : list){
-                if(c.getType() == CellType.FOOD){
-                    System.out.println(c.getIntensity());
+            for(Cell a : list){
+                if(a.getType() == cellType){
+                    cpt++;
                 }
-
             }
         }
+        return cpt;
     }
+
+
+
 }

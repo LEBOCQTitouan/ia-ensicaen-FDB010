@@ -7,6 +7,7 @@ import fr.ensicaen.lv223.view.CellView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class PlanetPresenter {
     private IPresenter view;
@@ -17,6 +18,7 @@ public class PlanetPresenter {
     }
 
     public void drawPlanet() {
+        updatePlanet();
         List<List<Cell>> cells = planet.getCells();
         List<List<CellView>> cellsView = new ArrayList<>();
 
@@ -39,5 +41,14 @@ public class PlanetPresenter {
 
     public void setView(IPresenter view) {
         this.view = view;
+    }
+
+    public void updatePlanet(){
+        this.view.updateStatus(planet.getAgeSinceTheArrivalOfTheColony(),
+                planet.getCurrentHealthStatus().name(),
+                planet.getStockFood(),
+                planet.getStockWater(),
+                planet.getStockMineral(),
+                planet.getListAgents().size());
     }
 }
