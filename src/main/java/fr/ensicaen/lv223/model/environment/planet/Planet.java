@@ -20,6 +20,8 @@ import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetData;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
+import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
+import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 
 /**
  * The {@code Planet} class implements the {@link Environment} interface and
@@ -57,14 +59,13 @@ public class Planet implements Environment, EnvironmentAgent {
     private double stockMineral;
     private double stockWater;
     public Planet() {
-        this.ageSinceTheArrivalOfTheColony = 0;
         Random r = new Random(System.currentTimeMillis());
 
         this.currentEmotion = PlanetEmotion.HAPPY;
         this.currentHealthStatus = PlanetHealthStatus.GOOD;
 
         this.cells = new ArrayList<>();
-        this.listAgents = new ArrayList<>();
+        this.waterPipes = new ArrayList<>();
         this.fuzzyLogic = new FuzzyLogic();
         this.dispatcher = new Dispatcher(this.cells);
 
@@ -75,7 +76,7 @@ public class Planet implements Environment, EnvironmentAgent {
         for (int i = 0; i < 21; i++) {
             this.cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
-                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i, j);
+                Optional<Cell> o = CellFactory.factory("IMPENETRABLE", -1, i, j,0);
                 cells.get(i).add(o.get());
             }
         }
@@ -88,7 +89,7 @@ public class Planet implements Environment, EnvironmentAgent {
                         planetDatum.getType(),
                         -1,
                         planetDatum.getCellPos()[j].getX(),
-                        planetDatum.getCellPos()[j].getY()
+                        planetDatum.getCellPos()[j].getY(),0
                 );
                 this.cells.get(x).set(y, o.get());
             }
@@ -120,10 +121,6 @@ public class Planet implements Environment, EnvironmentAgent {
         this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
     }
 
-    public int getAgeSinceTheArrivalOfTheColony() {
-        return ageSinceTheArrivalOfTheColony;
-    }
-
     @Override
     public int getWidth() {
         return cells.size();
@@ -132,11 +129,6 @@ public class Planet implements Environment, EnvironmentAgent {
     @Override
     public int getHeight() {
         return cells.get(0).size();
-    }
-
-    @Override
-    public List<List<Cell>> getCells() {
-        return cells;
     }
 
     @Override
@@ -183,19 +175,18 @@ public class Planet implements Environment, EnvironmentAgent {
         return stockWater;
     }
 
-    public List<Agent> getListAgents() {
-        return listAgents;
-    }
-    public double nbCaseType(CellType cellType){
+    public double nbCaseType(CellType cellType) {
         double cpt = 0;
-        for(List<Cell> list : this.cells){
-            for(Cell a : list){
-                if(a.getType() == cellType){
+        for (List<Cell> list : this.cells) {
+            for (Cell a : list) {
+                if (a.getType() == cellType) {
                     cpt++;
                 }
             }
         }
         return cpt;
+    }
+
     public void addPipe(WaterPipe pipe) {
         waterPipes.add(pipe);
     }
@@ -203,7 +194,5 @@ public class Planet implements Environment, EnvironmentAgent {
     public void removePipe(WaterPipe pipe) {
         waterPipes.remove(pipe);
     }
-
-
 
 }

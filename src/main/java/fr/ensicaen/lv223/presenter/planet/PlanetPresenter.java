@@ -45,11 +45,11 @@ public class PlanetPresenter {
     }
 
     public void updatePlanet(){
-        this.view.updateStatus(planet.getAgeSinceTheArrivalOfTheColony(),
+        this.view.updateStatus(0,
                 planet.getCurrentHealthStatus().name(),
                 planet.getStockFood(),
                 planet.getStockWater(),
                 planet.getStockMineral(),
-                planet.getListAgents().size());
+                0);
     }
 }
