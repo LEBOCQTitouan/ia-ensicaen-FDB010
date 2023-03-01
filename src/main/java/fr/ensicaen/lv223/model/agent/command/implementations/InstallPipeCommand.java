@@ -15,7 +15,7 @@ public class InstallPipeCommand extends Command {
         super(robot, robotMapper, value);
         this.planet = planet;
         Coordinate coord = robotMapper.getCoordinate(robot);
-        pipe = new WaterPipe(coord.x, coord.y);
+        pipe = WaterPipe.createWaterPipe(coord.x, coord.y);
     }
 
     @Override

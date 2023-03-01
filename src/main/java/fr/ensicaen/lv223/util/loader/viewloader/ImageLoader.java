@@ -97,7 +97,7 @@ public class ImageLoader {
                     new Image(new FileInputStream(imgFile), width, height, true, true)
             );
         }
-        return cellTypeImages.get(type);
+        return constructionTypeImages.get(type);
     }
 
     public double getWidth() {
