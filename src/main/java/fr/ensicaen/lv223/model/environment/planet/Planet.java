@@ -5,23 +5,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import fr.ensicaen.lv223.model.agent.Agent;
 import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
-import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
+import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
+import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
+import fr.ensicaen.lv223.model.environment.planet.reaction.ShockWaveSequencer;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
-import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetData;
 import fr.ensicaen.lv223.util.loader.planetloader.PlanetLoader;
-import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 
 /**
@@ -50,18 +49,20 @@ public class Planet implements Environment, EnvironmentAgent {
 
     private PlanetHealthStatus currentHealthStatus;
 
-    private final double initalstockFood;
-    private final double initalstockMineral;
-    private final double initalstockWater;
+    private final double initalStockFood;
+    private final double initalStockMineral;
+    private final double initalStockWater;
 
 
     private double stockFood;
     private double stockMineral;
     private double stockWater;
+    private ShockWaveSequencer shockWaveSequencer;
     public Planet() {
         currentEmotion = PlanetEmotion.HAPPY;
         cells = new ArrayList<>();
         fuzzyLogic = new FuzzyLogic();
+        shockWaveSequencer = new ShockWaveSequencer(this);
         dispatcher = new Dispatcher(cells);
 
         Random r = new Random(System.currentTimeMillis());
@@ -99,9 +100,9 @@ public class Planet implements Environment, EnvironmentAgent {
         this.stockMineral   = Math.floor((100.0 - nbCaseType(CellType.ORE))*r.nextDouble()  +nbCaseType(CellType.ORE));
         this.stockWater     = Math.floor((100.0 - nbCaseType(CellType.LAKE))*r.nextDouble() +nbCaseType(CellType.LAKE));
 
-        this.initalstockFood = stockFood;
-        this.initalstockMineral = stockMineral;
-        this.initalstockWater = stockWater;
+        this.initalStockFood = stockFood;
+        this.initalStockMineral = stockMineral;
+        this.initalStockWater = stockWater;
 
         dispatcher.dispatched(CellType.FOOD,this.stockFood);
         dispatcher.dispatched(CellType.ORE,this.stockFood);
@@ -112,13 +113,8 @@ public class Planet implements Environment, EnvironmentAgent {
     }
 
     @Override
-    public List<List<Cell>> getCells() {
-        return cells;
-    }
-
-    @Override
     public void setEmotion() {
-        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalstockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalstockWater)*100) - 100);
+        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalStockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalStockWater)*100) - 100);
         this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
     }
 
@@ -164,6 +160,16 @@ public class Planet implements Environment, EnvironmentAgent {
         return commands;
     }
 
+    public void extract(Coordinate coord, int value) {
+        // TODO evaluate the extraction type
+        shockWaveSequencer.createShockWave(coord.x, coord.y, ExtractionType.SMALL);
+    }
+
+    public void sample(Coordinate coord, int value) {
+        // TODO evaluate the sampling type
+        shockWaveSequencer.createShockWave(coord.x, coord.y, SamplingType.NEGLIGIBLE);
+    }
+
     public PlanetHealthStatus getCurrentHealthStatus() {
         return currentHealthStatus;
     }
@@ -178,5 +184,17 @@ public class Planet implements Environment, EnvironmentAgent {
             }
         }
         return cpt;
+    }
+
+    public double getStockFood() {
+        return stockFood;
+    }
+
+    public double getStockMineral() {
+        return stockMineral;
+    }
+
+    public double getStockWater() {
+        return stockWater;
     }
 }
