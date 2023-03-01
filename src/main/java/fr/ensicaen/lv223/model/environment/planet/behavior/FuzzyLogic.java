@@ -1,6 +1,5 @@
 package fr.ensicaen.lv223.model.environment.planet.behavior;
 
-import fr.ensicaen.lv223.model.environment.cells.specials.extractable.ExtractableCell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
@@ -8,12 +7,7 @@ import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 import javafx.scene.control.Alert;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
-import net.sourceforge.jFuzzyLogic.JFuzzyLogic;
 import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
-import net.sourceforge.jFuzzyLogic.rule.LinguisticTerm;
-import net.sourceforge.jFuzzyLogic.rule.Variable;
-
-import java.util.HashMap;
 
 public class FuzzyLogic {
 

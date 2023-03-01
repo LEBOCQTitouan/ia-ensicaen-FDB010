@@ -11,6 +11,7 @@ import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
+import fr.ensicaen.lv223.model.environment.cells.specials.extractable.ExtractableCell;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
@@ -52,6 +53,11 @@ public class Planet implements Environment, EnvironmentAgent {
     private final double initalStockFood;
     private final double initalStockMineral;
     private final double initalStockWater;
+
+    private final double quantityWater = 200000;
+    private final double quantityOre = 200;
+    private final double quantityFood = 200;
+
 
 
     private double stockFood;
@@ -97,21 +103,17 @@ public class Planet implements Environment, EnvironmentAgent {
                 this.cells.get(x).set(y, o.get());
             }
         }
-        this.stockFood      = Math.floor((100.0 - nbCaseType(CellType.FOOD))*r.nextDouble() +nbCaseType(CellType.FOOD));
-        this.stockMineral   = Math.floor((100.0 - nbCaseType(CellType.ORE))*r.nextDouble()  +nbCaseType(CellType.ORE));
-        this.stockWater     = Math.floor((100.0 - nbCaseType(CellType.LAKE))*r.nextDouble() +nbCaseType(CellType.LAKE));
+        this.stockFood      = nbCaseType(CellType.FOOD)*quantityFood;
+        this.stockMineral   = nbCaseType(CellType.ORE)*quantityOre;
+        this.stockWater     = nbCaseType(CellType.LAKE)*quantityWater;
 
         this.initalStockFood = stockFood;
         this.initalStockMineral = stockMineral;
         this.initalStockWater = stockWater;
 
-        dispatcher.dispatched(CellType.FOOD,this.stockFood);
-        dispatcher.dispatched(CellType.ORE,this.stockFood);
-        dispatcher.dispatched(CellType.LAKE,this.stockFood);
+        setStocks();
 
         this.setEmotion();
-
-        fuzzyLogic.getExtractionType(20);
     }
 
     @Override
@@ -119,6 +121,25 @@ public class Planet implements Environment, EnvironmentAgent {
         fuzzyLogic.executeEmotion(((this.stockMineral/this.initalStockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalStockWater)*100) - 100);
         this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
         return this.currentEmotion;
+    }
+
+
+    public void setStocks(){
+        for(List<Cell> list : this.cells){
+            for(Cell c : list){
+                if(c.getType() == CellType.LAKE){
+                    ((ExtractableCell) c).setQuantity(quantityWater);
+                }
+
+                if(c.getType() == CellType.FOOD){
+                    ((ExtractableCell) c).setQuantity(quantityFood);
+                }
+
+                if(c.getType() == CellType.ORE){
+                    ((ExtractableCell) c).setQuantity(quantityOre);
+                }
+            }
+        }
     }
 
     @Override
@@ -167,6 +188,7 @@ public class Planet implements Environment, EnvironmentAgent {
     public void extract(Coordinate coord, int value) {
         // TODO evaluate the extraction type
         shockWaveSequencer.createShockWave(coord.x, coord.y, ExtractionType.SMALL);
+
     }
 
     public void sample(Coordinate coord, int value) {
@@ -205,4 +227,5 @@ public class Planet implements Environment, EnvironmentAgent {
     public double getStockWater() {
         return stockWater;
     }
+
 }
