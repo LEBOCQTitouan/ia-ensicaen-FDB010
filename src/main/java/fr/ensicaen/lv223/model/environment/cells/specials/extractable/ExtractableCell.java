@@ -26,8 +26,7 @@ public abstract class ExtractableCell extends Cell {
      * @param intensity the intensity of metamorphosis for the cell
      * @param quantity the quantity of food that the cell can produce
      */
-    protected ExtractableCell(int x, int y, CellType type, double intensity,
-                              double quantity) {
+    protected ExtractableCell(int x, int y, CellType type, double intensity, double quantity) {
         super(x, y, type, intensity);
         this.quantity = quantity;
         this.initialQuantity = quantity;

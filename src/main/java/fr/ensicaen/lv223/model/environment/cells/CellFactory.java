@@ -1,6 +1,8 @@
 package fr.ensicaen.lv223.model.environment.cells;
 
+import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.*;
+import fr.ensicaen.lv223.model.environment.cells.specials.extractable.ExtractableCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.FoodCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.LakeCell;
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.OreCell;
@@ -67,5 +69,25 @@ public class CellFactory {
             }
         }
         return Optional.of(null);
+    }
+
+    public static Optional<ExtractableCell> convert(Cell cell) {
+        switch (cell.getType()) {
+            case FOOD -> {
+                return Optional.of(new FoodCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+            }
+            case LAKE -> {
+                return Optional.of(new LakeCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+            }
+            case ORE -> {
+                return Optional.of(new OreCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+            }
+        }
+        return Optional.of(null);
+
+    }
+
+    public static Cell convert(EnvironmentCell cell) {
+        return (Cell) cell;
     }
 }
