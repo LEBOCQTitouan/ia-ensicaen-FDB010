@@ -1,6 +1,7 @@
 package fr.ensicaen.lv223.model.environment.planet.behavior;
 
 import fr.ensicaen.lv223.model.environment.planet.Planet;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
@@ -102,6 +103,19 @@ public class FuzzyLogic {
         return defineSampling(samplingPct);
     }
 
+    public MetamorphosisType getMetamorphsisType(int samplingPct) {
+        try {
+            this.functionBlockTransformation.setVariable("extraction", ((planet.getStockMineral()/planet.getInitalStockMineral() * 100)-100));
+            this.functionBlockTransformation.setVariable("sampling", ((planet.getStockWater()/planet.getInitalStockWater() * 100)-100));
+            this.functionBlockTransformation.setVariable("emotion", planet.getCurrentEmotion().ordinal());
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+        functionBlockTransformation.evaluate();
+        return defineMetamorphosis(functionBlockTransformation.getVariable("metamorphose").getValue());
+    }
+
     private ExtractionType defineExtraction(int value){
         if(this.functionBlockEmotion.getVariable("extraction").getMembershipFunction("petite").membership(value) == 1.0){
             return ExtractionType.SMALL;
@@ -129,6 +143,23 @@ public class FuzzyLogic {
             return SamplingType.GREAT;
         }
         return SamplingType.NEGLIGIBLE;
+    }
+
+    private MetamorphosisType defineMetamorphosis(double value){
+
+        if(this.functionBlockEmotion.getVariable("sampling").getMembershipFunction("limitee").membership(value) == 1.0){
+            return MetamorphosisType.NEGLIGIBLE;
+        }
+        if(this.functionBlockEmotion.getVariable("sampling").getMembershipFunction("petite").membership(value) == 1.0){
+            return MetamorphosisType.SMALL;
+        }
+        if(this.functionBlockEmotion.getVariable("sampling").getMembershipFunction("moyenne").membership(value) == 1.0){
+            return MetamorphosisType.MEDIUM;
+        }
+        if(this.functionBlockEmotion.getVariable("sampling").getMembershipFunction("grande").membership(value) == 1.0){
+            return MetamorphosisType.GREAT;
+        }
+        return MetamorphosisType.NEGLIGIBLE;
     }
 
     public PlanetEmotion getCurrentEmotion(int emotionPct) {

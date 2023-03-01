@@ -228,4 +228,15 @@ public class Planet implements Environment, EnvironmentAgent {
         return stockWater;
     }
 
+    public double getInitalStockFood() {
+        return initalStockFood;
+    }
+
+    public double getInitalStockMineral() {
+        return initalStockMineral;
+    }
+
+    public double getInitalStockWater() {
+        return initalStockWater;
+    }
 }
