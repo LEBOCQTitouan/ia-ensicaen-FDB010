@@ -4,5 +4,6 @@ public enum CommandType {
     INSTALL_PIPE,
     EXTRACT,
     MOVE,
-    IDLE;
+    IDLE,
+    MOVEJB;
 }

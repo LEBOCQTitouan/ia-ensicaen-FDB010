@@ -6,7 +6,9 @@ import fr.ensicaen.lv223.model.agent.command.implementations.InstallPipeCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.RandomMovementCommand;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
+import fr.ensicaen.lv223.model.logic.localisation.Direction;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
+import fr.ensicaen.lv223.teams.jamesbond.command.MoveCommandJB;
 
 /**
  * This is an example of a factory class. It is used to create commands.
@@ -42,9 +44,28 @@ public class CommandFactory {
                 return new ExtractFromCellCommand(planet, robot, robotMapper, value);
             case MOVE:
                 return new RandomMovementCommand(robot, robotMapper, value);
+
             case IDLE:
             default:
                 return new IdleCommand(robot, robotMapper);
         }
     }
+
+    /**
+     *
+     * @param robot
+     * @param type
+     * @param value
+     * @return
+     */
+    public Command createCommand(Robot robot, CommandType type, Direction value) {
+        switch (type) {
+            case MOVEJB:
+                return new MoveCommandJB(robot, robotMapper, value);
+
+            default:
+                return new IdleCommand(robot, robotMapper);
+        }
+    }
+
 }

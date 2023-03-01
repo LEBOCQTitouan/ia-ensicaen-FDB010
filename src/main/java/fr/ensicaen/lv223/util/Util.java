@@ -1,6 +1,8 @@
 package fr.ensicaen.lv223.util;
 
 import fr.ensicaen.lv223.model.agent.command.Command;
+import fr.ensicaen.lv223.model.agent.command.CommandFactory;
+import fr.ensicaen.lv223.model.agent.command.CommandType;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
@@ -49,13 +51,13 @@ public class Util {
     }
 
 
-    public static PriorityQueue<Command> cellListToCommandList(ArrayList<Cell> AStarPath, ProjectTeam team, Robot rob, RobotMapper mapper) {
+    public static PriorityQueue<Command> cellListToCommandList(ArrayList<Cell> AStarPath, ProjectTeam team, Robot rob) {
         PriorityQueue<Command> commandList = new PriorityQueue<>();
         for (int i = 0; i < AStarPath.size() - 1; i++) {
             Cell current = AStarPath.get(i);
             Cell next = AStarPath.get(i + 1);
             if(team==ProjectTeam.JAMES_BOND){
-                commandList.add(new MoveCommandJB(rob, mapper, current.getDirectionTo(next)));
+                commandList.add(rob.getCommandFactory().createCommand(rob, CommandType.MOVEJB, current.getDirectionTo(next)));
             }
             else{
                 //todo

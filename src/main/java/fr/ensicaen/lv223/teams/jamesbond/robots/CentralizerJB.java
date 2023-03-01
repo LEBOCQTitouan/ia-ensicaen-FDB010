@@ -17,29 +17,25 @@ import java.util.List;
 
 public class CentralizerJB extends Centralizer implements RobotInterfaceJB{
     private List<List<UnknownCell>> cells;
-    private RobotMapper mapper;
 
     private static CentralizerJB instance;
 
-    private CentralizerJB(RobotType type, CommandFactory commandFactory, PlanetInterface captors, RobotMapper mapper) {
+    private CentralizerJB(RobotType type, CommandFactory commandFactory, PlanetInterface captors) {
         super(type, commandFactory, captors);
-        this.mapper = mapper;
         cells = new ArrayList<>();
-        for(int i = 0; i< mapper.getHeigth(); i++){
+        for(int i = 0; i< 15; i++){
             cells.add(new ArrayList<>());
-            for(int j = 0; j< mapper.getWidth(); j++){
+            for(int j = 0; j< 25; j++){
                 cells.get(i).add(new UnknownCell(i,j));
             }
         }
     }
 
-    public RobotMapper getMapper(){
-        return mapper;
-    }
+
 
     public static CentralizerJB getInstance(RobotType type, CommandFactory commandFactory, PlanetInterface captors, RobotMapper mapper){
         if(instance == null){
-            instance = new CentralizerJB(type, commandFactory, captors, mapper);
+            instance = new CentralizerJB(type, commandFactory, captors);
         }
         return instance;
     }
@@ -83,6 +79,6 @@ public class CentralizerJB extends Centralizer implements RobotInterfaceJB{
 
     @Override
     public Coordinate getPosition() {
-        return this.getMapper().getCoordinate(this);
+        return new Coordinate(12,12);
     }
 }

@@ -30,6 +30,6 @@ public class FoodRetrieverJB extends FoodRetriever implements RobotInterfaceJB {
 
     @Override
     public Coordinate getPosition() {
-        return centralizer.getMapper().getCoordinate(this);
+        return new Coordinate(12,12);
     }
 }
