@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CentralizerJB extends Centralizer {
+public class CentralizerJB extends Centralizer implements RobotInterfaceJB{
     private List<List<UnknownCell>> cells;
     private RobotMapper mapper;
     private static CentralizerJB instance;
@@ -47,6 +47,10 @@ public class CentralizerJB extends Centralizer {
     @Override
     public boolean isAvailable(Message m) {
         return false;
+    }
+
+    public List<List<UnknownCell>> getCells(){
+        return cells;
     }
 
     public void updateMap(HashMap<Direction, CellType> map, RobotInterfaceJB robot){
@@ -81,5 +85,20 @@ public class CentralizerJB extends Centralizer {
                     break;
             }
         }
+    }
+
+    @Override
+    public CentralizerJB getCentralizer() {
+        return this;
+    }
+
+    @Override
+    public void updateCentralizerMap() {
+        this.updateMap(captors.getSurrounding(this), this);
+    }
+
+    @Override
+    public Coordinate getPosition() {
+        return this.getMapper().getCoordinate(this);
     }
 }

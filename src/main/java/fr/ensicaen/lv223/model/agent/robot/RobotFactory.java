@@ -23,7 +23,6 @@ public class RobotFactory {
         switch (type) {
             case CARTOGRAPHER -> {
                 if (team == ProjectTeam.JAMES_BOND)
-
                     return new CartographerJB(RobotType.CARTOGRAPHER, factory, PlanetInterface.getInstance(planet, robotMapper), CentralizerJB.getInstance(RobotType.CENTRALIZER, factory, PlanetInterface.getInstance(planet, robotMapper), robotMapper));
                 return new CartographerCopilot(RobotType.CARTOGRAPHER, factory, PlanetInterface.getInstance(planet, robotMapper));
             }

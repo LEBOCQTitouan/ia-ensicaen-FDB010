@@ -23,6 +23,10 @@ public class FarmerJB extends Farmer implements RobotInterfaceJB{
     public void updateCentralizerMap() {
         centralizer.updateMap(captors.getSurrounding(this), this);
     }
+    @Override
+    public CentralizerJB getCentralizer() {
+        return this.centralizer;
+    }
 
     @Override
     public Coordinate getPosition() {

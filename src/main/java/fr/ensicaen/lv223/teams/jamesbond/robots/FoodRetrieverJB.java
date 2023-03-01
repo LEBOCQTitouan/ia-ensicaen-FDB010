@@ -13,6 +13,10 @@ public class FoodRetrieverJB extends FoodRetriever implements RobotInterfaceJB {
         super(type, commandFactory, captors);
         this.centralizer = centralizer;
     }
+    @Override
+    public CentralizerJB getCentralizer() {
+        return this.centralizer;
+    }
 
     @Override
     public boolean isAvailable( Message m ) {

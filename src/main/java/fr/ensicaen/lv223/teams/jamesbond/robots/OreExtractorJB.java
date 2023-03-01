@@ -28,4 +28,8 @@ public class OreExtractorJB extends OreExtractor implements RobotInterfaceJB{
     public Coordinate getPosition() {
         return centralizer.getMapper().getCoordinate(this);
     }
+    @Override
+    public CentralizerJB getCentralizer() {
+        return this.centralizer;
+    }
 }

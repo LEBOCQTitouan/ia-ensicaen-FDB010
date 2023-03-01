@@ -28,4 +28,8 @@ public class PipelineBuilderJB extends PipelineBuilder implements RobotInterface
         public Coordinate getPosition() {
             return centralizer.getMapper().getCoordinate(this);
         }
+    @Override
+    public CentralizerJB getCentralizer() {
+        return this.centralizer;
+    }
 }

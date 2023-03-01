@@ -23,6 +23,11 @@ public class CartographerJB extends Cartographer implements RobotInterfaceJB{
 
 
     @Override
+    public CentralizerJB getCentralizer() {
+        return this.centralizer;
+    }
+
+    @Override
     public void updateCentralizerMap() {
         centralizer.updateMap(captors.getSurrounding(this), this);
     }
@@ -31,4 +36,6 @@ public class CartographerJB extends Cartographer implements RobotInterfaceJB{
     public Coordinate getPosition() {
         return centralizer.getMapper().getCoordinate(this);
     }
+
+
 }
