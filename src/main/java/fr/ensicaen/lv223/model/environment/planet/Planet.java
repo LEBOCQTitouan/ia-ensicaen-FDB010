@@ -13,6 +13,7 @@ import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.Metamorphosis;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ShockWaveSequencer;
@@ -58,11 +59,13 @@ public class Planet implements Environment, EnvironmentAgent {
     private double stockMineral;
     private double stockWater;
     private ShockWaveSequencer shockWaveSequencer;
+    private List<Metamorphosis> metamorphosisList;
     public Planet() {
         currentEmotion = PlanetEmotion.HAPPY;
         cells = new ArrayList<>();
         fuzzyLogic = new FuzzyLogic();
         shockWaveSequencer = new ShockWaveSequencer(this);
+        metamorphosisList = new ArrayList<>();
         dispatcher = new Dispatcher(cells);
 
         Random r = new Random(System.currentTimeMillis());
@@ -152,24 +155,24 @@ public class Planet implements Environment, EnvironmentAgent {
     }
 
     private void react() {
-        // TODO
+        shockWaveSequencer.updateShockWaves();
+        for (Metamorphosis metamorphosis : metamorphosisList) {
+            metamorphosis.transform();
+        }
     }
 
     @Override
     public List<Command> compute() {
         ArrayList commands = new ArrayList();
         react();
-        // TODO possible commands for planet
         return commands;
     }
 
     public void extract(Coordinate coord, int value) {
-        // TODO evaluate the extraction type
         shockWaveSequencer.createShockWave(coord.x, coord.y, ExtractionType.SMALL);
     }
 
     public void sample(Coordinate coord, int value) {
-        // TODO evaluate the sampling type
         shockWaveSequencer.createShockWave(coord.x, coord.y, SamplingType.NEGLIGIBLE);
     }
 
