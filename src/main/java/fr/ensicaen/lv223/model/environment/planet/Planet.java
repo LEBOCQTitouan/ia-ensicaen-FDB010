@@ -10,7 +10,6 @@ import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.cells.CellFactory;
 import fr.ensicaen.lv223.model.environment.Environment;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
-import fr.ensicaen.lv223.model.environment.cells.specials.ExtractableCell;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.util.loader.planetloader.JsonLoader;
@@ -47,6 +46,11 @@ public class Planet implements Environment {
     private Dispatcher dispatcher;
 
     private PlanetHealthStatus currentHealthStatus;
+
+    private final double initalstockFood;
+    private final double initalstockMineral;
+    private final double initalstockWater;
+
 
     private double stockFood;
     private double stockMineral;
@@ -91,9 +95,16 @@ public class Planet implements Environment {
         this.stockFood      = Math.floor((100.0 - nbCaseType(CellType.FOOD))*r.nextDouble() +nbCaseType(CellType.FOOD));
         this.stockMineral   = Math.floor((100.0 - nbCaseType(CellType.ORE))*r.nextDouble()  +nbCaseType(CellType.ORE));
         this.stockWater     = Math.floor((100.0 - nbCaseType(CellType.LAKE))*r.nextDouble() +nbCaseType(CellType.LAKE));
+
+        this.initalstockFood = stockFood;
+        this.initalstockMineral = stockMineral;
+        this.initalstockWater = stockWater;
+
         dispatcher.dispatched(CellType.FOOD,this.stockFood);
         dispatcher.dispatched(CellType.ORE,this.stockFood);
         dispatcher.dispatched(CellType.LAKE,this.stockFood);
+
+        this.setEmotion();
 
     }
 
@@ -103,8 +114,9 @@ public class Planet implements Environment {
     }
 
     @Override
-    public void setEmotion( PlanetEmotion planetEmotion ) {
-        this.currentEmotion = planetEmotion;
+    public void setEmotion() {
+        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalstockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalstockWater)*100) - 100);
+        this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
     }
 
     public int getAgeSinceTheArrivalOfTheColony() {

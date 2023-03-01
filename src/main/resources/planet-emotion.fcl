@@ -7,13 +7,13 @@ VAR_INPUT				// Variables en entrée
 END_VAR
 
 VAR_OUTPUT				// Variable en sortie
-	metamorphose : REAL;
+	future_emotion : REAL;
 END_VAR
 
 FUZZIFY emotion			// Variable en entrée "fuzzifiée"
-    TERM colere := (0,0) (1,0) (2,0) (3,1) (4,0)
-    TERM moyenne := (0,0) (1,0) (2,1) (3,0)
-    TERM joyeuse := (0,0) (1,1) (2,0)
+    TERM colere := (0,0) (1,0) (2,1) (3,0);
+    TERM triste := (0,0) (1,1) (2,0);
+    TERM joyeuse := (0,1) (1,0);
 END_FUZZIFY
 
 
@@ -25,18 +25,16 @@ END_FUZZIFY
 
 FUZZIFY prelevement			// Variable en entrée "fuzzifiée"
     TERM insignifiant := (0,1) (5,1) (10,0);
-    TERM petite := (5,0) (10,1) (30,1) (40,0);
-    TERM moyenne := (30,0) (40,1) (50,1) (60,0);
-    TERM grande := (50,0) (70,1) (100,1);
+    TERM petit := (5,0) (10,1) (30,1) (40,0);
+    TERM moyen := (30,0) (40,1) (50,1) (60,0);
+    TERM grand := (50,0) (70,1) (100,1);
 END_FUZZIFY
 
 
-DEFUZZIFY metamorphose			// Variable en sortie "défuzzifiée"
-	TERM limitee := (0,1) (5,1) (10,0);
-    TERM petite := (5,0) (10,1) (30,1) (40,0);
-	TERM moyenne := (30,0) (40,1) (50,1) (60,0);
-	TERM grande := (50,0) (70,1) (80,1) (90,0);
-	TERM importante := (80,0) (90,1) (100,1);
+DEFUZZIFY future_emotion			// Variable en entrée "fuzzifiée"
+    TERM colere := (0,0) (1,0) (2,1) (3,0);
+    TERM triste := (0,0) (1,1) (2,0);
+    TERM joyeuse := (0,1) (1,0);
 	METHOD : COG;		// Utilise le centre de gravité pour la défuzzification
 	DEFAULT := 0;		// Valeur par défaut (aucune règle ne lance la défuzzification)
 END_DEFUZZIFY
@@ -46,18 +44,28 @@ RULEBLOCK No1
 	ACT : MIN;			// Utilise 'min' comme méthode d'activation
 	ACCU : MAX;			// Utilise 'max' comme méthode d'accumulation
 
-    RULE 1 : IF extraction IS petite AND prelevement IS insignifiant THEN metamorphose IS limitee;
-    RULE 2 : IF extraction IS petite AND prelevement IS petit THEN metamorphose IS petite;
-    RULE 3 : IF extraction IS petite AND prelevement IS moyen THEN metamorphose IS petite;
-    RULE 4 : IF extraction IS petite AND prelevement IS grand THEN metamorphose IS moyenne;
-    RULE 5 : IF extraction IS moyenne AND prelevement IS insignifiant THEN metamorphose IS moyenne;
-    RULE 6 : IF extraction IS moyenne AND prelevement IS petit THEN metamorphose IS moyenne;
-    RULE 7 : IF extraction IS moyenne AND prelevement IS moyen THEN metamorphose IS moyenne;
-    RULE 8 : IF extraction IS moyenne AND prelevement IS grand THEN metamorphose IS moyenne;
-    RULE 9 : IF extraction IS grande AND prelevement IS insignifiant THEN metamorphose IS grande;
-    RULE 10 : IF extraction IS grande AND prelevement IS petit THEN metamorphose IS grande;
-    RULE 11 : IF extraction IS grande AND prelevement IS moyen THEN metamorphose IS importante;
-    RULE 12 : IF extraction IS grande AND prelevement IS grand THEN metamorphose IS importante;
+     RULE 1 : IF extraction IS petite AND prelevement IS insignifiant AND emotion IS joyeuse THEN future_emotion IS joyeuse;
+     RULE 2 : IF extraction IS petite AND prelevement IS insignifiant AND emotion IS triste THEN future_emotion IS triste;
+     RULE 3 : IF extraction IS petite AND prelevement IS insignifiant AND emotion IS colere THEN future_emotion IS colere;
+     RULE 4 : IF extraction IS petite AND prelevement IS petit AND emotion IS joyeuse THEN future_emotion IS joyeuse;
+     RULE 5 : IF extraction IS petite AND prelevement IS petit AND emotion IS triste THEN future_emotion IS triste;
+     RULE 6 : IF extraction IS petite AND prelevement IS petit AND emotion IS colere THEN future_emotion IS colere;
+     RULE 7 : IF extraction IS petite AND prelevement IS moyen AND emotion IS joyeuse THEN future_emotion IS triste;
+     RULE 8 : IF extraction IS petite AND prelevement IS moyen AND emotion IS triste THEN future_emotion IS triste;
+     RULE 9 : IF extraction IS petite AND prelevement IS moyen AND emotion IS colere THEN future_emotion IS colere;
+     RULE 10 : IF extraction IS petite AND prelevement IS grand AND emotion IS joyeuse THEN future_emotion IS triste;
+     RULE 11 : IF extraction IS petite AND prelevement IS grand AND emotion IS triste  THEN future_emotion IS colere;
+     RULE 12 : IF extraction IS petite AND prelevement IS grand AND emotion IS colere THEN future_emotion IS colere;
+     RULE 13 : IF extraction IS moyenne AND prelevement IS insignifiant AND emotion IS joyeuse THEN future_emotion IS joyeuse;
+     RULE 14 : IF extraction IS moyenne AND prelevement IS insignifiant AND emotion IS triste THEN future_emotion IS triste;
+     RULE 15 : IF extraction IS moyenne AND prelevement IS insignifiant AND emotion is colere THEN future_emotion IS colere;
+     RULE 16 : IF extraction IS moyenne AND prelevement IS petit AND emotion IS joyeuse THEN future_emotion IS triste;
+     RULE 17 : IF extraction IS moyenne AND prelevement IS petit AND emotion IS triste THEN future_emotion IS colere;
+     RULE 18 : IF extraction IS moyenne AND prelevement IS petit AND emotion IS colere THEN future_emotion IS colere;
+     RULE 19 : IF extraction IS moyenne AND prelevement IS moyen AND emotion IS joyeuse THEN future_emotion IS triste;
+     RULE 20 : IF extraction IS moyenne AND prelevement IS moyen AND emotion IS triste THEN future_emotion IS colere;
+     RULE 21 : IF extraction IS moyenne AND prelevement IS moyen AND emotion IS colere THEN future_emotion IS colere;
+
     END_RULEBLOCK
 
 END_FUNCTION_BLOCK

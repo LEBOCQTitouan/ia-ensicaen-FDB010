@@ -7,7 +7,6 @@ import fr.ensicaen.lv223.view.CellView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class PlanetPresenter {
     private IPresenter view;
