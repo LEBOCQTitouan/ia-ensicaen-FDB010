@@ -117,7 +117,6 @@ public class Planet implements Environment, EnvironmentAgent {
         setStocks();
 
         this.setEmotion();
-
     }
 
     @Override
@@ -238,5 +237,17 @@ public class Planet implements Environment, EnvironmentAgent {
 
     public double getStockWater() {
         return stockWater;
+    }
+
+    public double getInitalStockFood() {
+        return initalStockFood;
+    }
+
+    public double getInitalStockMineral() {
+        return initalStockMineral;
+    }
+
+    public double getInitalStockWater() {
+        return initalStockWater;
     }
 }
