@@ -3,6 +3,9 @@ package fr.ensicaen.lv223.model.environment.planet.reaction;
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.Metamorphosis;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisFactory;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisType;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.util.Util;
 import javafx.scene.input.ScrollEvent;
@@ -35,7 +38,16 @@ public class ShockWave {
         for (int i = 0; i < speed; i++) {
             if (!steps.isEmpty()) {
                 List<EnvironmentCell> cells = steps.pop();
-                // TODO : update the cells
+                for (EnvironmentCell cell : cells) {
+                    Optional<Metamorphosis> metamorphosis = MetamorphosisFactory.createMetamorphosis(
+                            planet.getFuzzyLogic().getMetamorphosisType(),
+                            planet,
+                            (Cell) cell
+                    );
+                    if (metamorphosis.isPresent()) {
+                        planet.addMetamorphosis(metamorphosis.get());
+                    }
+                }
             }
         }
     }

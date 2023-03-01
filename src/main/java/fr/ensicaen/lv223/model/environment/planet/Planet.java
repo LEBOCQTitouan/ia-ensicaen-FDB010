@@ -161,6 +161,14 @@ public class Planet implements Environment, EnvironmentAgent {
         }
     }
 
+    public void addMetamorphosis(Metamorphosis metamorphosis) {
+        metamorphosisList.add(metamorphosis);
+    }
+
+    public FuzzyLogic getFuzzyLogic() {
+        return fuzzyLogic;
+    }
+
     @Override
     public List<Command> compute() {
         ArrayList commands = new ArrayList();
@@ -169,11 +177,11 @@ public class Planet implements Environment, EnvironmentAgent {
     }
 
     public void extract(Coordinate coord, int value) {
-        shockWaveSequencer.createShockWave(coord.x, coord.y, ExtractionType.SMALL);
+        shockWaveSequencer.createShockWave(coord.x, coord.y, fuzzyLogic.getExtractionType(value));
     }
 
     public void sample(Coordinate coord, int value) {
-        shockWaveSequencer.createShockWave(coord.x, coord.y, SamplingType.NEGLIGIBLE);
+        shockWaveSequencer.createShockWave(coord.x, coord.y, fuzzyLogic.getSamplingType(value));
     }
 
     public PlanetHealthStatus getCurrentHealthStatus() {

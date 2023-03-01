@@ -1,6 +1,7 @@
 package fr.ensicaen.lv223.model.environment.planet.behavior;
 
 import fr.ensicaen.lv223.model.environment.cells.specials.extractable.ExtractableCell;
+import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
@@ -91,5 +92,10 @@ public class FuzzyLogic {
     public PlanetEmotion getCurrentEmotion(int emotionPct) {
         // TODO Nicolas
         return PlanetEmotion.HAPPY;
+    }
+
+    public MetamorphosisType getMetamorphosisType() {
+        // TODO get the current chances to metamorphose
+        return MetamorphosisType.SMALL;
     }
 }
