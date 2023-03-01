@@ -1,5 +1,9 @@
 package fr.ensicaen.lv223.model.environment.planet.behavior;
 
+import fr.ensicaen.lv223.model.environment.cells.specials.extractable.ExtractableCell;
+import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
+import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
+import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 import javafx.scene.control.Alert;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
@@ -52,7 +56,6 @@ public class FuzzyLogic {
             this.functionBlockTransformation.setVariable("extraction", extraction);
             this.functionBlockTransformation.setVariable("emotion", emotion);
             this.functionBlockTransformation.setVariable("prelevement", sampling);
-
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -64,7 +67,6 @@ public class FuzzyLogic {
             this.functionBlockEmotion.setVariable("extraction", extraction);
             this.functionBlockEmotion.setVariable("emotion", emotion);
             this.functionBlockEmotion.setVariable("prelevement", sampling);
-
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -76,5 +78,18 @@ public class FuzzyLogic {
         JFuzzyChart.get().chart(functionBlockTransformation);
     }
 
+    public ExtractionType getExtractionType(int extractionPct) {
+        // TODO Nicolas
+        return ExtractionType.SMALL;
+    }
 
+    public SamplingType getSamplingType(int samplingPct) {
+        // TODO Nicolas
+        return SamplingType.SMALL;
+    }
+
+    public PlanetEmotion getCurrentEmotion(int emotionPct) {
+        // TODO Nicolas
+        return PlanetEmotion.HAPPY;
+    }
 }
