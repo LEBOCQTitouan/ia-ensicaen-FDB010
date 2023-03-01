@@ -61,7 +61,7 @@ public class Planet implements Environment, EnvironmentAgent {
     public Planet() {
         currentEmotion = PlanetEmotion.HAPPY;
         cells = new ArrayList<>();
-        fuzzyLogic = new FuzzyLogic();
+        fuzzyLogic = new FuzzyLogic(this);
         shockWaveSequencer = new ShockWaveSequencer(this);
         dispatcher = new Dispatcher(cells);
 
@@ -111,6 +111,7 @@ public class Planet implements Environment, EnvironmentAgent {
 
         this.setEmotion();
 
+        fuzzyLogic.getExtractionType(20);
     }
 
     @Override
@@ -191,6 +192,10 @@ public class Planet implements Environment, EnvironmentAgent {
 
     public double getStockFood() {
         return stockFood;
+    }
+
+    public PlanetEmotion getCurrentEmotion(){
+        return this.currentEmotion;
     }
 
     public double getStockMineral() {
