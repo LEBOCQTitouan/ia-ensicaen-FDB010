@@ -116,9 +116,10 @@ public class Planet implements Environment, EnvironmentAgent {
     }
 
     @Override
-    public void setEmotion() {
+    public PlanetEmotion setEmotion() {
         fuzzyLogic.executeEmotion(((this.stockMineral/this.initalstockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalstockWater)*100) - 100);
         this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
+        return this.currentEmotion;
     }
 
     @Override
