@@ -18,7 +18,7 @@ import java.util.Random;
 public class Cell implements EnvironmentCell, Comparable {
     private final int x;
     private final int y;
-    private CellType type;
+    protected CellType type;
     private double intensityOfMetamorphosis;
     private int intensityOfWave;
     private final boolean isExoskeleton;

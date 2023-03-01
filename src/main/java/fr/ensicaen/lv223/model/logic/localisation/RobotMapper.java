@@ -29,7 +29,12 @@ public class RobotMapper {
         this.planet = planet;
         robotMap = new HashMap<>();
 
+<<<<<<< HEAD
         CommandFactory commandFactory = new CommandFactory(planet, this);
+=======
+        CommandFactory commandFactory = new CommandFactory(this);
+
+>>>>>>> 0533d0dfb62be45863b0ba0ce6fafe5dcc25cc8f
         RobotFactory factory = new RobotFactory(commandFactory, planet, this);
 
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);
