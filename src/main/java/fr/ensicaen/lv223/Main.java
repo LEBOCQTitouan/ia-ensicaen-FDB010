@@ -16,6 +16,7 @@ import java.io.IOException;
  * It sets up the scene, size, style and behavior of the application.
  */
 public class Main extends Application {
+    public static final boolean DEBUG = true;
     /**
      * Override the start method of {@link Application} class to set up the GUI
      * elements and behaviors.

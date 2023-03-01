@@ -29,7 +29,9 @@ public class PlanetPresenter {
                                 view.getSceneWidth() / 21.0,
                                 view.getSceneHeight() / 21.0,
                                 cells.get(i).get(j).getType(),
-                                WaterPipe.hasPipe(i, j) != null
+                                WaterPipe.hasPipe(i, j) != null,
+                                i,
+                                j
                         )
                 );
             }
