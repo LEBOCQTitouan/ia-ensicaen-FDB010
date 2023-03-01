@@ -8,7 +8,7 @@ import fr.ensicaen.lv223.model.logic.agentInterface.PlanetInterface;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 
 public class PipelineBuilderJB extends PipelineBuilder implements RobotInterfaceJB {
-    private CentralizerJB centralizer;
+    private final CentralizerJB centralizer;
     public PipelineBuilderJB(RobotType type, CommandFactory commandFactory, PlanetInterface captors, CentralizerJB centralizer) {
         super(type, commandFactory, captors);
         this.centralizer = centralizer;
