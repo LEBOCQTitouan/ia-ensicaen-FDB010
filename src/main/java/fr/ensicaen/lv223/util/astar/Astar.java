@@ -1,8 +1,8 @@
 package fr.ensicaen.lv223.util.astar;
 
 
-import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
+import fr.ensicaen.lv223.model.environment.cells.CellType;
 import fr.ensicaen.lv223.util.astar.heuristic.Heuristic;
 import fr.ensicaen.lv223.util.astar.heuristic.ManhattanHeuristic;
 
@@ -62,42 +62,51 @@ public class Astar implements Agent {
         int y = cell.getY();
 
         if (x > 0) { // TOP
-            if (cells[x - 1][y].getType() != CellType.IMPENETRABLE
+            if (cells[x - 1][y].getType() != CellType.UNKNOWN
+                    && cells[x - 1][y].getType() != CellType.IMPENETRABLE
                     && cells[x - 1][y].getType() != CellType.LAKE) {
                 neighbours.add(cells[x - 1][y]);
             }
-            if (y > 0 && cells[x - 1][y - 1].getType() != CellType.IMPENETRABLE
+            if (y > 0
+                    && cells[x - 1][y - 1].getType() != CellType.UNKNOWN
+                    && cells[x - 1][y - 1].getType() != CellType.IMPENETRABLE
                     && cells[x - 1][y - 1].getType() != CellType.LAKE) { // TOP LEFT
                 neighbours.add(cells[x - 1][y - 1]);
             }
             if (y < cells[0].length - 1
+                    && cells[x - 1][y + 1].getType() != CellType.UNKNOWN
                     && cells[x - 1][y + 1].getType() != CellType.IMPENETRABLE
                     && cells[x - 1][y + 1].getType() != CellType.LAKE) { // TOP RIGHT
                 neighbours.add(cells[x - 1][y + 1]);
             }
         }
         if (x < cells.length - 1) { // BOTTOM
-            if (cells[x + 1][y].getType() != CellType.IMPENETRABLE
+            if (cells[x + 1][y].getType() != CellType.UNKNOWN
+                    && cells[x + 1][y].getType() != CellType.IMPENETRABLE
                     && cells[x + 1][y].getType() != CellType.LAKE) {
                 neighbours.add(cells[x + 1][y]);
             }
             if (y > 0
+                    && cells[x + 1][y - 1].getType() != CellType.UNKNOWN
                     && cells[x + 1][y - 1].getType() != CellType.IMPENETRABLE
                     && cells[x + 1][y - 1].getType() != CellType.LAKE) { // BOTTOM LEFT
                 neighbours.add(cells[x + 1][y - 1]);
             }
             if (y < cells[0].length - 1
+                    && cells[x + 1][y + 1].getType() != CellType.UNKNOWN
                     && cells[x + 1][y + 1].getType() != CellType.IMPENETRABLE
                     && cells[x + 1][y + 1].getType() != CellType.LAKE) { // BOTTOM RIGHT
                 neighbours.add(cells[x + 1][y + 1]);
             }
         }
         if (y > 0
+                && cells[x][y - 1].getType() != CellType.UNKNOWN
                 && cells[x][y - 1].getType() != CellType.IMPENETRABLE
                 && cells[x][y - 1].getType() != CellType.LAKE) { // LEFT
             neighbours.add(cells[x][y - 1]);
         }
         if (y < cells[0].length - 1
+                && cells[x][y + 1].getType() != CellType.UNKNOWN
                 && cells[x][y + 1].getType() != CellType.IMPENETRABLE
                 && cells[x][y + 1].getType() != CellType.LAKE) { // RIGHT
             neighbours.add(cells[x][y + 1]);
