@@ -220,4 +220,8 @@ public class Cell implements EnvironmentCell, Comparable {
         }
         return this;
     }
+
+    public void addIntensityOfWave(int intensity){
+        this.intensityOfWave += intensity;
+    }
 }

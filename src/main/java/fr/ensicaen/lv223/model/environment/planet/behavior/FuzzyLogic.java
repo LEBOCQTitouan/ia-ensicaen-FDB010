@@ -8,36 +8,62 @@ import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 
 public class FuzzyLogic {
 
-    private String filename;
-    private FunctionBlock functionBlock;
+    private String filenameTransformation;
+    private String filenameEmotion;
+    private FunctionBlock functionBlockTransformation;
+    private FunctionBlock functionBlockEmotion;
+
 
     public FuzzyLogic(){
-        this.filename = getClass().getClassLoader().getResource("planet-transformation.fcl").getPath();
-        this.functionBlock = loadFisFile();
+        this.filenameTransformation = getClass().getClassLoader().getResource("planet-transformation.fcl").getPath();
+        this.filenameEmotion = getClass().getClassLoader().getResource("planet-emotion.fcl").getPath();
+        this.functionBlockTransformation = loadFisFile(this.filenameTransformation);
+        this.functionBlockEmotion = loadFisFile(this.filenameEmotion);
     }
-    private FunctionBlock loadFisFile() {
-        FIS fis = FIS.load(this.filename, true);
+    private FunctionBlock loadFisFile(String filename) {
+        FIS fis = FIS.load(filename, true);
         if (fis == null) {
-            System.err.println("Impossible to charge this file '" + this.filename + "'");
+            System.err.println("Impossible to charge this file '" + filename + "'");
             System.exit(1);
         }
         return fis.getFunctionBlock(null);
     }
 
-    public void execute(double extraction, double emotion, double sampling){
-        setVariables(extraction,emotion,sampling);
-        this.functionBlock.evaluate();
+    public void executeTransformation(double extraction, double emotion, double sampling){
+        setVariablesTransformation(extraction,emotion,sampling);
+        this.functionBlockTransformation.evaluate();
     }
 
-    public double getValueVariable(String name){
-        return this.functionBlock.getVariable(name).getValue();
+    public void executeEmotion(double extraction, double emotion, double sampling){
+        setVariablesEmotion(extraction,emotion,sampling);
+        this.functionBlockEmotion.evaluate();
     }
 
-    private void setVariables(double extraction, double emotion, double sampling) {
+    public double getValueVariableTransformation(String name){
+        return this.functionBlockTransformation.getVariable(name).getValue();
+    }
+
+    public double getValueVariableEmotion(String name){
+        return this.functionBlockEmotion.getVariable(name).getValue();
+    }
+
+    private void setVariablesTransformation(double extraction, double emotion, double sampling) {
         try {
-            this.functionBlock.setVariable("extraction", extraction);
-            this.functionBlock.setVariable("emotion", emotion);
-            this.functionBlock.setVariable("prelevement", sampling);
+            this.functionBlockTransformation.setVariable("extraction", extraction);
+            this.functionBlockTransformation.setVariable("emotion", emotion);
+            this.functionBlockTransformation.setVariable("prelevement", sampling);
+
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    private void setVariablesEmotion(double extraction, double emotion, double sampling) {
+        try {
+            this.functionBlockEmotion.setVariable("extraction", extraction);
+            this.functionBlockEmotion.setVariable("emotion", emotion);
+            this.functionBlockEmotion.setVariable("prelevement", sampling);
 
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -46,8 +72,8 @@ public class FuzzyLogic {
     }
 
 
-    public void viewAllChart(){
-        JFuzzyChart.get().chart(functionBlock);
+    public void viewAllChartTransformation(){
+        JFuzzyChart.get().chart(functionBlockTransformation);
     }
 
 
