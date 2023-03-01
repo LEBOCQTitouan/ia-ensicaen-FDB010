@@ -43,7 +43,6 @@ import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
  */
 public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
-    private final List<WaterPipe> waterPipes;
     private FuzzyLogic fuzzyLogic;
     private PlanetEmotion currentEmotion;
     private Dispatcher dispatcher;
@@ -116,7 +115,7 @@ public class Planet implements Environment, EnvironmentAgent {
 
     @Override
     public PlanetEmotion setEmotion() {
-        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalstockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalstockWater)*100) - 100);
+        fuzzyLogic.executeEmotion(((this.stockMineral/this.initalStockMineral)*100) - 100,this.currentEmotion.ordinal(),((this.stockWater/this.initalStockWater)*100) - 100);
         this.currentEmotion = PlanetEmotion.values()[(int)(fuzzyLogic.getValueVariableEmotion("future_emotion"))];
         return this.currentEmotion;
     }
