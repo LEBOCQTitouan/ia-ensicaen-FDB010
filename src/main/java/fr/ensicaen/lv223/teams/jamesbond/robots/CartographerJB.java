@@ -24,7 +24,7 @@ public class CartographerJB extends Cartographer implements RobotInterfaceJB{
 
     @Override
     public void updateCentralizerMap() {
-        centralizer.updateMap(captors.getSurrounding(getPosition()), this);
+        centralizer.updateMap(captors.getSurrounding(this), this);
     }
 
     @Override

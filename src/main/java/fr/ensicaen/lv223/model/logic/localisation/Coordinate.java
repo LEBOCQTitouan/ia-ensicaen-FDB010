@@ -33,19 +33,11 @@ public class Coordinate {
                 '}';
     }
 
-<<<<<<< HEAD
     public int getX() {
         return x;
     }
 
     public int getY() {
-=======
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
->>>>>>> 0533d0dfb62be45863b0ba0ce6fafe5dcc25cc8f
         return y;
     }
 }

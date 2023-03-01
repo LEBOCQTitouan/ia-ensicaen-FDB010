@@ -16,14 +16,12 @@ public enum CellType {
     LAKE,           /**<! A cell that contains a lake (is part of the exoskeleton). */
     ORE,            /**<! A cell that contains mineral deposits (is part of the exoskeleton). */
     STONE,          /**<! A cell that contains stones (is part of the exoskeleton). */
-<<<<<<< HEAD
-    WET_GRASS;     /**<! A cell that contains a wet meadow. */
+    WET_GRASS,      /**<! A cell that contains a wet meadow. */
+    UNKNOWN;        /**<! A cell that is unknown. */
+
 
     public static boolean isExtractableDirectly(CellType type) {
         return type == ORE || type == FOOD;
     }
-=======
-    WET_GRASS,       /**<! A cell that contains a wet meadow. */
-    UNKNOWN       /**<! A cell that is unknown. */
->>>>>>> 0533d0dfb62be45863b0ba0ce6fafe5dcc25cc8f
+
 }

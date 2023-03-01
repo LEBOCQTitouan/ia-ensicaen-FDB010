@@ -21,7 +21,7 @@ public class FoodRetrieverJB extends FoodRetriever implements RobotInterfaceJB {
 
     @Override
     public void updateCentralizerMap() {
-        centralizer.updateMap(captors.getSurrounding(getPosition()), this);
+        centralizer.updateMap(captors.getSurrounding(this), this);
     }
 
     @Override

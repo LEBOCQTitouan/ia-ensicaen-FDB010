@@ -21,7 +21,7 @@ public class PipelineBuilderJB extends PipelineBuilder implements RobotInterface
 
         @Override
         public void updateCentralizerMap() {
-            centralizer.updateMap(captors.getSurrounding(getPosition()), this);
+            centralizer.updateMap(captors.getSurrounding(this), this);
         }
 
         @Override
