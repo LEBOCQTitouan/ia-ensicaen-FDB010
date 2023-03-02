@@ -5,30 +5,24 @@ import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.Metamorphosis;
 import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisFactory;
-import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.MetamorphosisType;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.util.Util;
-import javafx.scene.input.ScrollEvent;
 
 import java.util.*;
 
 public class ShockWave {
     private Queue<List<EnvironmentCell>> steps;
-    private int amplitude;
+    private Coordinate coordinate;
     private int speed;
     private Planet planet;
 
     public ShockWave(Planet planet, Coordinate coordinate, int amplitude, int speed) {
-        this.amplitude = amplitude;
+        this.coordinate = coordinate;
         this.speed = speed;
         this.planet = planet;
         steps = new LinkedList<>();
         // TODO : create the shockwave steps
-        List<Coordinate> visited = new ArrayList<>();
-        List<Coordinate> current = new ArrayList<>();
-
-        current.add(coordinate);
-        propagateShockWave(planet, amplitude*speed, visited, current);
+        propagateShockWave(planet, amplitude*speed);
     }
 
     public void update() {
@@ -77,31 +71,32 @@ public class ShockWave {
         return steps.isEmpty();
     }
 
-    private void addToSteps(List<Coordinate> coordinates, Planet planet) {
-        List<EnvironmentCell> cells = new ArrayList<>();
-        for (Coordinate c : coordinates) {
-            cells.add(planet.getCell(c));
-        }
-        steps.add(cells);
+    private void propagateShockWave(Planet planet, int n) {
+        List<Coordinate> origin = new ArrayList<>();
+        origin.add(coordinate);
+        propagateShockWaveRec(planet, n , origin, new ArrayList<>());
     }
 
-    private void propagateShockWave(Planet planet, int n, List<Coordinate> visited, List<Coordinate> visit) {
-        if (n <= 0) {
+    private void propagateShockWaveRec(Planet planet, int n, List<Coordinate> origins, List<Coordinate> visited){
+        if (n <= 0)
             return;
-        }
 
-        addToSteps(visit, planet);
+        List<EnvironmentCell> step = new ArrayList<>();
+        for (Coordinate coord : origins) {
+            step.add(planet.getCell(coord));
+            if (!visited.contains(coord))
+                visited.add(coord);
+        }
+        steps.add(step);
+
         List<Coordinate> toVisit = new ArrayList<>();
-        for (Coordinate c : visit) {
-            visited.add(c);
-            for (Coordinate neighbor : Util.getNeighbors(c, planet.getWidth(), planet.getHeight())) {
-                if (!visited.contains(neighbor)) {
-                    toVisit.add(neighbor);
-                    visited.add(neighbor);
-                }
+        for (Coordinate coord : origins) {
+            for (Coordinate coordN : Util.getNeighbors(coord, planet.getWidth(), planet.getHeight())) {
+                if (!visited.contains(coordN) && !toVisit.contains(coordN))
+                    toVisit.add(coordN);
             }
         }
 
-        propagateShockWave(planet, n - 1, visited, toVisit);
+        propagateShockWaveRec(planet, n-1, toVisit, visited);
     }
 }
