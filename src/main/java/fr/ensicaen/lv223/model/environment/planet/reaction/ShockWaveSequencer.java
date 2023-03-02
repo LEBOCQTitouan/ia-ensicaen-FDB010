@@ -5,7 +5,6 @@ import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
 public class ShockWaveSequencer {
     private Planet planet;
