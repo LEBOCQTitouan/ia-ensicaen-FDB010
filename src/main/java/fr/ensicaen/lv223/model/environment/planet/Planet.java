@@ -148,9 +148,11 @@ public class Planet implements Environment, EnvironmentAgent {
 
     private void react() {
         shockWaveSequencer.updateShockWaves();
-        for (Metamorphosis metamorphosis : metamorphosisList) {
+        for (int i = 0; i < metamorphosisList.size(); i++) {
+            Metamorphosis metamorphosis = metamorphosisList.get(i);
             metamorphosis.transform();
         }
+        metamorphosisList.clear();
     }
 
     @Override

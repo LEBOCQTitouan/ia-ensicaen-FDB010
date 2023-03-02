@@ -56,7 +56,7 @@ public class CellView {
         robotView = new RobotView(this.width);
         this.pane.getChildren().add(robotView.getNode());
 
-        if (Main.DEBUG) {
+        if (Main.DEBUG_DISPLAY) {
             Text text = new Text(x + ", " + y);
             text.setFill(Color.BLACK);
             this.pane.getChildren().add(text);
