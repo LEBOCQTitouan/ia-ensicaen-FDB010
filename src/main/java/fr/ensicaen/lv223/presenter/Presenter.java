@@ -59,6 +59,7 @@ public class Presenter {
     public void updateView() {
         planetPresenter.updateStatus();
         colonyPresenter.drawColony();
+        planetPresenter.drawPlanet();
     }
 
     public void drawPlanet(){
