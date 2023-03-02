@@ -30,6 +30,7 @@ public class RobotMapper {
         robotMap = new HashMap<>();
 
         CommandFactory commandFactory = new CommandFactory(planet, this);
+
         RobotFactory factory = new RobotFactory(commandFactory, planet, this);
 
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);

@@ -6,6 +6,7 @@ import fr.ensicaen.lv223.model.agent.command.CommandFactory;
 import fr.ensicaen.lv223.model.agent.robot.message.Message;
 import fr.ensicaen.lv223.model.agent.robot.objectif.Objectif;
 import fr.ensicaen.lv223.model.logic.agentInterface.PlanetInterface;
+import fr.ensicaen.lv223.model.logic.localisation.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public abstract class Robot implements Agent {
      * This objective is only temporary and prevail on the primal objective.
      */
     private Objectif temporaryObjectif;
+
+    private int pos_x;
+    private int pos_y;
 
     protected Robot(RobotType type, CommandFactory commandFactory, PlanetInterface captors) {
         this.type = type;
@@ -68,5 +72,22 @@ public abstract class Robot implements Agent {
 
     public void resetCommandQueue(){
         this.priorityQueueCommand.clear();
+    }
+
+    public CommandFactory getCommandFactory(){
+        return this.commandFactory;
+    }
+
+    public int getPos_x() {
+        return pos_x;
+    }
+
+    public int getPos_y() {
+        return pos_y;
+    }
+
+    public void update_position(Direction dir){
+        this.pos_x += dir.getDirection_x();
+        this.pos_y += dir.getDirection_y();
     }
 }
