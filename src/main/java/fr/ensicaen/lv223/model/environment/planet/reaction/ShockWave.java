@@ -10,13 +10,10 @@ import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.util.Util;
 import javafx.scene.input.ScrollEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
+import java.util.*;
 
 public class ShockWave {
-    private Stack<List<EnvironmentCell>> steps;
+    private Queue<List<EnvironmentCell>> steps;
     private int amplitude;
     private int speed;
     private Planet planet;
@@ -25,19 +22,19 @@ public class ShockWave {
         this.amplitude = amplitude;
         this.speed = speed;
         this.planet = planet;
-        steps = new Stack<>();
+        steps = new LinkedList<>();
         // TODO : create the shockwave steps
         List<Coordinate> visited = new ArrayList<>();
         List<Coordinate> current = new ArrayList<>();
 
         current.add(coordinate);
-        propagateShockWave(planet, amplitude + 1, visited, current);
+        propagateShockWave(planet, amplitude*speed, visited, current);
     }
 
     public void update() {
         for (int i = 0; i < speed; i++) {
             if (!steps.isEmpty()) {
-                List<EnvironmentCell> cells = steps.pop();
+                List<EnvironmentCell> cells = steps.remove();
                 for (EnvironmentCell cell : cells) {
                     Optional<Metamorphosis> metamorphosis = MetamorphosisFactory.createMetamorphosis(
                             planet.getFuzzyLogic().getMetamorphosisType(),
@@ -89,7 +86,7 @@ public class ShockWave {
     }
 
     private void propagateShockWave(Planet planet, int n, List<Coordinate> visited, List<Coordinate> visit) {
-        if (n < 0) {
+        if (n <= 0) {
             return;
         }
 

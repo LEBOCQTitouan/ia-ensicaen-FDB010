@@ -20,7 +20,7 @@ public abstract class Metamorphosis {
 
     protected void setNewCell(CellType type) {
         Coordinate coordinate = new Coordinate(affectedCell.getX(), affectedCell.getY());
-        Cell cell = CellFactory.factory(type, coordinate.x, coordinate.y, affectedCell.getY()).get();
+        Cell cell = CellFactory.factory(type, affectedCell.getIntensity(), coordinate.x, coordinate.y).get();
         planet.setCell(coordinate, cell);
     }
 
