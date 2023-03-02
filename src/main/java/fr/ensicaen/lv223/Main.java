@@ -51,18 +51,19 @@ public class Main extends Application {
         view.setChoicesOfNumberOfSteps();
         view.setChoicesOfPlanetTolerance();
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-        presenter.updateView();
+        presenter.drawPlanet();
 
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            presenter.updateView();
+            presenter.drawPlanet();
         });
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
             view.setSceneHeight(newSceneHeight.intValue());
             view.setSceneWidth(newSceneHeight.intValue());
 
-            presenter.updateView();
+            presenter.drawPlanet();
         });
 
+        presenter.updateView();
         stage.setMaximized(true);
         stage.show();
     }

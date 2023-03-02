@@ -216,7 +216,7 @@ public class PlanetView implements IPresenter {
         ageSinceTheArrivalOfTheColony.setText("Âge de la planète : " + age + " an(s)");
         healthStatusOfThePlanet.setText("Santé de la planète : " + healthStatus);
         foodStockOfTheColony.setText("Food Stock : " + foodStock);
-        waterStockOfTheColony.setText("Water Stock : " + waterStock);
+        waterStockOfTheColony.setText("Water-Stock : " + waterStock + " Km3");
         oreStockOfTheColony.setText("Ore Stock : " + oreStock);
         currentNumberOfRobots.setText("Nombre de robots : " + nbRobots);
     }

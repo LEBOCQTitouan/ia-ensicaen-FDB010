@@ -18,7 +18,6 @@ public class PlanetPresenter {
     }
 
     public void drawPlanet() {
-        updatePlanet();
         List<List<Cell>> cells = planet.getCells();
         List<List<CellView>> cellsView = new ArrayList<>();
 
@@ -44,12 +43,14 @@ public class PlanetPresenter {
         this.view = view;
     }
 
-    public void updatePlanet(){
-        this.view.updateStatus(0,
+    public void updateStatus(){
+        this.view.updateStatus(
+                0,
                 planet.getCurrentHealthStatus().name(),
                 planet.getStockFood(),
-                planet.getStockWater(),
+                (planet.getStockWater() * 1e-9),
                 planet.getStockMineral(),
-                0);
+                0
+        );
     }
 }
