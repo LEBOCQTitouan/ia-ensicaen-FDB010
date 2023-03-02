@@ -13,7 +13,6 @@ public class GrassCell extends Cell {
      *
      * @param x         the x coordinate of the cell
      * @param y         the y coordinate of the cell
-     * @param type      the type of cell
      * @param intensity the intensity of metamorphosis
      */
     public GrassCell(int x, int y, double intensity) {
@@ -38,5 +37,14 @@ public class GrassCell extends Cell {
     public void setWet() {
         isWet = true;
         isDry = false;
+    }
+
+    @Override
+    public CellType getType() {
+        if (isWet)
+            return CellType.WET_GRASS;
+        if (isDry)
+            return CellType.DRY_GRASS;
+        return super.getType();
     }
 }
