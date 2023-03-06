@@ -29,6 +29,7 @@ public class Main extends Application {
         // TODO : update legend of main frame
         int width;
         int height;
+
         Presenter presenter;
         IPresenter view;
         FXMLLoader fxmlLoader;
@@ -50,7 +51,9 @@ public class Main extends Application {
 
         view.setOnclick();
         view.setChoicesOfNumberOfSteps();
-        view.setChoicesOfPlanetTolerance();
+        view.setChoicesOfVisionMode();
+        view.setChoicesOfAgents();
+
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         presenter.drawPlanet();
 

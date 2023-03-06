@@ -46,13 +46,6 @@ public class PlanetPresenter {
     }
 
     public void updateStatus(){
-        this.view.updateStatus(
-                0,
-                planet.getCurrentHealthStatus().name(),
-                planet.getStockFood(),
-                (planet.getStockWater() * 1e-9),
-                planet.getStockMineral(),
-                0
-        );
+        view.updateStock(planet.getStockFood(), planet.getStockWater(), planet.getStockMineral());
     }
 }
