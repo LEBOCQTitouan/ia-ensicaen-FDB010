@@ -13,7 +13,7 @@ public class AstarCell extends Cell {
     private final String uniqueID = UUID.randomUUID().toString();
 
     public AstarCell(Cell cell) {
-        super(cell.getX(), cell.getY(), cell.getType(), cell.getIntensity());
+        super(cell.getX(), cell.getY(), cell.getType(), cell.getMetamorphosisIntensity());
         h = 0;
         f = 0;
         parent = null;

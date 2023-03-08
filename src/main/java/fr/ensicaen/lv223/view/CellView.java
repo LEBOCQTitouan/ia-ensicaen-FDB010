@@ -33,7 +33,7 @@ public class CellView {
      * @param height The height of the cell.
      * @param type The type of cell, used to determine its color.
      */
-    public CellView(double width, double height, CellType type, boolean hasPipe, int x, int y) {
+    public CellView(double width, double height, CellType type, int x, int y) {
         this.pane = new StackPane();
         this.width = width;
         this.height = height;
@@ -43,28 +43,8 @@ public class CellView {
         shape.setFill(color);
         this.pane.getChildren().add(shape);
 
-        try {
-            ImageLoader imageLoader = ImageLoader.getInstance(width, height);
-            this.pane.getChildren().add(new ImageView(imageLoader.getCellImage(type)));
-            if (hasPipe) {
-                this.pane.getChildren().add(new ImageView(imageLoader.getConstructionImage(ConstructionType.PIPE)));
-            }
-        } catch (Exception e) {
-            Util.LOGGER.severe("Error while loading cell image: " + e.getMessage());
-        }
-
         robotView = new RobotView(this.width);
         this.pane.getChildren().add(robotView.getNode());
-
-        if (Main.DEBUG_DISPLAY) {
-            Text text = new Text(x + ", " + y);
-            text.setFill(Color.BLACK);
-            this.pane.getChildren().add(text);
-        }
-    }
-
-    public CellView(double width, double height, CellType type, int x, int y) {
-        this(width, height, type, false, x, y);
     }
 
     /**

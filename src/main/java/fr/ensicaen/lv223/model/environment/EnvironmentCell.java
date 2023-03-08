@@ -16,11 +16,11 @@ public interface EnvironmentCell {
      * Returns the intensity of metamorphosis for this cell.
      * @return the intensity of metamorphosis for this cell
      */
-    double getIntensity();
+    double getMetamorphosisIntensity();
 
     /**
      * Sets the intensity of metamorphosis for this cell.
      * @param intensity the intensity of metamorphosis for this cell
      */
-    void setIntensity(double intensity);
+    void setMetamorphosisIntensity(double intensity);
 }

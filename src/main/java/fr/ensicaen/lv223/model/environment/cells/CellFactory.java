@@ -73,13 +73,13 @@ public class CellFactory {
     public static Optional<ExtractableCell> convert(Cell cell) {
         switch (cell.getType()) {
             case FOOD -> {
-                return Optional.of(new FoodCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+                return Optional.of(new FoodCell(cell.getX(), cell.getY(), cell.getMetamorphosisIntensity(), 1));
             }
             case LAKE -> {
-                return Optional.of(new LakeCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+                return Optional.of(new LakeCell(cell.getX(), cell.getY(), cell.getMetamorphosisIntensity(), 1));
             }
             case ORE -> {
-                return Optional.of(new OreCell(cell.getX(), cell.getY(), cell.getIntensity(), 1));
+                return Optional.of(new OreCell(cell.getX(), cell.getY(), cell.getMetamorphosisIntensity(), 1));
             }
         }
         return Optional.of(null);

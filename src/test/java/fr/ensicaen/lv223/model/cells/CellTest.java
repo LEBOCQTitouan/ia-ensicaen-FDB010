@@ -27,7 +27,7 @@ class CellTest {
         assertEquals(x, cell.getX());
         assertEquals(y, cell.getY());
         assertEquals(type, cell.getType());
-        assertEquals(intensity, cell.getIntensity());
+        assertEquals(intensity, cell.getMetamorphosisIntensity());
     }
 
     @Test
@@ -68,8 +68,8 @@ class CellTest {
             fail("Cell is null");
         }
         double newIntensity = 0.8;
-        cell.setIntensity(newIntensity);
-        assertEquals(newIntensity, cell.getIntensity());
+        cell.setMetamorphosisIntensity(newIntensity);
+        assertEquals(newIntensity, cell.getMetamorphosisIntensity());
     }
 
     @Test

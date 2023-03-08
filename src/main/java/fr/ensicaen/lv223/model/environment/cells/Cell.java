@@ -1,9 +1,7 @@
 package fr.ensicaen.lv223.model.environment.cells;
 
 import fr.ensicaen.lv223.model.environment.EnvironmentCell;
-import fr.ensicaen.lv223.model.environment.cells.specials.extractable.FoodCell;
-
-import java.util.Random;
+import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 
 /**
  * The {@code Cell} class represents a cell in a two-dimensional grid, with
@@ -14,12 +12,12 @@ import java.util.Random;
  * @see EnvironmentCell
  * @see Comparable
  */
-public abstract class Cell implements EnvironmentCell, Comparable {
+public abstract class Cell implements EnvironmentCell {
     private final int x;
     private final int y;
     protected CellType type;
-    private double intensityOfMetamorphosis;
-    private int intensityOfWave;
+    private WaterPipe pipe;
+    private double metamorphosisIntensity;
     private final boolean isExoskeleton;
 
     /**
@@ -35,8 +33,7 @@ public abstract class Cell implements EnvironmentCell, Comparable {
         this.x = x;
         this.y = y;
         this.type = type;
-        this.intensityOfMetamorphosis = intensity;
-        this.intensityOfWave = 0;
+        this.metamorphosisIntensity = intensity;
         this.isExoskeleton = type == CellType.BASE
                 || type == CellType.LAKE || type == CellType.STONE
                 || type == CellType.ORE || type == CellType.IMPENETRABLE;
@@ -56,30 +53,6 @@ public abstract class Cell implements EnvironmentCell, Comparable {
      */
     public int getY() {
         return y;
-    }
-
-    /**
-     * Returns whether the cell has been impacted by a wave or not.
-     * @return true if the cell has been impacted by a wave, false otherwise
-     */
-    public boolean hasBeenImpactedByAWave() {
-        return intensityOfWave != 0;
-    }
-
-    /**
-     * Returns the intensity of wave on the cell.
-     * @return the intensity of wave on the cell
-     */
-    public int getIntensityOfWave() {
-        return intensityOfWave;
-    }
-
-    /**
-     * Sets the intensity of wave on the cell to the given value.
-     * @param value the new value of the intensity of wave
-     */
-    public void setIntensityOfWave(int value) {
-        this.intensityOfWave = value;
     }
 
     /**
@@ -104,8 +77,8 @@ public abstract class Cell implements EnvironmentCell, Comparable {
      * @return the intensity of metamorphosis for the cell
      */
     @Override
-    public double getIntensity() {
-        return intensityOfMetamorphosis;
+    public double getMetamorphosisIntensity() {
+        return metamorphosisIntensity;
     }
 
     /**
@@ -113,27 +86,40 @@ public abstract class Cell implements EnvironmentCell, Comparable {
      * @param intensity the intensity of metamorphosis of the cell
      */
     @Override
-    public void setIntensity(double intensity) {
-        intensityOfMetamorphosis = intensity;
+    public void setMetamorphosisIntensity(double intensity) {
+        metamorphosisIntensity = intensity;
     }
 
     /**
-     * Compares the intensity of wave of this cell to another cell.
-     * @param o the other cell to compare to
-     * @return a negative integer, zero, or a positive integer as this cell's
-     * intensity of wave is less than, equal to, or greater than the other
-     * cell's
+     * Returns whether the cell has a water pipe or not.
+     * @return true if the cell has a water pipe, false otherwise
      */
-    public int compareTo(Object o) {
-        Cell other = (Cell) o;
-        return Integer.compare(intensityOfWave, other.getIntensityOfWave());
+    public boolean hasWaterPipe() {
+        return pipe != null;
     }
 
     /**
-     * Returns a string representation of the cell.
-     * @return a string representation of the cell
+     * Method to put a water pipe in the cell.
+     * @param pipe the water pipe to put in the cell
+     * @return true if the pipe has been put, false if a pipe is already in the cell
      */
+    public boolean putWaterPipe(WaterPipe pipe) {
+        if (hasWaterPipe()) {
+            return false;
+        }
+        this.pipe = pipe;
+        return true;
+    }
+
+    @Override
     public String toString() {
-        return "" + intensityOfWave;
+        return "Cell{" +
+            "x=" + x +
+            ", y=" + y +
+            ", type=" + type +
+            ", pipe=" + pipe +
+            ", metamorphosisIntensity=" + metamorphosisIntensity +
+            ", isExoskeleton=" + isExoskeleton +
+        '}';
     }
 }

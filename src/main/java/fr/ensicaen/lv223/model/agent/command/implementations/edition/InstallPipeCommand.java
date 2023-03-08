@@ -18,12 +18,11 @@ public class InstallPipeCommand extends Command {
 
     @Override
     public void apply() {
-        Coordinate coord = robotMapper.getCoordinate(robot);
-        pipe = WaterPipe.createWaterPipe(coord.x, coord.y);
+        // TODO water pipe apply
     }
 
     @Override
     public void unapply() {
-        WaterPipe.removePipe(pipe);
+        // TODO water pipe unapply
     }
 }
