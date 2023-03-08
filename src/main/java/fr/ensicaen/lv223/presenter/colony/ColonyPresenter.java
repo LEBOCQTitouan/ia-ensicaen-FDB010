@@ -5,8 +5,9 @@ import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
 import fr.ensicaen.lv223.presenter.ViewEffector;
 import fr.ensicaen.lv223.presenter.ViewModificator;
-import fr.ensicaen.lv223.view.CellView;
+import fr.ensicaen.lv223.view.image.CellView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,12 +24,24 @@ public class ColonyPresenter extends ViewEffector {
         this.robotMapper = robotMapper;
     }
 
-    public void drawColony() {
+    public void updateColony() {
         List<List<CellView>> cellViews = view.getCellView();
+        List<Coordinate> robotCoordinates = new ArrayList<>();
         for (Robot robot : robotMapper.getRobots()) {
-            Coordinate robotCoordinate = robotMapper.getCoordinate(robot);
-            cellViews.get(robotCoordinate.x).get(robotCoordinate.y).getRobotView().setRobotType(robot.type);
-            cellViews.get(robotCoordinate.x).get(robotCoordinate.y).getRobotView().setVisible();
+            robotCoordinates.add(robotMapper.getCoordinate(robot));
+        }
+        for (int i = 0; i < cellViews.size(); i++) {
+            List<CellView> cellViewRow = cellViews.get(i);
+            for (int j = 0; j < cellViewRow.size(); j++) {
+                CellView cellView = cellViewRow.get(j);
+                Coordinate coordinate = new Coordinate(i, j);
+                if (robotCoordinates.contains(coordinate)) {
+                    cellView.getRobotView().setRobotType(robotMapper.getRobot(coordinate).type);
+                    cellView.getRobotView().setVisible();
+                } else {
+                    cellView.getRobotView().hide();
+                }
+            }
         }
     }
 

@@ -22,7 +22,6 @@ public class ImageLoader {
     private final HashMap<ConstructionType, Image> constructionTypeImages;
     private double width;
     private double height;
-
     private static final String ressourcePath = "/display/img/";
 
     private ImageLoader(double width, double height) {
@@ -123,11 +122,11 @@ public class ImageLoader {
         return height;
     }
 
-    public void setWidth(double width) {
+    protected void setWidth(double width) {
         this.width = width;
     }
 
-    public void setHeight(double height) {
+    protected void setHeight(double height) {
         this.height = height;
     }
 

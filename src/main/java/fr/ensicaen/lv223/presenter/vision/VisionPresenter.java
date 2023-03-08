@@ -12,5 +12,5 @@ public abstract class VisionPresenter extends ViewEffector {
         this.robotMapper = robotMapper;
     }
 
-    public abstract void createVisionFog();
+    public abstract void updateFog();
 }

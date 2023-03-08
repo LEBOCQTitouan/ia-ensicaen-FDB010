@@ -1,18 +1,23 @@
 package fr.ensicaen.lv223.presenter;
 
 import fr.ensicaen.lv223.Main;
+import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.Sequencer;
 import fr.ensicaen.lv223.presenter.colony.ColonyPresenter;
+import fr.ensicaen.lv223.presenter.construction.WaterPipePresenter;
 import fr.ensicaen.lv223.presenter.planet.PlanetPresenter;
 import fr.ensicaen.lv223.presenter.vision.ColonyVisionPresenter;
 import fr.ensicaen.lv223.presenter.vision.VisionPresenter;
+import fr.ensicaen.lv223.view.image.CellView;
 import fr.ensicaen.lv223.view.PlanetView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -25,6 +30,7 @@ public class Presenter {
     private final PlanetPresenter planetPresenter;
     private final ColonyPresenter colonyPresenter;
     private final VisionPresenter visionPresenter;
+    private final WaterPipePresenter waterPipePresenter;
     private final Sequencer sequencer;
     private final Semaphore semaphore = new Semaphore(1);
 
@@ -43,6 +49,20 @@ public class Presenter {
         planetPresenter = new PlanetPresenter(view, sequencer.planet);
         colonyPresenter = new ColonyPresenter(view, sequencer.mapper);
         visionPresenter = new ColonyVisionPresenter(view, sequencer.mapper);
+        waterPipePresenter = new WaterPipePresenter(view, sequencer.planet);
+
+        List<List<CellView>> cells = new ArrayList<>();
+        List<List<Cell>> cellsModel = sequencer.planet.getCells();
+        for (int i = 0; i < cellsModel.size(); i++) {
+            List<CellView> row = new ArrayList<>();
+            for (int j = 0; j < cellsModel.get(i).size(); j++) {
+                Cell cell = cellsModel.get(i).get(j);
+                CellView cellView = new CellView(Math.max(view.getSceneWidth(), view.getSceneHeight()) / cellsModel.size(), cell.getType());
+                row.add(cellView);
+            }
+            cells.add(row);
+        }
+        view.setCellsView(cells);
 
         updateView();
     }
@@ -58,13 +78,14 @@ public class Presenter {
 
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            updateView();
+            this.view.setSceneWidth(newSceneWidth.intValue());
+
+            this.updateView();
         });
         scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-            view.setSceneHeight(newSceneHeight.intValue());
-            view.setSceneWidth(newSceneHeight.intValue());
+            this.view.setSceneHeight(newSceneHeight.intValue());
 
-            updateView();
+            this.updateView();
         });
 
         stage.setMaximized(true);
@@ -105,8 +126,10 @@ public class Presenter {
     }
 
     private void drawPlanet(){
-        planetPresenter.drawPlanet();
-        colonyPresenter.drawColony();
-        visionPresenter.createVisionFog();
+        planetPresenter.updatePlanet();
+        colonyPresenter.updateColony();
+        waterPipePresenter.updateWaterPipes();
+        visionPresenter.updateFog();
+        view.draw();
     }
 }

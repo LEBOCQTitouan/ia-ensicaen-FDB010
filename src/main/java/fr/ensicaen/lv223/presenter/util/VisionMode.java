@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.presenter.content;
+package fr.ensicaen.lv223.presenter.util;
 
 public enum VisionMode {
     DEFAULT("Default");

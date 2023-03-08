@@ -3,13 +3,13 @@ package fr.ensicaen.lv223.view;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 import fr.ensicaen.lv223.presenter.ViewModificator;
 import fr.ensicaen.lv223.presenter.Presenter;
-import fr.ensicaen.lv223.presenter.content.NumberOfSteps;
-import fr.ensicaen.lv223.presenter.content.VisionMode;
+import fr.ensicaen.lv223.presenter.util.NumberOfSteps;
+import fr.ensicaen.lv223.presenter.util.VisionMode;
+import fr.ensicaen.lv223.view.image.CellView;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -132,10 +132,18 @@ public class PlanetView implements ViewModificator {
         this.sceneHeight = height;
     }
 
+    /**
+     * Gets the width of the scene.
+     * @return the width of the scene
+     */
     public int getSceneWidth() {
         return sceneWidth;
     }
 
+    /**
+     * Gets the height of the scene.
+     * @return the height of the scene
+     */
     public int getSceneHeight() {
         return sceneHeight;
     }
@@ -170,26 +178,22 @@ public class PlanetView implements ViewModificator {
         choiceOfNumberOfSteps.setValue(NumberOfSteps.ONE);
     }
 
+    /**
+     * Sets the items of the choice boxe to select the vision mode of the
+     * simulation.
+     */
     public void setChoicesOfVisionMode() {
         choiceOfVisionMode.getItems().setAll(VisionMode.values());
         choiceOfVisionMode.setValue(VisionMode.DEFAULT);
     }
 
+    /**
+     * Sets the items of the choice boxe to select the agents of the
+     * simulation.
+     */
     public void setChoicesOfAgents() {
         agentsChoiceBox.setDisable(true);
         agentsChoiceBox.setValue("ALL");
-    }
-
-    /**
-     * Displays an information alert when the simulation ends.
-     */
-    @Override
-    public void finish() {
-        stepButton.setDisable(true);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setContentText("Fin de la simulation !");
-        alert.showAndWait();
     }
 
     @Override

@@ -54,6 +54,10 @@ public class RobotMapper {
         }
     }
 
+    public Robot getRobot(Coordinate coordinate) {
+        return getRobot(coordinate.x, coordinate.y);
+    }
+
     /**
      * Get the robot at the given coordinates.
      * @param x The x coordinate.

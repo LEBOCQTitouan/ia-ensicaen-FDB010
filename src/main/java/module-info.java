@@ -11,4 +11,5 @@ module fr.ensicaen.lv223 {
 
     exports fr.ensicaen.lv223;
     exports fr.ensicaen.lv223.model.environment.cells;
+    opens fr.ensicaen.lv223.view.image to javafx.fxml;
 }

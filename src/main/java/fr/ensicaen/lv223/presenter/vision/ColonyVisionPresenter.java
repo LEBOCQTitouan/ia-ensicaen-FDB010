@@ -4,7 +4,7 @@ import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
 import fr.ensicaen.lv223.presenter.ViewModificator;
-import fr.ensicaen.lv223.view.CellView;
+import fr.ensicaen.lv223.view.image.CellView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class ColonyVisionPresenter extends VisionPresenter {
     }
 
     @Override
-    public void createVisionFog() {
+    public void updateFog() {
         List<Coordinate> visibleCoordinates = new ArrayList<>();
         for (Robot robot : robotMapper.getRobots()) {
             visibleCoordinates.add(robotMapper.getCoordinate(robot));
@@ -34,7 +34,7 @@ public class ColonyVisionPresenter extends VisionPresenter {
         for (int i = 0; i < cellViews.size(); i++) {
             for (int j = 0; j < cellViews.get(i).size(); j++) {
                 if (!visibleCoordinates.contains(new Coordinate(i, j))) {
-                    cellViews.get(i).get(j).setBlurred(90);
+                    cellViews.get(i).get(j).setBlurred(0);
                 } else {
                     cellViews.get(i).get(j).setBlurred(0);
                 }

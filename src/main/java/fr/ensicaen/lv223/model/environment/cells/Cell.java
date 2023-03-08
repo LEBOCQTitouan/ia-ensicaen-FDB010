@@ -90,19 +90,10 @@ public abstract class Cell implements EnvironmentCell {
         metamorphosisIntensity = intensity;
     }
 
-    /**
-     * Returns whether the cell has a water pipe or not.
-     * @return true if the cell has a water pipe, false otherwise
-     */
     public boolean hasWaterPipe() {
         return pipe != null;
     }
 
-    /**
-     * Method to put a water pipe in the cell.
-     * @param pipe the water pipe to put in the cell
-     * @return true if the pipe has been put, false if a pipe is already in the cell
-     */
     public boolean putWaterPipe(WaterPipe pipe) {
         if (hasWaterPipe()) {
             return false;

@@ -1,7 +1,7 @@
 package fr.ensicaen.lv223.presenter;
 
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
-import fr.ensicaen.lv223.view.CellView;
+import fr.ensicaen.lv223.view.image.CellView;
 
 import java.util.List;
 
@@ -65,8 +65,4 @@ public interface ViewModificator {
     void setChoicesOfNumberOfSteps();
     void setChoicesOfVisionMode();
     void setChoicesOfAgents();
-    /**
-     * Finish the view.
-     */
-    void finish();
 }
