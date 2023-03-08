@@ -89,7 +89,7 @@ public class ShockWave {
 
         List<Coordinate> toVisit = new ArrayList<>();
         for (Coordinate coord : origins) {
-            for (Coordinate coordN : Util.getNeighbors(coord, planet.getWidth(), planet.getHeight())) {
+            for (Coordinate coordN : coord.getNeighbors(planet.getWidth(), planet.getHeight())) {
                 if (!visited.contains(coordN) && !toVisit.contains(coordN))
                     toVisit.add(coordN);
             }

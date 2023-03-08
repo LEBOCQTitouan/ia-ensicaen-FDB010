@@ -1,19 +1,19 @@
 package fr.ensicaen.lv223.presenter.planet;
 
 import fr.ensicaen.lv223.model.environment.cells.Cell;
-import fr.ensicaen.lv223.model.environment.construction.WaterPipe;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
-import fr.ensicaen.lv223.presenter.IPresenter;
+import fr.ensicaen.lv223.presenter.ViewEffector;
+import fr.ensicaen.lv223.presenter.ViewModificator;
 import fr.ensicaen.lv223.view.CellView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanetPresenter {
-    private IPresenter view;
+public class PlanetPresenter extends ViewEffector {
     private final Planet planet;
 
-    public PlanetPresenter(Planet planet) {
+    public PlanetPresenter(ViewModificator view, Planet planet) {
+        super(view);
         this.planet = planet;
     }
 
@@ -38,13 +38,5 @@ public class PlanetPresenter {
 
         view.setCellsView(cellsView);
         view.draw();
-    }
-
-    public void setView(IPresenter view) {
-        this.view = view;
-    }
-
-    public void updateStatus(){
-        view.updateStock(planet.getStockFood(), planet.getStockWater(), planet.getStockMineral());
     }
 }

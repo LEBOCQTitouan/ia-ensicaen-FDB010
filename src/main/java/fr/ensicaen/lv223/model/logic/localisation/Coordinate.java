@@ -1,5 +1,8 @@
 package fr.ensicaen.lv223.model.logic.localisation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Coordinate {
     public final int x;
     public final int y;
@@ -39,5 +42,34 @@ public class Coordinate {
 
     public int getY() {
         return y;
+    }
+
+    public List<Coordinate> getNeighbors(int width, int height) {
+        ArrayList<Coordinate> neighbors = new ArrayList<>();
+        if (x > 0) {
+            neighbors.add(new Coordinate(x - 1, y));
+            if (y > 0) {
+                neighbors.add(new Coordinate(x - 1, y - 1));
+            }
+            if (y < width - 1) {
+                neighbors.add(new Coordinate(x - 1, y + 1));
+            }
+        }
+        if (x < height - 1) {
+            neighbors.add(new Coordinate(x + 1, y));
+            if (y > 0) {
+                neighbors.add(new Coordinate(x + 1, y - 1));
+            }
+            if (y < width - 1) {
+                neighbors.add(new Coordinate(x + 1, y + 1));
+            }
+        }
+        if (y > 0) {
+            neighbors.add(new Coordinate(x, y - 1));
+        }
+        if (y < width - 1) {
+            neighbors.add(new Coordinate(x, y + 1));
+        }
+        return neighbors;
     }
 }

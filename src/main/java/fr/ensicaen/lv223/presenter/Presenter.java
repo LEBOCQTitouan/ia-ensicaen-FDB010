@@ -1,38 +1,74 @@
 package fr.ensicaen.lv223.presenter;
 
+import fr.ensicaen.lv223.Main;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.Sequencer;
 import fr.ensicaen.lv223.presenter.colony.ColonyPresenter;
 import fr.ensicaen.lv223.presenter.planet.PlanetPresenter;
+import fr.ensicaen.lv223.presenter.vision.ColonyVisionPresenter;
+import fr.ensicaen.lv223.presenter.vision.VisionPresenter;
+import fr.ensicaen.lv223.view.PlanetView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.concurrent.Semaphore;
 
 /**
  * The {@code Presenter} class is responsible for coordinating the interactions
- * between the model ({@link Planet}) and the view ({@link IPresenter}). It
+ * between the model ({@link Planet}) and the view ({@link ViewModificator}). It
  * implements the simulation logic and updates the view accordingly.
  */
 public class Presenter {
-    private IPresenter view;
+    private ViewModificator view;
     private final PlanetPresenter planetPresenter;
     private final ColonyPresenter colonyPresenter;
+    private final VisionPresenter visionPresenter;
     private final Sequencer sequencer;
+    private final Semaphore semaphore = new Semaphore(1);
 
     /**
      * Constructs a new {@code Presenter} instance.
      */
-    public Presenter() {
+    public Presenter(Stage stage) throws IOException {
+        view = new PlanetView(this, Main.default_width, Main.default_height);
+        loadView(stage);
+        view.setOnclick();
+        view.setChoicesOfNumberOfSteps();
+        view.setChoicesOfVisionMode();
+        view.setChoicesOfAgents();
+
         sequencer = new Sequencer(new Planet());
-        planetPresenter = new PlanetPresenter(sequencer.planet);
-        colonyPresenter = new ColonyPresenter(sequencer.mapper);
+        planetPresenter = new PlanetPresenter(view, sequencer.planet);
+        colonyPresenter = new ColonyPresenter(view, sequencer.mapper);
+        visionPresenter = new ColonyVisionPresenter(view, sequencer.mapper);
+
+        updateView();
     }
 
-    /**
-     * Sets the {@code IPresenter} view.
-     * @param view the view to be set
-     */
-    public void setView(IPresenter view) {
-        this.view = view;
-        planetPresenter.setView(view);
-        colonyPresenter.setView(view);
+    private void loadView(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/board_view.fxml"));
+        fxmlLoader.setController(view);
+
+        Scene scene = new Scene(fxmlLoader.load(), Main.default_width, Main.default_height);
+        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
+        stage.setScene(scene);
+        stage.setTitle("Simulation FDB010");
+
+        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
+        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+            updateView();
+        });
+        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+            view.setSceneHeight(newSceneHeight.intValue());
+            view.setSceneWidth(newSceneHeight.intValue());
+
+            updateView();
+        });
+
+        stage.setMaximized(true);
+        stage.show();
     }
 
     /**
@@ -55,15 +91,22 @@ public class Presenter {
     }
 
     public void updateView() {
-        view.updateAge(sequencer.getDays());
-        planetPresenter.updateStatus();
-        colonyPresenter.updateStatus();
-        planetPresenter.drawPlanet();
-        colonyPresenter.drawColony();
+        while (!semaphore.tryAcquire());
+        try {
+            drawPlanet();
+            updateUI();
+        } finally {
+            semaphore.release();
+        }
     }
 
-    public void drawPlanet(){
+    private void updateUI() {
+        // TODO
+    }
+
+    private void drawPlanet(){
         planetPresenter.drawPlanet();
         colonyPresenter.drawColony();
+        visionPresenter.createVisionFog();
     }
 }

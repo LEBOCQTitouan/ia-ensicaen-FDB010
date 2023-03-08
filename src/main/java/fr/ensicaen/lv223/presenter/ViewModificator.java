@@ -6,11 +6,11 @@ import fr.ensicaen.lv223.view.CellView;
 import java.util.List;
 
 /**
- * {@code IPresenter} interface specifies the methods that must be
+ * {@code ViewModificator} interface specifies the methods that must be
  * implemented by the presenter of the view in a Model-View-Presenter (MVP)
  * architecture.
  */
-public interface IPresenter {
+public interface ViewModificator {
     /**
      * Sets the cells view of the environment.
      * @param cellsView a two-dimensional list of {@link CellView} objects.

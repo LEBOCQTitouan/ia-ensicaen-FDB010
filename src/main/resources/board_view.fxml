@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane fx:id="gridOfPlanet">
+    <GridPane fx:id="planetGrid">
         <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" percentWidth="4.2" />
             <ColumnConstraints hgrow="ALWAYS" percentWidth="4.2" />
@@ -107,7 +107,7 @@
             <Label text=" : Agent vision" />
          </children>
       </HBox>
-        <Button fx:id="buttonToStartOneOrMoreSteps" mnemonicParsing="false" text="Avancer">
+        <Button fx:id="stepButton" mnemonicParsing="false" text="Avancer">
             <VBox.margin>
                 <Insets bottom="10.0" top="10.0" />
             </VBox.margin>

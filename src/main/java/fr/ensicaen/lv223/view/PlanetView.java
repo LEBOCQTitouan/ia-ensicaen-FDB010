@@ -1,13 +1,14 @@
 package fr.ensicaen.lv223.view;
 
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
-import fr.ensicaen.lv223.presenter.IPresenter;
+import fr.ensicaen.lv223.presenter.ViewModificator;
 import fr.ensicaen.lv223.presenter.Presenter;
-import fr.ensicaen.lv223.view.content.NumberOfSteps;
-import fr.ensicaen.lv223.view.content.VisionMode;
+import fr.ensicaen.lv223.presenter.content.NumberOfSteps;
+import fr.ensicaen.lv223.presenter.content.VisionMode;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -19,25 +20,25 @@ import java.util.List;
 /**
  * {@code PlanetView} is a JavaFX class that represents the visual aspect of
  * the planet and its simulation.
- * The class implements the {@code IPresenter} interface and contains methods
+ * The class implements the {@code ViewModificator} interface and contains methods
  * to interact with the user and display the simulation status.
  * @version 1.0
  * @since 01/12/2023
  */
-public class PlanetView implements IPresenter {
+public class PlanetView implements ViewModificator {
     /**
      * The {@code gridOfPlanet} is a {@link GridPane} object used to display
      * the cells of the planet simulation.
      */
     @FXML
-    private GridPane gridOfPlanet;
+    private GridPane planetGrid;
 
     /**
      * The {@code buttonToStartOneOrMoreSteps} is a {@link Button} object used
      * to initiate a certain number of steps for the simulation.
      */
     @FXML
-    private Button buttonToStartOneOrMoreSteps;
+    private Button stepButton;
 
     /**
      * The {@code choiceOfNumberOfSteps} is a {@link ChoiceBox} object used to
@@ -46,8 +47,18 @@ public class PlanetView implements IPresenter {
      */
     @FXML
     private ChoiceBox<NumberOfSteps> choiceOfNumberOfSteps;
+
+    /**
+     * The {@code choiceOfVisionMode} is a {@link ChoiceBox} object used to
+     * choose the vision mode of the simulation (default, ...).
+     */
     @FXML
     private ChoiceBox<VisionMode> choiceOfVisionMode;
+
+    /**
+     * The {@code buttonToStartOneOrMoreSteps} is a {@link Button} object used
+     * to initiate a certain number of steps for the simulation.
+     */
     @FXML
     private ChoiceBox<String> agentsChoiceBox;
 
@@ -97,7 +108,15 @@ public class PlanetView implements IPresenter {
      * An Observable list of items to select the number of steps of the simulation
      */
     private final Observable nbTurnsItems = FXCollections.observableArrayList(NumberOfSteps.values());
+
+    /**
+     * An Observable list of items to select the vision mode of the simulation
+     */
     private final Observable visionModeItems = FXCollections.observableArrayList(VisionMode.values());
+
+    /**
+     * An Observable list of items to select the agents of the simulation
+     */
     private final Observable agentsItems = FXCollections.observableArrayList("ALL");
 
     /**
@@ -135,7 +154,7 @@ public class PlanetView implements IPresenter {
      * Sets the action when the user clicks on the button to simulate.
      */
     public void setOnclick() {
-        buttonToStartOneOrMoreSteps.setOnAction(
+        stepButton.setOnAction(
             (event) -> {
                 presenter.simulate(choiceOfNumberOfSteps.getValue().getValue());
             }
@@ -166,7 +185,7 @@ public class PlanetView implements IPresenter {
      */
     @Override
     public void finish() {
-        buttonToStartOneOrMoreSteps.setDisable(true);
+        stepButton.setDisable(true);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setContentText("Fin de la simulation !");
@@ -175,10 +194,12 @@ public class PlanetView implements IPresenter {
 
     @Override
     public void draw() {
-        gridOfPlanet.getChildren().clear();
+        planetGrid.getChildren().clear();
         for (int i = 0; i < cellsView.size(); i++) {
             for (int j = 0; j < cellsView.get(i).size(); j++) {
-                gridOfPlanet.add(cellsView.get(i).get(j).getPane(), i, j);
+                for (Node node : cellsView.get(i).get(j).getNodes()) {
+                    planetGrid.add(node, j, i);
+                }
             }
         }
     }

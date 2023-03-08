@@ -83,7 +83,7 @@ public class RobotMapper {
      * Get the height of the planet on which the robots are.
      * @return The height of the planet.
      */
-    public int getHeigth() {
+    public int getHeight() {
         return planet.getHeight();
     }
 

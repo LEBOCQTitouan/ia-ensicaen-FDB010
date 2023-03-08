@@ -1,6 +1,6 @@
 package fr.ensicaen.lv223;
 
-import fr.ensicaen.lv223.presenter.IPresenter;
+import fr.ensicaen.lv223.presenter.ViewModificator;
 import fr.ensicaen.lv223.presenter.Presenter;
 import fr.ensicaen.lv223.view.PlanetView;
 import javafx.application.Application;
@@ -16,7 +16,9 @@ import java.io.IOException;
  * It sets up the scene, size, style and behavior of the application.
  */
 public class Main extends Application {
-    public static final boolean DEBUG_DISPLAY = false;
+    public static final int default_width = 800;
+    public static final int default_height = 600;
+
     /**
      * Override the start method of {@link Application} class to set up the GUI
      * elements and behaviors.
@@ -26,50 +28,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        // TODO : update legend of main frame
-        int width;
-        int height;
-
-        Presenter presenter;
-        IPresenter view;
-        FXMLLoader fxmlLoader;
-        Scene scene;
-
-        width = 500;
-        height = 500;
-        presenter = new Presenter();
-        view = new PlanetView(presenter, width, height);
-        presenter.setView(view);
-
-        fxmlLoader = new FXMLLoader(Main.class.getResource("/board_view.fxml"));
-        fxmlLoader.setController(view);
-
-        scene = new Scene(fxmlLoader.load(), width, height);
-        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-        stage.setScene(scene);
-        stage.setTitle("Simulation LV-223");
-
-        view.setOnclick();
-        view.setChoicesOfNumberOfSteps();
-        view.setChoicesOfVisionMode();
-        view.setChoicesOfAgents();
-
-        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-        presenter.drawPlanet();
-
-        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            presenter.drawPlanet();
-        });
-        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-            view.setSceneHeight(newSceneHeight.intValue());
-            view.setSceneWidth(newSceneHeight.intValue());
-
-            presenter.drawPlanet();
-        });
-
-        presenter.updateView();
-        stage.setMaximized(true);
-        stage.show();
+        Presenter presenter = new Presenter(stage);
     }
 
     /**
