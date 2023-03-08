@@ -3,12 +3,10 @@ package fr.ensicaen.lv223.model.agent.command;
 import fr.ensicaen.lv223.model.agent.command.implementations.edition.ExtractFromCellCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.IdleCommand;
 import fr.ensicaen.lv223.model.agent.command.implementations.edition.InstallPipeCommand;
-import fr.ensicaen.lv223.model.agent.command.implementations.movement.RandomMovementCommand;
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.localisation.Direction;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
-import fr.ensicaen.lv223.teams.jamesbond.command.MoveCommandJB;
 
 /**
  * This is an example of a factory class. It is used to create commands.
@@ -18,11 +16,11 @@ public class CommandFactory {
     /**
      * The robot mapper used to localise robots.
      */
-    private RobotMapper robotMapper;
+    private final RobotMapper robotMapper;
     /**
      * The planet where the robots are.
      */
-    private Planet planet;
+    private final Planet planet;
 
     public CommandFactory(Planet planet, RobotMapper robotMapper) {
         this.robotMapper = robotMapper;
@@ -36,15 +34,12 @@ public class CommandFactory {
      * @param value The value of the command.
      * @return The command.
      */
-    public Command createCommand(Robot robot, CommandType type, int value) {
+    public Command createAction(Robot robot, CommandType type, int value) {
         switch (type) {
             case INSTALL_PIPE:
                 return new InstallPipeCommand(robot, robotMapper, value, planet);
             case EXTRACT:
                 return new ExtractFromCellCommand(planet, robot, robotMapper, value);
-            case MOVE:
-                return new RandomMovementCommand(robot, robotMapper, value);
-
             case IDLE:
             default:
                 return new IdleCommand(robot, robotMapper);
@@ -58,11 +53,8 @@ public class CommandFactory {
      * @param value
      * @return
      */
-    public Command createCommand(Robot robot, CommandType type, Direction value) {
+    public Command createMovement(Robot robot, CommandType type, Direction direction) {
         switch (type) {
-            case MOVEJB:
-                return new MoveCommandJB(robot, robotMapper, value);
-
             default:
                 return new IdleCommand(robot, robotMapper);
         }

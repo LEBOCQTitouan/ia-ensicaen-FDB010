@@ -11,10 +11,10 @@ import fr.ensicaen.lv223.util.Util;
 import java.util.*;
 
 public class ShockWave {
-    private Queue<List<EnvironmentCell>> steps;
-    private Coordinate coordinate;
-    private int speed;
-    private Planet planet;
+    private final Queue<List<EnvironmentCell>> steps;
+    private final Coordinate coordinate;
+    private final int speed;
+    private final Planet planet;
 
     public ShockWave(Planet planet, Coordinate coordinate, int amplitude, int speed) {
         this.coordinate = coordinate;
@@ -35,9 +35,7 @@ public class ShockWave {
                             planet,
                             (Cell) cell
                     );
-                    if (metamorphosis.isPresent()) {
-                        planet.addMetamorphosis(metamorphosis.get());
-                    }
+                    metamorphosis.ifPresent(planet::addMetamorphosis);
                 }
             }
         }

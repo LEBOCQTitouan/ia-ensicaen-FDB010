@@ -1,5 +1,6 @@
 package fr.ensicaen.lv223.presenter;
 
+import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 import fr.ensicaen.lv223.view.CellView;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public interface IPresenter {
      * Draws the view.
      */
     void draw();
+    void updateHealthStatus(PlanetHealthStatus healthStatus);
     void updateAge(int age);
     void updateStock(double foodStock, double waterStock, double oreStock);
     void updateNbRobots(int nbRobots);

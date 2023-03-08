@@ -3,7 +3,6 @@ package fr.ensicaen.lv223.model.environment.planet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import fr.ensicaen.lv223.model.agent.command.Command;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
@@ -15,8 +14,6 @@ import fr.ensicaen.lv223.model.environment.cells.specials.extractable.Extractabl
 import fr.ensicaen.lv223.model.environment.planet.behavior.EnvironmentAgent;
 import fr.ensicaen.lv223.model.environment.planet.behavior.FuzzyLogic;
 import fr.ensicaen.lv223.model.environment.planet.behavior.metamorphosis.Metamorphosis;
-import fr.ensicaen.lv223.model.environment.planet.reaction.ExtractionType;
-import fr.ensicaen.lv223.model.environment.planet.reaction.SamplingType;
 import fr.ensicaen.lv223.model.environment.planet.reaction.ShockWaveSequencer;
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetEmotion;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
@@ -37,21 +34,15 @@ import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
  * be retrieved or set using a {@link Coordinate} object to specify their
  * position in the grid.
  */
-
-
-/**
- * toDo emotions with planet
- * Generate around the Centralisator cases with probalities random
- */
 public class Planet implements Environment, EnvironmentAgent {
     private final List<List<Cell>> cells;
-    private FuzzyLogic fuzzyLogic;
+    private final FuzzyLogic fuzzyLogic;
     private PlanetEmotion currentEmotion;
     // simulation
     private PlanetHealthStatus currentHealthStatus;
     // shockWave
-    private ShockWaveSequencer shockWaveSequencer;
-    private List<Metamorphosis> metamorphosisList;
+    private final ShockWaveSequencer shockWaveSequencer;
+    private final List<Metamorphosis> metamorphosisList;
     // stock data
     private double initalStockFood;
     private double initalStockMineral;
@@ -72,7 +63,9 @@ public class Planet implements Environment, EnvironmentAgent {
             cells.add(new ArrayList<>());
             for (int j = 0; j < 21; j++) {
                 Optional<Cell> o = CellFactory.factory(CellType.IMPENETRABLE, -1, i, j);
-                cells.get(i).add(o.get());
+                if (o.isPresent()) {
+                    cells.get(i).add(o.get());
+                }
             }
         }
 
@@ -86,7 +79,7 @@ public class Planet implements Environment, EnvironmentAgent {
                         planetDatum.getCellPos()[j].getX(),
                         planetDatum.getCellPos()[j].getY()
                 );
-                this.cells.get(x).set(y, o.get());
+                o.ifPresent(cell -> this.cells.get(x).set(y, cell));
             }
         }
     }
@@ -148,8 +141,7 @@ public class Planet implements Environment, EnvironmentAgent {
 
     private void react() {
         shockWaveSequencer.updateShockWaves();
-        for (int i = 0; i < metamorphosisList.size(); i++) {
-            Metamorphosis metamorphosis = metamorphosisList.get(i);
+        for (Metamorphosis metamorphosis : metamorphosisList) {
             metamorphosis.transform();
         }
         metamorphosisList.clear();
@@ -157,7 +149,7 @@ public class Planet implements Environment, EnvironmentAgent {
 
     @Override
     public List<Command> compute() {
-        ArrayList commands = new ArrayList();
+        List<Command> commands = new ArrayList<>();
         react();
         // TODO possible commands for planet
         return commands;

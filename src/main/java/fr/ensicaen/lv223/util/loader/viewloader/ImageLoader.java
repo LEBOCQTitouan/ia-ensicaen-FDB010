@@ -14,12 +14,12 @@ import java.util.HashMap;
 
 public class ImageLoader {
     private static ImageLoader instance;
-    private HashMap<RobotType, String> robotTypeImagesPath;
-    private HashMap<CellType, String> cellTypeImagesPath;
-    private HashMap<ConstructionType, String> constructionTypeImagesPath;
-    private HashMap<RobotType, Image> robotTypeImages;
-    private HashMap<CellType, Image> cellTypeImages;
-    private HashMap<ConstructionType, Image> constructionTypeImages;
+    private final HashMap<RobotType, String> robotTypeImagesPath;
+    private final HashMap<CellType, String> cellTypeImagesPath;
+    private final HashMap<ConstructionType, String> constructionTypeImagesPath;
+    private final HashMap<RobotType, Image> robotTypeImages;
+    private final HashMap<CellType, Image> cellTypeImages;
+    private final HashMap<ConstructionType, Image> constructionTypeImages;
     private double width;
     private double height;
 
@@ -64,39 +64,54 @@ public class ImageLoader {
         return instance;
     }
 
+    private boolean imageIsLoaded(RobotType type) {
+        return robotTypeImages.containsKey(type);
+    }
+
+    private boolean imageIsLoaded(CellType type) {
+        return cellTypeImages.containsKey(type);
+    }
+
+    private boolean imageIsLoaded(ConstructionType type) {
+        return constructionTypeImages.containsKey(type);
+    }
+
     public Image getRobotImage(RobotType type) throws FileNotFoundException, URISyntaxException {
-        if (!robotTypeImages.containsKey(type)) {
-            URI imgURI = getClass().getResource(robotTypeImagesPath.get(type)).toURI();
-            File imgFile = new File(imgURI);
-            robotTypeImages.put(
-                    type,
-                    new Image(new FileInputStream(imgFile), width, height, true, true)
-            );
-        }
+        if (imageIsLoaded(type))
+            return robotTypeImages.get(type);
+
+        URI imgURI = getClass().getResource(robotTypeImagesPath.get(type)).toURI();
+        File imgFile = new File(imgURI);
+        robotTypeImages.put(
+                type,
+                new Image(new FileInputStream(imgFile), width, height, true, true)
+        );
         return robotTypeImages.get(type);
     }
 
     public Image getCellImage(CellType type) throws FileNotFoundException, URISyntaxException {
-        if (!cellTypeImages.containsKey(type)) {
-            URI imgURI = getClass().getResource(cellTypeImagesPath.get(type)).toURI();
-            File imgFile = new File(imgURI);
-            cellTypeImages.put(
-                    type,
-                    new Image(new FileInputStream(imgFile), width, height, true, true)
-            );
-        }
+        if (imageIsLoaded(type))
+            return cellTypeImages.get(type);
+
+        URI imgURI = getClass().getResource(cellTypeImagesPath.get(type)).toURI();
+        File imgFile = new File(imgURI);
+        cellTypeImages.put(
+                type,
+                new Image(new FileInputStream(imgFile), width, height, true, true)
+        );
         return cellTypeImages.get(type);
     }
 
     public Image getConstructionImage(ConstructionType type) throws FileNotFoundException, URISyntaxException {
-        if (!constructionTypeImages.containsKey(type)) {
-            URI imgURI = getClass().getResource(constructionTypeImagesPath.get(type)).toURI();
-            File imgFile = new File(imgURI);
-            constructionTypeImages.put(
-                    type,
-                    new Image(new FileInputStream(imgFile), width, height, true, true)
-            );
-        }
+        if (imageIsLoaded(type))
+            return constructionTypeImages.get(type);
+
+        URI imgURI = getClass().getResource(constructionTypeImagesPath.get(type)).toURI();
+        File imgFile = new File(imgURI);
+        constructionTypeImages.put(
+                type,
+                new Image(new FileInputStream(imgFile), width, height, true, true)
+        );
         return constructionTypeImages.get(type);
     }
 

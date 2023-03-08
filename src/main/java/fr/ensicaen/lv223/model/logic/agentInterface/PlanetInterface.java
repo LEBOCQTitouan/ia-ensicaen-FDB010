@@ -16,18 +16,9 @@ import java.util.HashMap;
  * what the robot can see and what it can do.
  */
 public class PlanetInterface implements AgentInterface {
-    private static PlanetInterface instance;
-    private RobotMapper robotMapper;
-
-    public static PlanetInterface getInstance(Planet planet, RobotMapper robotMapper) {
-        if (instance == null) {
-            instance = new PlanetInterface(planet, robotMapper);
-        }
-        return instance;
-    }
+    private final RobotMapper robotMapper;
     private final Planet planet;
-
-    private PlanetInterface(Planet planet, RobotMapper robotMapper) {
+    public PlanetInterface(Planet planet, RobotMapper robotMapper) {
         this.planet = planet;
         this.robotMapper = robotMapper;
     }

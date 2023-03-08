@@ -14,7 +14,7 @@ import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
  * extractable cell (only FOOD and ORE are impacted).
  */
 public class ExtractFromCellCommand extends Command {
-    private Planet planet;
+    private final Planet planet;
     public ExtractFromCellCommand(Planet planet, Robot robot, RobotMapper robotMapper, int value) {
         super(robot, robotMapper, value);
         this.planet = planet;

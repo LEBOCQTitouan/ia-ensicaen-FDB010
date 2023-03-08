@@ -16,10 +16,10 @@ import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 public class FuzzyLogic {
 
     private final Planet planet;
-    private String filenameTransformation;
-    private String filenameEmotion;
-    private FunctionBlock functionBlockTransformation;
-    private FunctionBlock functionBlockEmotion;
+    private final String filenameTransformation;
+    private final String filenameEmotion;
+    private final FunctionBlock functionBlockTransformation;
+    private final FunctionBlock functionBlockEmotion;
 
 
     public FuzzyLogic( Planet planet){

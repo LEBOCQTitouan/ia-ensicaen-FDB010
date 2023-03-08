@@ -8,7 +8,7 @@ import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
 
 public class InstallPipeCommand extends Command {
-    private Planet planet;
+    private final Planet planet;
     private WaterPipe pipe;
 
     public InstallPipeCommand(Robot robot, RobotMapper robotMapper, int value, Planet planet) {

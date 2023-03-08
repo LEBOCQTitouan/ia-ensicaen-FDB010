@@ -6,7 +6,6 @@ import fr.ensicaen.lv223.model.agent.robot.RobotFactory;
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.agentInterface.RobotInterface;
-import fr.ensicaen.lv223.teams.ProjectTeam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,21 +33,20 @@ public class RobotMapper {
         RobotFactory factory = new RobotFactory(commandFactory, planet, this);
 
         Coordinate baseCoord = new Coordinate(planet.getHeight()/2, planet.getWidth()/2);
-        ProjectTeam currentTeam = ProjectTeam.JAMES_BOND;
-        robotMap.put(factory.createRobot(RobotType.CENTRALIZER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.CARTOGRAPHER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.CARTOGRAPHER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.FARMER, currentTeam), baseCoord);
-        robotMap.put(factory.createRobot(RobotType.FARMER, currentTeam), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.CENTRALIZER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.ORE_EXTRACTOR), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.CARTOGRAPHER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.CARTOGRAPHER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.FOOD_RETRIEVER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.PIPELINE_BUILDER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.FARMER), baseCoord);
+        robotMap.put(factory.createRobot(RobotType.FARMER), baseCoord);
 
         for (Robot robot : robotMap.keySet()) {
             RobotInterface robotInterface = new RobotInterface(robot, this);

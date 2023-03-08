@@ -1,5 +1,6 @@
 package fr.ensicaen.lv223.view;
 
+import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 import fr.ensicaen.lv223.presenter.IPresenter;
 import fr.ensicaen.lv223.presenter.Presenter;
 import fr.ensicaen.lv223.view.content.NumberOfSteps;
@@ -209,4 +210,8 @@ public class PlanetView implements IPresenter {
         currentNumberOfRobots.setText("Nombre de robots : " + nbRobots);
     }
 
+    @Override
+    public void updateHealthStatus(PlanetHealthStatus healthStatus) {
+        healthStatusOfThePlanet.setText("État de santé de la planète : " + healthStatus);
+    }
 }

@@ -10,5 +10,5 @@ public enum RobotType {
     PIPELINE_BUILDER,
     ORE_EXTRACTOR,
     CENTRALIZER,
-    NONE;
+    NONE
 }

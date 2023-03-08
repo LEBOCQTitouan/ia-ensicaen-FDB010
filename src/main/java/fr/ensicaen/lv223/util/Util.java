@@ -1,19 +1,9 @@
 package fr.ensicaen.lv223.util;
 
-import fr.ensicaen.lv223.model.agent.command.Command;
-import fr.ensicaen.lv223.model.agent.command.CommandFactory;
-import fr.ensicaen.lv223.model.agent.command.CommandType;
-import fr.ensicaen.lv223.model.agent.robot.Robot;
-import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;
-import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
-import fr.ensicaen.lv223.teams.ProjectTeam;
-import fr.ensicaen.lv223.teams.jamesbond.command.MoveCommandJB;
-import fr.ensicaen.lv223.teams.jamesbond.robots.RobotInterfaceJB;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
 public class Util {

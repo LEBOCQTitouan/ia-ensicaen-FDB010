@@ -9,8 +9,8 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class ShockWaveSequencer {
-    private Planet planet;
-    private Queue<ShockWave> shockwaves;
+    private final Planet planet;
+    private final Queue<ShockWave> shockwaves;
 
     public ShockWaveSequencer(Planet planet) {
         this.planet = planet;
@@ -34,6 +34,7 @@ public class ShockWaveSequencer {
                 newShockwaves.add(shockwave);
             }
         }
-        shockwaves = newShockwaves;
+        shockwaves.clear();
+        shockwaves.addAll(newShockwaves);
     }
 }
