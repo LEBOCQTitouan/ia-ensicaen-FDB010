@@ -40,19 +40,8 @@ public class Presenter {
      * Constructs a new {@code Presenter} instance.
      */
     public Presenter(Stage stage) throws IOException {
-        view = new PlanetView(this, Main.default_width, Main.default_height);
-        loadView(stage);
-        view.setOnclick();
-        view.setChoicesOfNumberOfSteps();
-        view.setChoicesOfVisionMode();
-        view.setChoicesOfAgents();
-
+        view = new PlanetView(this, (int) stage.getWidth(), (int) stage.getHeight());
         sequencer = new Sequencer(new Planet());
-        planetPresenter = new PlanetPresenter(view, sequencer.planet);
-        colonyPresenter = new ColonyPresenter(view, sequencer.mapper);
-        visionPresenter = new ColonyVisionPresenter(view, sequencer.mapper);
-        waterPipePresenter = new WaterPipePresenter(view, sequencer.planet);
-        uiManager = new UIManager(view, sequencer);
 
         List<List<CellView>> cells = new ArrayList<>();
         List<List<Cell>> cellsModel = sequencer.planet.getCells();
@@ -60,12 +49,27 @@ public class Presenter {
             List<CellView> row = new ArrayList<>();
             for (int j = 0; j < cellsModel.get(i).size(); j++) {
                 Cell cell = cellsModel.get(i).get(j);
-                CellView cellView = new CellView(Math.max(view.getSceneWidth(), view.getSceneHeight()) / cellsModel.size(), cell.getType());
+                CellView cellView = new CellView(
+                        Math.min(view.getSceneWidth(), view.getSceneHeight()) / cellsModel.size(),
+                        cell.getType()
+                );
                 row.add(cellView);
             }
             cells.add(row);
         }
         view.setCellsView(cells);
+
+        planetPresenter = new PlanetPresenter(view, sequencer.planet);
+        colonyPresenter = new ColonyPresenter(view, sequencer.mapper);
+        visionPresenter = new ColonyVisionPresenter(view, sequencer.mapper);
+        waterPipePresenter = new WaterPipePresenter(view, sequencer.planet);
+        uiManager = new UIManager(view, sequencer);
+
+        loadView(stage);
+        view.setOnclick();
+        view.setChoicesOfNumberOfSteps();
+        view.setChoicesOfVisionMode();
+        view.setChoicesOfAgents();
 
         updateView();
     }
@@ -80,12 +84,12 @@ public class Presenter {
         stage.setTitle("Simulation FDB010");
 
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-        scene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+        stage.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
             this.view.setSceneWidth(newSceneWidth.intValue());
 
             this.updateView();
         });
-        scene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+        stage.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
             this.view.setSceneHeight(newSceneHeight.intValue());
 
             this.updateView();

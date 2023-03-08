@@ -24,7 +24,7 @@ public class PlanetPresenter extends ViewEffector {
                 Cell cell = cells.get(i).get(j);
                 CellView cellView = view.getCellView().get(i).get(j);
 
-                cellView.setSize(Math.max(view.getSceneWidth(), view.getSceneHeight()) / cells.size());
+                cellView.setSize(Math.min(view.getSceneWidth(), view.getSceneHeight()) / cells.size());
                 cellView.setType(cell.getType());
             }
         }
