@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.presenter.colony;
+package fr.ensicaen.lv223.presenter.simulationGrid.colony;
 
 import fr.ensicaen.lv223.model.agent.robot.Robot;
 import fr.ensicaen.lv223.model.logic.localisation.Coordinate;

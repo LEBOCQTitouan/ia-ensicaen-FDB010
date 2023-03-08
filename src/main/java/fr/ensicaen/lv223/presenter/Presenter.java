@@ -4,11 +4,12 @@ import fr.ensicaen.lv223.Main;
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
 import fr.ensicaen.lv223.model.logic.Sequencer;
-import fr.ensicaen.lv223.presenter.colony.ColonyPresenter;
-import fr.ensicaen.lv223.presenter.construction.WaterPipePresenter;
-import fr.ensicaen.lv223.presenter.planet.PlanetPresenter;
-import fr.ensicaen.lv223.presenter.vision.ColonyVisionPresenter;
-import fr.ensicaen.lv223.presenter.vision.VisionPresenter;
+import fr.ensicaen.lv223.presenter.simulationGrid.colony.ColonyPresenter;
+import fr.ensicaen.lv223.presenter.simulationGrid.construction.WaterPipePresenter;
+import fr.ensicaen.lv223.presenter.simulationGrid.planet.PlanetPresenter;
+import fr.ensicaen.lv223.presenter.simulationGrid.vision.ColonyVisionPresenter;
+import fr.ensicaen.lv223.presenter.simulationGrid.vision.VisionPresenter;
+import fr.ensicaen.lv223.presenter.ui.UIManager;
 import fr.ensicaen.lv223.view.image.CellView;
 import fr.ensicaen.lv223.view.PlanetView;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,7 @@ public class Presenter {
     private final ColonyPresenter colonyPresenter;
     private final VisionPresenter visionPresenter;
     private final WaterPipePresenter waterPipePresenter;
+    private final UIManager uiManager;
     private final Sequencer sequencer;
     private final Semaphore semaphore = new Semaphore(1);
 
@@ -50,6 +52,7 @@ public class Presenter {
         colonyPresenter = new ColonyPresenter(view, sequencer.mapper);
         visionPresenter = new ColonyVisionPresenter(view, sequencer.mapper);
         waterPipePresenter = new WaterPipePresenter(view, sequencer.planet);
+        uiManager = new UIManager(view, sequencer);
 
         List<List<CellView>> cells = new ArrayList<>();
         List<List<Cell>> cellsModel = sequencer.planet.getCells();
@@ -122,7 +125,7 @@ public class Presenter {
     }
 
     private void updateUI() {
-        // TODO
+        uiManager.update();
     }
 
     private void drawPlanet(){

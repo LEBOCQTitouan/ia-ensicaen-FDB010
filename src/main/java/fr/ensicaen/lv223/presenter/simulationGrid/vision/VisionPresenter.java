@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.presenter.vision;
+package fr.ensicaen.lv223.presenter.simulationGrid.vision;
 
 import fr.ensicaen.lv223.model.logic.localisation.RobotMapper;
 import fr.ensicaen.lv223.presenter.ViewEffector;

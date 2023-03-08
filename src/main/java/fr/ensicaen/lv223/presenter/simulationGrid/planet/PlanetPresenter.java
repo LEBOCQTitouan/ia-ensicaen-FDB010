@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.presenter.planet;
+package fr.ensicaen.lv223.presenter.simulationGrid.planet;
 
 import fr.ensicaen.lv223.model.environment.cells.Cell;
 import fr.ensicaen.lv223.model.environment.planet.Planet;
