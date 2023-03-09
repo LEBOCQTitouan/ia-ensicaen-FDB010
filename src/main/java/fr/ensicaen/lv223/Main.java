@@ -29,7 +29,7 @@ public class Main extends Application {
      * @throws IOException when there is an error in loading the FXML file
      */
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws Exception {
         Presenter presenter = new Presenter(stage);
     }
 

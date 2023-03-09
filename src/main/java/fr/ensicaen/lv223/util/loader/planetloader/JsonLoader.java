@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.util.loader.planetloader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -30,7 +31,7 @@ public class JsonLoader implements PlanetLoader {
         PlanetData[] loadedData = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            loadedData = mapper.readValue(getClass().getResource(this.dataSource), PlanetData[].class);
+            loadedData = mapper.readValue(new File(this.dataSource), PlanetData[].class);
         } catch (IOException e) {
             e.printStackTrace();
         }

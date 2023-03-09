@@ -45,14 +45,6 @@ public class CommandFactory {
                 return new IdleCommand(robot, robotMapper);
         }
     }
-
-    /**
-     *
-     * @param robot
-     * @param type
-     * @param value
-     * @return
-     */
     public Command createMovement(Robot robot, CommandType type, Direction direction) {
         switch (type) {
             default:

@@ -2,6 +2,7 @@ package fr.ensicaen.lv223.util.loader.viewloader;
 
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.environment.cells.CellType;
+import fr.ensicaen.lv223.util.loader.viewloader.image.ImageLoader;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

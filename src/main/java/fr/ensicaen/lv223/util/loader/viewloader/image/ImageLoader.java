@@ -1,4 +1,4 @@
-package fr.ensicaen.lv223.util.loader.viewloader;
+package fr.ensicaen.lv223.util.loader.viewloader.image;
 
 import fr.ensicaen.lv223.model.agent.robot.RobotType;
 import fr.ensicaen.lv223.model.environment.cells.CellType;

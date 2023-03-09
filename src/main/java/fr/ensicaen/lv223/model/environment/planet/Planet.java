@@ -55,7 +55,7 @@ public class Planet implements Environment, EnvironmentAgent {
     private double stockWater;
 
     private void load() {
-        PlanetLoader planetLoader = new JsonLoader("/json/planet.json");
+        PlanetLoader planetLoader = new JsonLoader(getClass().getResource("/json/planet.json").getPath());
         PlanetData[] planetData = planetLoader.load();
 
 

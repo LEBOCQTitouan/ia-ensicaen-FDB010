@@ -10,7 +10,6 @@ import fr.ensicaen.lv223.presenter.simulationDisplay.vision.ColonyVisionPresente
 import fr.ensicaen.lv223.presenter.simulationDisplay.vision.VisionPresenter;
 import fr.ensicaen.lv223.presenter.ui.UIManager;
 import fr.ensicaen.lv223.view.PlanetView;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -33,7 +32,7 @@ public class Presenter {
     /**
      * Constructs a new {@code Presenter} instance.
      */
-    public Presenter(Stage stage) throws IOException {
+    public Presenter(Stage stage) throws Exception {
         this.view = new PlanetView(this);
         this.sequencer = new Sequencer(new Planet());
 
@@ -47,23 +46,17 @@ public class Presenter {
     }
 
     private void loadView(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/board_view.fxml"));
-        fxmlLoader.setController(view);
-
-        Scene scene = new Scene(fxmlLoader.load(), Main.default_width, Main.default_height);
+        Scene scene = new Scene(view.getRoot());
         scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
+        // setup stage
         stage.setScene(scene);
         stage.setTitle("Simulation FDB010");
-
-        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
-
         stage.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-            // TODO
+            updateView();
         });
         stage.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-            // TODO
+            updateView();
         });
-
         stage.setMaximized(true);
         stage.show();
     }

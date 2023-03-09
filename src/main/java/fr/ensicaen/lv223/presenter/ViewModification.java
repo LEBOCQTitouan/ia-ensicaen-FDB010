@@ -2,6 +2,8 @@ package fr.ensicaen.lv223.presenter;
 
 import fr.ensicaen.lv223.model.environment.planet.state.PlanetHealthStatus;
 import fr.ensicaen.lv223.model.logic.Sequencer;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 
 /**
  * {@code ViewModification} interface specifies the methods that must be
@@ -41,4 +43,10 @@ public interface ViewModification {
      * @param sequencer the sequencer of the simulation
      */
     void updateSimulationDisplay(Sequencer sequencer);
+
+    /**
+     * Get the root of the view.
+     * @return the root of the view
+     */
+    Parent getRoot();
 }
