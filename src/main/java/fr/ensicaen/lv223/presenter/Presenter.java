@@ -91,21 +91,10 @@ public class Presenter {
      * Updates the view.
      */
     public void updateView() {
-        drawPlanet();
-        updateUI();
-    }
-
-    /**
-     * Updates the UI.
-     */
-    private void updateUI() {
-        // TODO
-    }
-
-    /**
-     * Draws the planet.
-     */
-    private void drawPlanet(){
-        // TODO
+        uiManager.updateView();
+        planetPresenter.updateView();
+        colonyPresenter.updateView();
+        waterPipePresenter.updateView();
+        visionPresenter.updateView();
     }
 }
