@@ -1,11 +1,7 @@
 package fr.ensicaen.lv223;
 
-import fr.ensicaen.lv223.presenter.ViewModificator;
 import fr.ensicaen.lv223.presenter.Presenter;
-import fr.ensicaen.lv223.view.PlanetView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,7 +12,13 @@ import java.io.IOException;
  * It sets up the scene, size, style and behavior of the application.
  */
 public class Main extends Application {
-    public static final int default_width = 800;
+    /**
+     * The default width and height of the application.
+     */
+    public static final int default_width = 600;
+    /**
+     * The default width and height of the application.
+     */
     public static final int default_height = 600;
 
     /**
